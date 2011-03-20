@@ -1,0 +1,54 @@
+# zsh zle set up
+
+source $XDG_CONFIG_HOME/zsh/terminfo
+
+# for bindings that should be available for both viins and vicmd
+for keymap in viins vicmd; do
+    alias bindkey="bindkey -M $keymap"
+
+    bindkey ${key[Home]}    vi-beginning-of-line
+    bindkey ${key[End]}     vi-end-of-line
+    bindkey ${key[Insert]}  overwrite-mode
+    bindkey ${key[Delete]}  delete-char
+    bindkey ${key[Up]}      up-line-or-history
+    bindkey ${key[Down]}    down-line-or-history
+    bindkey ${key[Left]}    backward-char
+    bindkey ${key[Right]}   forward-char
+
+    bindkey '^R' history-incremental-search-backward
+    bindkey '^A' vi-beginning-of-line
+    bindkey '^E' vi-end-of-line
+    bindkey '^U' kill-whole-line
+    bindkey '^_' undo
+
+    unalias bindkey
+done
+
+bindkey -M viins '^[^W' backward-delete-word
+bindkey -M viins '^N'   down-history
+bindkey -M viins '^P'   up-history
+bindkey -M viins ${key[Backspace]} backward-delete-char
+
+# Make ^L switch to vi-cmd mode
+bindkey -M viins '^L' vi-cmd-mode
+# But still let screen clearing be available
+bindkey -M vicmd '^L' clear-screen
+
+# rationalise-dot {{{
+# This was written entirely by Mikael Magnusson
+# Basically type '...' to get '../..' with successive .'s adding /..
+function rationalise-dot {
+    local MATCH # keep the regex match from leaking to the environment
+    if [[ $LBUFFER =~ '(^|/| |      |'$'\n''|\||;|&)\.\.$' ]]; then
+      LBUFFER+=/
+      zle self-insert
+      zle self-insert
+    else
+      zle self-insert
+    fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
+# without this, typing a . aborts incremental history search
+bindkey -M isearch . self-insert
+# }}}

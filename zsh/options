@@ -1,0 +1,109 @@
+# zsh options
+
+# history {{{
+
+# options {{{
+#
+# append history when saving instead of overwriting
+setopt append_history
+# write out history entry as it is executed
+setopt inc_append_history
+
+# shows history substitution before executing
+setopt hist_verify
+# write date, time, and runtime of each command to history
+setopt extended_history
+
+# ignore history dupes
+setopt hist_ignore_dups
+# really ignore dupes
+setopt hist_ignore_all_dups
+# ignore dupes in history search
+setopt hist_find_no_dups
+# don't save dupes
+setopt hist_save_no_dups
+# if any command starts with whitespace, it will not be saved.
+# it will still be displayed in the current session, though
+setopt hist_ignore_space
+# ignore `history' and `fc' commands
+setopt hist_no_store
+# ignore function definitions
+setopt hist_no_functions
+# }}}
+#
+# history env {{{
+#
+# history file
+HISTFILE=$XDG_CONFIG_HOME/zsh/history
+# history file size in lines
+SAVEHIST=1000
+# current shell history size in lines
+HISTSIZE=1000
+# }}}
+
+# }}}
+
+# completion {{{
+
+# tab completion inside words
+setopt complete_in_word
+# automatically show list of possible completions
+# (as opposed to using a separate bindkey)
+setopt auto_list
+# show list on first tab
+setopt no_list_ambiguous
+# no menu completion on first tab
+setopt no_menu_complete
+# menu behavior on second tab
+setopt auto_menu
+# append slash to completed directories
+setopt auto_param_slash
+# If a completion ends with a slash and you type another slash,
+# remove the second
+setopt auto_remove_slash
+# compact completion list
+setopt list_packed
+
+# }}}
+
+# expansions {{{
+
+# {a-z} {0-2} etc expansion
+setopt braceccl
+# with this, we can do `some_evil_stuff # which we explain`
+# and just execute some_evil_stuff
+setopt interactive_comments
+# sort globs numerically
+setopt numeric_glob_sort
+# extended glob patterns
+setopt extended_glob
+
+# }}}
+
+# prompt {{{
+
+# only show RPROMPT in the current line
+setopt transientrprompt
+
+# }}}
+
+# misc {{{
+
+# don't renice background jobs
+setopt no_bg_nice
+# show job number and PID when suspending
+setopt long_list_jobs
+# prohibit `cat foo > bar' if bar exists. Use >! instead
+setopt no_clobber
+# put info from finished bg process over current line
+setopt notify
+# fill $0 with function name instead of "zsh"
+setopt function_arg_zero
+# no beeps
+setopt no_beep
+# allow multiple redirects
+# ls > foo > bar
+# cmd > >(cmd1) > >(cmd2) # would redirect stdout from cmd to stdin of cmd1,2
+# make install > /tmp/logfile | grep -i error
+setopt multios
+# }}}

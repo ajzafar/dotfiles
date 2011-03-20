@@ -1,0 +1,10 @@
+plugins to use/consider
+- fugitive https://github.com/tpope/vim-fugitive
+- sparkup https://github.com/rstacruz/sparkup
+- gundo https://github.com/sjl/gundo.vim
+- Ack https://github.com/mileszs/ack.vim
+- xptemplate https://github.com/drmingdrmer/xptemplate
+- syntastic https://github.com/scrooloose/syntastic
+
+colorscheme
+- better diff support

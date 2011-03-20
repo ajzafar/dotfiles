@@ -1,0 +1,8 @@
+URxvt.perl-ext-common: selection,selection-autotransform,matcher,tabbed
+Xft.antialias: 1
+Xft.hinting: 0
+Xft.rgba: rgb
+Xft.hintstyle: hintnone
+Xcursor.theme: Vienna3
+Xcursor.theme_core: true
+Xcursor.size: 16

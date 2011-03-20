@@ -1,0 +1,354 @@
+" The general layout was taken from godlygeek's vimrc. Most of what I've taken
+" has been labeled.
+"
+" Be vim, not vi.
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+""" Pathogen
+filetype off
+set rtp+=~/.vim/pathogen
+if v:version < 730 && !has('gui') || &t_Co < 88
+    let g:pathogen_disabled = [ 'csapprox' ]
+endif
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+""" Vim Settings
+"""" Patterns and search behavior
+set incsearch           " do incremental searching
+set nohlsearch          " instead use <F12> as mapped below
+set ignorecase
+set smartcase
+
+"""" Tabs and indentation
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+set shiftround      " Round to a multiple of shiftwidth
+set expandtab
+set cinoptions=(0,g0,b1,l1
+set autoindent
+
+"""" Backup, swap, undo
+set nobackup nowritebackup
+set updatetime=1000
+set directory^=~/.cache/vim/swapfiles//  " save swap files to a single directory
+" The // means the swap filename will be bulit from the path for uniqueness
+
+" The above and the below roughly taken from godlygeek's vimrc
+
+if ! len(glob('~/.cache/vim/')) || ! len(glob("~/.cache/vim/swapfiles"))
+    echomsg "~/.cache/vim{,/swapfiles} doesn't exist."
+endif
+
+if has('persistent_undo')
+    set undofile
+    set undodir^=~/.cache/vim/undofiles//
+    set undoreload=1000
+
+    if ! len(glob("~/.cache/vim/undofiles"))
+        echomsg "~/.cache/vim/undofiles doesn't exist."
+    endif
+endif
+
+"""" Reading settings
+set secure              " try to make per-directory settings safe
+set exrc                " enable per-directory vimrc (more power than modelines)
+set modeline
+set viminfo+=n~/.cache/vim/viminfo
+
+"""" Reading/writing
+set noautowrite noautowriteall
+set noautoread
+
+"""" Windows/buffers
+set noequalalways
+set splitright
+set hidden
+set switchbuf=usetab
+
+"""" Folding
+set foldmethod=marker
+
+"""" Spelling
+set spelllang=en_us
+set spellfile=~/.vim/spell/en.utf-8.add
+set spellfile+=~/.vim/spell/names.utf-8.add
+set spellfile+=~/.vim/spell/acro.utf-8.add
+
+"""" Formatting
+" Also see toggle#FormatToggle()
+set formatoptions=
+set formatoptions+=n " format based on 'flp'
+set formatoptions+=1 " Break before one-letter words
+let &formatlistpat = '^\s*[0-9*-]\+[\]:.)}\t ]\s*'
+set textwidth=80
+set nojoinspaces
+
+"""" Input control
+set mouse=v
+set timeoutlen=1000
+set ttimeoutlen=100
+set lazyredraw
+
+"""" Insert completion
+set noinfercase  " Use the case of the match rather than what was typed
+set completeopt=
+set completeopt+=longest
+set completeopt+=menu
+set completeopt+=preview
+
+"""" Messages and status
+set confirm
+set ruler               " show the cursor position all the time
+set showcmd             " display incomplete commands
+set showmode            " display NORMAL, REPLACE, etc
+set visualbell t_vb=    " No fucking way do I want things beeping at me.
+set report=0
+set shortmess+=a        " Abbreviate various messages
+
+if exists('+rnu')
+    set relativenumber " relative numbers!!!
+    set numberwidth=1
+endif
+
+"""" Moving/editing
+set backspace=indent,eol,start  " Allow backspacing over everything in insert mode
+set scrolloff=2                 " Show 2 lines above/below cursor when possible
+set virtualedit=block
+set nostartofline
+
+"""" 'listchars
+if &enc =~ '\vu(tf|cs)'         " if Unicode...
+    set listchars=tab:▶―,trail:∎,nbsp:∎
+else
+    set listchars=tab:>-,trail:-,nbsp:-
+endif
+
+if !&readonly  " Don't use 'list' when invoked as view
+    set list
+endif
+
+"""" Command line
+set history=100          " keep 50 lines of command line history
+set wildmenu
+set wildmode=longest:full
+
+"""" Tags
+set tags+=~/.vim/tags.d/systags
+
+""" Filetype stuff
+" Enable filetype detection, ftplugin, and filetype indent settings
+filetype plugin indent on
+
+" Use LaTeX syntax not plaintex
+let g:tex_flavor = 'latex'
+" Assume POSIX sh
+let g:is_posix = 1
+
+" Switch syntax highlighting on when the terminal has colors
+" TODO Make Tilda report a 256 term. Or stop using Tilda.
+if &t_Co > 2 || has("gui_running")
+    syntax on
+    colors darksky
+endif
+
+" Use the inkpot colorscheme when using vimdiff
+" Unfortunately, this requires 256 color support
+" TODO: make my colorscheme work well for vimdiff
+if &diff && (&t_Co > 16 || has('gui_running'))
+    colors inkpot
+endif
+
+""" Autocommands
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+    " Put these in an autocmd group, so that we can delete them easily.
+    augroup myVimrc
+    au!
+
+    " For all text files set 'textwidth' to 80 characters.
+    au FileType text,markdown setlocal spell fo+=a fo+=t
+
+    " Make K use internal help when editing VimScript or vimrc
+    au FileType vim* setlocal kp=:help
+
+    " This is for SnipMate snippets
+    au FileType snippet* setlocal sts=8 sw=8 fdl=999
+
+    au FileType ruby,eruby setlocal sts=2 sw=2
+    au FileType html,xhtml,xml setlocal sts=2 sw=2
+
+    " Use syntax folding for some filetypes
+    au FileType c,cpp setl fdm=syntax fdl=999
+
+    " Most ftplugins set this automatically, but not these
+    au FileType vim,sh setl fo+=croql
+
+    " From :h last-position-jump
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " May require a viminfo file.
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
+
+    " I take notes in either TeX or Markdown, and Vim doesn't ftdetect Markdown
+    " properly
+    au BufReadPost,BufNewFile */notes/* if &ft != 'tex' | setl ft=markdown | endif
+
+    " If there's no omnifunc, take one from the syntax
+    " Taken from godlygeek's vimrc
+    au Filetype * let &l:ofu = (len(&ofu) ? &ofu : 'syntaxcomplete#Complete')
+
+    " I'm not sure where I took this from.
+    " Source the vimrc after editing
+    au BufWritePost {,.}vimrc source $MYVIMRC
+
+    " Turn off list while in insert mode.
+    " Seeing trailing spaces while typing them is annoying
+    au InsertEnter * setl nolist
+    au InsertLeave * setl list
+
+    " Files in ~/.config/zsh are ft=zsh
+    au BufNewFile,BufRead ~/.config/zsh/* setl ft=zsh
+
+    augroup END
+endif
+
+""" Maps
+"""" Leaders
+" This is so comfortable on Dvorak.
+let mapleader = '-'
+let maplocalleader = '_'
+
+noremap - <nop>
+noremap _ <nop>
+
+"""" Normal mode mappings
+" Don't use Ex mode, use Q for formatting
+" Derived from the default vimrc
+" This is mapped in an unwanted form in Gentoo's system vimrc, so unmap it first
+unmap Q
+nnoremap Q gq
+xnoremap Q gq
+
+" Use Enter to follow tags
+nnoremap <CR> <C-]>
+
+" Make Y act more logically (like D and C)
+nnoremap Y y$
+
+" Make Space toggle folds
+nnoremap <Space> za
+
+" Insert blank lines easily
+nnoremap <leader>o o<Esc>
+nnoremap <leader>O O<Esc>
+
+" What's the syntax attribute associated with the current word?
+" Taken from :h synID()
+nnoremap <leader>g :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+
+" Remove trailing whitespace
+nnoremap <leader>ws :%s/\s\+$//e<CR>
+
+" Reselect what was just pasted (taken from Steve Losh)
+nnoremap <leader>v V`]
+
+" ZZ -- save
+" ZQ -- save and quit
+" ZX -- quit unconditionally
+nnoremap ZZ :up<CR>
+nnoremap ZQ :x<CR>
+nnoremap ZX :q!<CR>
+
+""""" Improvements (taken from godlygeek's vimrc)
+
+" Switching with the alternate file preserves column/line
+nnoremap <C-6> <C-6>`"
+
+" <C-g> shows full path and buffer number
+nnoremap <C-g> 2<C-g>
+
+"""" Command line mappings
+" Emacs bindings. Hate me if you must.
+" Taken from godlygeek's vimrc
+cnoremap <C-A>     <Home>
+cnoremap <ESC>b    <S-Left>
+cnoremap <ESC>f    <S-Right>
+
+"""" Insert mode mappings
+" Some nice Emacs-like bindings. Hate me if you must.
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>^
+
+" Create a new undo block before clearing the line
+inoremap <c-u> <c-g>u<c-u>
+
+"""" ^L as Esc
+noremap <C-l> <Esc>
+noremap! <C-l> <Esc>
+" so that the default <C-l> is available
+nnoremap <C-l> <Esc><C-l>
+
+"""" Function keys
+" <F2> will be used for snipmate.
+nnoremap <F3> :cnext<CR>
+nnoremap <F4> :make<Space>
+imap <F4> <Esc><F4>
+
+set pastetoggle=<F5>
+
+let opt_toggle = { '<F5>'  : 'paste',
+                \  '<F6>'  : 'spell',
+                \  '<F7>'  : 'toggle#FormatToggle',
+                \  '<F8>'  : 'toggle#MouseToggle',
+                \  '<F9>'  : 'list',
+                \  '<F10>' : 'relativenumber',
+                \  '<F11>' : 'hlsearch',
+                \  '<F12>' : 'toggle#CCToggle',
+                \}
+
+for [key, val] in items(opt_toggle)
+    if val == 'relativenumber' && !exists('+rnu')
+        let val = 'number'
+    endif
+
+    if val[0] =~ '\U' && exists('+'.val)
+        exe 'nnoremap <silent> ' . key . ' :setl ' . val . '! ' . val . '?<CR>'
+    elseif val[0] =~ '\u' || val =~ '\V#'
+        exe 'nnoremap <silent> ' . key . ' :call ' . val . '()<CR>'
+    else
+        echomsg "Not mapping " . key . ". " . val . " is unavailable."
+    endif
+
+    exe 'imap ' . key . ' <C-o>' . key
+endfor
+
+""" Plugins
+"""" snipMate
+let g:snippets_dir = '~/.vim/snippets'
+" Reread snippets
+nnoremap <F2> :call ReloadSnippets(&ft)<CR>
+imap <F2> <C-O><F2>
+
+"""" NERD Commenter
+let g:NERDSpaceDelims = 1
+
+"""" NERD Tree
+nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
+
+"""" CSApprox
+let g:CSApprox_hook_post = [
+            \ 'hi Normal ctermfg=NONE ctermbg=NONE',
+            \ 'hi Visual ctermfg=NONE ctermbg=NONE cterm=reverse',
+            \ ]
+let g:CSApprox_attr_map = { 'bold' : '', 'italic' : '', 'sp' : '' }
+
+""
+"" taken from godlygeek's vimrc. Pretty nice way to handle folding.
+"" vim:fdm=expr
+"" vim:fde=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'""*')-2)\:'='

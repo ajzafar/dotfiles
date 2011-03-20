@@ -1,0 +1,35 @@
+; vim: ft=xdefaults
+URxvt.*.background: #edf5ff
+URxvt.*.foreground: #1a1c20
+URxvt.*.scrollBar: false
+URxvt.*.fading: 0
+URxvt.*.fadeColor: #1a1c20
+URxvt.*.font: xft:DejaVu Sans Mono:pixelsize=12
+URxvt.*.boldFont: xft:DejaVu Sans Mono:pixelsize=12
+URxvt.*.italicFont: xft:DejaVu Sans Mono:italic:pixelsize=12
+URxvt.*.boldItalicFont: xft:DejaVu Sans Mono:bold:italic:pixelsize=12
+*.color1: #960c0f
+*.color2: #025b00
+*.color3: #a6aa09
+*.color4: #4171e2
+*.color5: #b31b5e
+*.color6: #177c8c
+*.color8: #888888
+;*.color9: #4171e2
+*.color10: #04c000
+*.color11: #98bf10
+*.color12: #111111
+;*.color13: #4171e2
+*.color14: #00c1d8
+;*.color15: #4171e2
+*.background: #e8f0fa
+*.foreground: #1a1c20
+gnuplot*background: #ffffff
+gnuplot*foreground: #000000
+Xcursor.theme: Vienna3
+Xcursor.theme_core: true
+Xcursor.size: 16
+Xft.antialias: 1
+Xft.hinting: 0
+Xft.rgba: rgb
+Xft.hintstyle: hintnone

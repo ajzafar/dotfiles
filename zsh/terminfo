@@ -1,0 +1,48 @@
+# zsh terminfo setup
+
+# originally taken from zshwiki.org
+# create a zkbd compatible hash
+
+typeset -A key
+
+() {
+    local -A fill
+    local k v f
+
+    fill=(
+        Backspace kbs
+        Insert    kich1
+        Delete    kdch1
+        Home      khome
+        End       kend
+        PageUp    kpp
+        PageDown  knp
+        Up        kcuu1
+        Down      kcud1
+        Left      kcub1
+        Right     kcuf1
+    )
+
+    for k v in ${(kv)fill}; do
+        key[$k]=$terminfo[$v]
+    done
+
+    unset fill
+
+    for f in {1..${fnmax:-12}}; do
+        key[F$f]=$terminfo[kf$f]
+    done
+}
+
+# Put the terminal in application mode so that terminfo entries work right
+if [[ $TERM != 'linux' ]]; then
+    function terminfo-init {
+        echoti smkx
+    }
+    function terminfo-finish {
+        echoti rmkx
+    }
+    # to be compatible with Frank Terbeck's vi-mode.zsh
+    zle_init_functions+=( terminfo-init )
+    zle_finish_functions+=( terminfo-finish )
+fi

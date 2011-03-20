@@ -1,0 +1,8 @@
+# zsh zprofile
+
+export XDG_CONFIG_HOME="${HOME}/.config"
+
+export EDITOR="vim"
+export VISUAL=$EDITOR
+export LESS="-R -M --shift 5 -i"
+export PAGER="less"

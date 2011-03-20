@@ -1,0 +1,42 @@
+# zsh prompts
+
+# Normal prompts {{{
+() {
+    # Based on the default gentoo prompt
+    # ( autoload -U promptinit; promptinit; prompt gentoo )
+    local user ppath end
+
+    # if root, display red and don't display username
+    user='%(!.%F{red}.%F{green}%n@)%m%k'
+    ppath='%F{blue}%32<..<%~'
+    end='%b%f%k'
+
+    PS1="%B${user} ${ppath} %# ${end}"
+    PS2="%B${user} ${ppath} %_> ${end}"
+    PS3="%B${user} ${ppath} ?# ${end}"
+} # }}}
+
+# RPROMPT {{{
+() {
+    local vimode exitcode shelldepth date
+
+    # Use $psvar[$psvmodeidx] as defined by vi-mode
+    vimode="%F{white}%${psvmodeidx}v%f "
+    # if previous command exited with nonzero status...
+    exitcode="%(?..[%F{red}%U%?%u%f]) "
+    # show SHLVL if >= 3, 4 if in X
+    shelldepth="%(NL.(%L) .)"
+    if [[ -n $DISPLAY ]]; then
+        shelldepth=${shelldepth/N/4}
+    else
+        shelldepth=${shelldepth/N/3}
+    fi
+    # date in 12:34:56 Mon 06/14/2010
+    date="%D{%T %a %m/%d/%Y}"
+
+    RPROMPT="${vimode}${exitcode}${shelldepth}${date}"
+    RPROMPT2=$RPROMPT
+} # }}}
+
+# the prompt we see when being asked for substitutions
+SPROMPT="zsh: correct '%R' to '%r'? [N/y/a/e] "

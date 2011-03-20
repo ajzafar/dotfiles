@@ -1,0 +1,22 @@
+cd(| *)
+(ls|dir)(| *)
+(rm|mv|cp|ln|scp|rmdir|mkdir) *
+(echo|print)(| *)
+(g|)vim(| *)
+vi(h|ew) *
+cat(| *)
+man *
+(which|whence|type)(| *)
+[fb]g(| *)
+mpl(fs|ayer) *
+feh *
+pwd
+(nc|)mpc(| *)
+exit(| *)
+fortune(| *)
+date(| *)
+eix(| *)
+startx(| *)
+(p|)kill(| *)
+ping *
+bt[rl](| *)

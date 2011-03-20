@@ -1,0 +1,5 @@
+local arg
+
+for arg in "$@"; do
+    sudo vimdiff ${arg:h}/{,._cfg0000_}${arg:t}
+done

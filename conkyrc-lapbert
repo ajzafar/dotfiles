@@ -1,0 +1,146 @@
+# vim:ft=conkyrc:
+
+# set to yes if you want Conky to be forked in the background
+background yes
+
+# Use Xft?
+use_xft yes
+
+# Xft font when Xft is enabled
+xftfont DejaVu Sans Mono:size=9
+
+# Text alpha when using Xft
+xftalpha 0.8
+
+# Update interval in seconds
+update_interval 10.0
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop
+own_window no
+own_window_transparent yes
+
+# available hints:
+# undecorated below above sticky skip_taskbar skip_pager
+own_window_hints undecorated,sticky,skip_taskbar,skip_pager,above
+
+# possible types:
+# normal desktop dock panel override
+own_window_type normal
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 100 5
+
+# Draw various stuff?
+draw_shades no
+draw_outline yes
+draw_borders no
+
+# Stippled borders?
+stippled_borders 8
+
+# border margins
+border_inner_margin 4
+
+# border width
+border_width 1
+
+# Default colors and also border colors
+default_color white
+default_shade_color black
+#default_outline_color #101010
+
+# Text alignment
+# (top|bottom)_(left|right)
+alignment top_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 0
+gap_y 21
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer left
+
+# variable is given either in format $variable or in ${variable}. Latter
+# allows characters right after the variable and must be used in network
+# stuff because of an argument
+
+# stuff after 'TEXT' will be formatted on screen
+
+TEXT
+${color #aaaaaa}time_t:
+${alignr 10}${color}${time %s}
+${color #aaaaaa}Uptime:
+${alignr 10}${color}$uptime
+${color #aaaaaa}CPU:${color} ${cpu cpu1}% ${cpu cpu2}%
+${cpugraph cpu1 20,53 000000 ffffff} ${cpugraph cpu2 20,53 000000 ffffff}
+${color #aaaaaa}Load: ${color}${acpitemp}C
+${alignr 10}$loadavg
+${color #aaaaaa}Processes: ${color}$processes
+${color #aaaaaa}Running:   ${color}$running_processes
+
+${color #aaaaaa}Battery:
+${alignr 7}${color}$battery_short $battery_time
+${battery_bar 3,110 BAT0}
+
+${color #aaaaaa}Highest CPU (%):
+${color #ddaa00} ${top name 1}
+${alignr 10}${top cpu 1}
+${color lightgrey} ${top name 2}
+${alignr 10}${top cpu 2}
+${color lightgrey} ${top name 3}
+${alignr 10}${top cpu 3}
+
+${color #aaaaaa}Highest MEM (%):
+${color #ddaa00} ${top_mem name 1}
+${alignr 10}${top_mem mem 1}
+${color lightgrey} ${top_mem name 2}
+${alignr 10}${top_mem mem 2}
+${color lightgrey} ${top_mem name 3}
+${alignr 10}${top_mem mem 3}
+
+${color #aaaaaa}MEM: ${alignr 10}${color}$memperc%
+${membar 3,110}
+${color #aaaaaa}SWAP: ${alignr 10}${color}$swapperc%
+${swapbar 3,110}
+
+${color #aaaaaa}ROOT:${alignr 10}${color} ${fs_free_perc /}% free
+${fs_bar 3,110 /}
+${color #aaaaaa}HOME:${alignr 10}${color} ${fs_free_perc /home}% free
+${fs_bar 3,110 /home}
+${color #aaaaaa}WIN:${alignr 10}${color} ${fs_free_perc /mnt/win}% free
+${fs_bar 3,110 /mnt/win}
+
+${color #aaaaaa}NET:${alignr 10}wlan0
+${color}Up: ${color}${alignr 10}${upspeed wlan0}/s
+${upspeedgraph wlan0 15,110 000000 ffffff}
+
+${color}Down: ${color}${alignr 10}${downspeed wlan0}/s${color}
+${downspeedgraph wlan0 15,110 000000 ffffff}
+
+${color}Strength: ${color}${alignr 10}${wireless_link_qual_perc wlan0}%
+${wireless_link_bar 3,110 wlan0}

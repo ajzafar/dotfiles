@@ -1,0 +1,36 @@
+" gvimrc
+""" Vim settings
+"""" GUI behavior
+set guioptions=
+set guioptions+=a
+set guioptions+=c
+set guioptions+=i
+
+"""" Visuals
+set gcr+=a:blinkwait0
+
+if has('gui_gtk2')
+    let &guifont = 'Menlo,DejaVu\ Sans\ Mono,Bitstream\ Vera\ Sans\ Mono'
+endif
+
+"""" Misc
+" Do I need this in both vimrc and gvimrc?
+" Apparently yes, yes I do
+set t_vb= " Disable beeping.
+
+""" Autocommands
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+    augroup gvimrcEx
+    au!
+
+    " Source the gvimrc after editing
+    au BufWritePost .gvimrc source $MYGVIMRC
+
+    augroup END
+endif
+
+""
+"" Taken from godlygeek's vimrc. Pretty nice way to handle folding.
+"" vim:fdm=expr
+"" vim:fde=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'""*')-2)\:'='

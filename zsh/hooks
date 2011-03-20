@@ -1,0 +1,82 @@
+# zsh hooks
+
+function termtitle { # {{{
+    local wd
+    if [[ $1 = '-p' ]]; then
+        wd='%n@%m:%15<..<%~%<< '
+        shift
+    fi
+
+    # forget the working directory if it's a long title
+    (( ${#${*}} > 25 )) && unset wd
+
+    # different terms have different escape sequences
+    case $TERM in # {{{
+        screen*)
+            # output zsh for screen, then also output the xterm escape
+            printf "\ek%s\e\\" ${*:-zsh}
+            ;&
+        *xterm*|*rxvt*)
+            printf "\e]2;%s\a" ${(%)wd}${*}
+            ;;
+    esac # }}}
+} # }}}
+
+function chpwd precmd { # {{{
+    [[ -t 1 ]] || return
+    # show wd
+    termtitle -p
+} # }}}
+
+function preexec { # {{{
+    [[ -t 1 ]] || return
+    local -a words
+
+    # more or less taken from Frank Terbeck's preexec()
+    words=( ${(z)${1}} )
+
+    # obtain comment via reverse lookup
+    # add one to the index of the first word equal to '#'
+    local comment="${words[${words[(rei)#]}+1,-1]}"
+    [[ -n $comment ]] && { termtitle $comment ; return }
+
+    while (( ${#words} > 0 )); do # {{{
+        case ${words[1]} in
+            (*=*) ;& # variable assignments
+            (sudo) ;&
+            (exec) ;&
+            (torify) ;&
+            (watch) ;&
+            (noglob) shift words ;;
+            (*) break ;;
+        esac
+    done # }}}
+
+    # loop through until the first command
+    local w
+    for w in $words; do
+        if check_com $w; then
+            termtitle -p $w
+            break;
+        fi
+    done
+
+} # }}}
+
+function zshaddhistory { # {{{
+    setopt localoptions extended_glob
+    local line=${1%%$'\n'} filter_file=${2:-~/config/.zsh/histignore}
+    local -a words
+    words=( ${(z)line} )
+
+    # if the command contained only one word or starts with a space
+    (( ${#words} == 1 )) || [[ ${line[1]} == ' ' ]] && return 1
+
+    (( ${+HISTFILE} )) && [[ -f ${filter_file} ]] && while read -r filt; do
+        if [[ $line == ${~filt} ]]; then
+            return 1
+        fi
+    done < $filter_file
+
+    return 0
+} # }}}

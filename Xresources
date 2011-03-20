@@ -1,0 +1,16 @@
+URxvt.*.background: #1a1c20
+URxvt.*.foreground: #98a0aa
+URxvt.*.scrollBar: false
+URxvt.*.fading: 25
+URxvt.*.fadeColor: #1a1c20
+URxvt.*.font: xft:Menlo:pixelsize=12
+URxvt.*.boldFont: xft:Menlo:pixelsize=12
+URxvt.*.italicFont: xft:Menlo:italic:pixelsize=12
+URxvt.*.boldItalicFont: xft:Menlo:italic:pixelsize=12
+URxvt.urlLauncher: /usr/bin/firefox
+URxvt.utmpInhibit: true
+*.utmpInhibit: true
+*.background: #1a1c20
+*.foreground: #98a0aa
+gnuplot*background: #ffffff
+gnuplot*foreground: #000000

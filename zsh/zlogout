@@ -1,0 +1,4 @@
+# zsh zlogout
+
+sudo -k
+clear

@@ -1,0 +1,34 @@
+emulate -L zsh
+setopt local_options
+setopt typeset_silent
+setopt extended_glob
+
+local dry artist album dest preserve old_album
+local -a have
+
+[[ -n $1 ]] && dry='echo'
+
+for artist in *; do
+    have=( ../^untagged/$artist(N) )
+
+    if (( ${#have} == 0 )); then
+        echo "Don't have $artist. Skipping"
+    else
+        dest=${have[1]}
+
+        for album in $artist/*; do
+            old_album=$dest/${album:t}
+
+            if [[ -d $old_album ]]; then
+                $dry feh $old_album/cover.jpg
+                $dry read -q "preserve?Preserve art for $album (y/n): "
+                $dry cp $old_album/cover.jpg $album
+                $dry rm -r $old_album
+            fi
+
+            $dry mv $album $dest
+        done
+    fi
+done
+
+rmdir --ignore-fail-on-non-empty *

@@ -1,0 +1,15 @@
+# vim:ft=gitconfig:
+
+[user]
+    email = adnanjzafar@gmail.com
+    name  = Adnan Zafar
+[branch]
+    autosetupmerge  = true
+    autosetuprebase = always
+[alias]
+    ci = commit
+    co = checkout
+    st = status
+[core]
+    autocrlf     = input
+    excludesfile = '*~'

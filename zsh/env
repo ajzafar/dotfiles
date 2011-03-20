@@ -1,0 +1,21 @@
+# zsh interactive env variables
+
+if [[ -n $DISPLAY ]]; then
+    export BROWSER="firefox"
+    export WINEDEBUG="-all"
+fi
+
+# less {{{
+# Originally from RichiH
+if check_com less; then
+    export LESSCHARSET="utf-8"
+    if (( terminfo[colors] >= 8 )); then
+        export LESS_TERMCAP_mb=$'\e[01;31m'
+        export LESS_TERMCAP_md=$'\e[01;31m'
+        export LESS_TERMCAP_me=$'\e[0m'
+        export LESS_TERMCAP_se=$'\e[0m'
+        export LESS_TERMCAP_so=$'\e[01;44;33m'
+        export LESS_TERMCAP_ue=$'\e[0m'
+        export LESS_TERMCAP_us=$'\e[01;32m'
+    fi
+fi # }}}

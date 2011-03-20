@@ -1,0 +1,91 @@
+# zsh compsys
+
+# :completion:function:completer:command:argument:tag
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' substitute 1
+
+# case insensitive completion
+# FIXME: This doesn't quite work as I'd like. Maybe it never will.
+() {
+    local -a matchers
+    matchers=(
+        'm:{[:lower:]}={[:upper:]}'
+        '+r:|[-._/]=** r:|=*'
+        'l:|=* r:|=*'
+        '+m:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+    )
+    zstyle ':completion:*' matcher-list "${(@)matchers}"
+}
+
+# /usr/bin/<tab> won't check for /usr/binfoo/ if /usr/bin exists
+zstyle ':completion:*' accept-exact-dirs true
+
+# only ask if completion should be shown if it is larger than our screen
+LISTMAX=0
+
+# more-like prompt for completions
+zstyle ':completion:*' list-prompt '%S%L %P -- More -- %s'
+
+# color completion based on LS_COLORS
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# cache completions when available (think apt completion)
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zshcompletion
+
+# Some completions can use perl instead of awk, which works better
+check_com perl && zstyle ':completion:*' use-perl on
+
+# ignore parents and pwd in when completing paths in current word
+zstyle ':completion:*' ignore-parents parent pwd ..
+# adds .. as a possible completion (so that ..<tab> adds a /)
+zstyle ':completion:*' special-dirs ..
+# foo///bar can be equivalent to foo/*/*/bar
+zstyle ':completion:*:paths' squeeze-slashes true # doesn't work
+
+# Don't complete backup files (e.g. 'bin/foo~') as executables
+zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+
+# Ignore completion functions
+zstyle ':completion:*:(functions|parameters|association-keys)' ignored-patterns '_*'
+
+# set path differently for sudo {{{
+() {
+    local p
+    local -a spath
+    for p in $path; {
+        local sp=${p:h}/sbin
+        if [[ -d ${p:h}/sbin ]]; then
+            spath+=($sp $p)
+        else
+            spath+=$p
+        fi
+    }
+
+    zstyle ':completion:*:*:sudo:*' command-path $spath
+} # }}}
+
+# pretty kill completion. colored, cpu load & process tree
+zstyle ':completion:*:processes' command 'ps xf -u $USER -o pid,%cpu,%mem,cmd'
+zstyle ':completion:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:*:kill:*' menu select yes
+
+# Much better man completion
+zstyle ':completion:*:manuals' menu select yes
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.*' insert-sections true
+
+
+# Ignore some users
+() {
+    local -a ignore_users
+    ignore_users=( adm bitlbee bin daemon dbus games haldaemon halt lp mail man
+        messagebus mysql news nfsnobody nobody ntp operator polipo portage
+        postmaster pulse rpc shutdown smmsp sshd sync uucp )
+    zstyle ':completion:*:users' ignored-patterns ${ignore_users}
+}
+
+autoload -Uz compinit; compinit
+
+check_com epdfview && compdef _pdf epdfview

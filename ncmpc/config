@@ -1,0 +1,25 @@
+audible-bell = no
+auto-center = no
+bell-on-wrap = no
+crossfade-time = 5
+enable-colors = yes
+enable-mouse = yes
+find-show-last = no
+find-wrap = yes
+jump-prefix-only = yes
+lyrics-autosave = no
+screen-list = playlist browse
+scroll = yes
+scroll-offset = 1
+search-mode = 3
+second-column = no
+seek-time = 10
+set-xterm-title = yes
+visible-bell = no
+welcome-screen-list = yes
+wide-cursor = yes
+wrap-around = no
+
+list-format = "[[%composer% - ]%artist% #[%album%#] [%track%: ]%title%|%file%] #[%time%#]"
+status-format = "[[%composer% - ]%artist% #[%album%#] %title%]|%file%"
+xterm-title-format = "[%artist% #[%album%#] %title%]|%file%"

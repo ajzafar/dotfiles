@@ -1,0 +1,63 @@
+# zsh aliases
+
+# chalias -- check if a command exists and if so make the alias {{{
+# -d      -- check for $DISPLAY
+# -s      -- make a suffix alias
+chalias() {
+    local suffix=''
+
+    while [[ $1 == -* ]]; do
+        case $1 in
+            (-d) [[ -z $DISPLAY ]] && return;;
+            (-s) suffix='-s' ;;
+        esac
+        shift
+    done
+
+    check_com ${argv[1,-2]} && alias $suffix ${argv[-1]}
+} # }}}
+
+# coreutils aliases {{{
+chalias ls ls='ls --color=auto'
+chalias ls dir='ls --color=auto'
+chalias grep grep='grep --color=auto'
+chalias grep egrep='grep -E --color=auto'
+# }}}
+
+# apps-based aliases {{{
+chalias hamachi ham='sudo -u hamachi hamachi -c /etc/hamachi'
+chalias -d mplayer mplfs='mplayer -fs'
+chalias mplayer stream='http_proxy= mplayer -volume 100 http://deskbert:9362/stream'
+chalias mpc at mpat="echo 'mpc --no-status pause' | at"
+chalias -d huludesktop hulu='http_proxy= huludesktop'
+chalias transmission-remote btr btg='btr -l | grep -i'
+# This allows aliases to be used with sudo. Credit to godlygeek.
+chalias sudo sudo='sudo '
+# }}}
+
+# extension aliases {{{
+chalias -d -s epdfview pdf=epdfview
+chalias -s mono exe=mono
+
+# vids {{{
+if [[ -n $DISPLAY ]]; then
+    PLAYER=mplayer
+    vids=(
+        avi
+        mkv
+        mp4
+    )
+
+    for i in $vids; {
+        alias -s $i='${(z)PLAYER}'
+    }
+    unset vids i
+fi
+# }}}
+
+# autoload aliases {{{
+for func in pass vimh zmv; {
+    alias $func="autoload -U $func; unalias $func; $func"
+}
+unset func
+# }}}

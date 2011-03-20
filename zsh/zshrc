@@ -1,0 +1,57 @@
+# zshrc
+
+# Prepend my fpath contributions
+# Do this early on so my functions will be available in my setup
+# and prepend so that my functions can override system functions
+fpath=(
+    $XDG_CONFIG_HOME/zsh/zfunctions
+    $XDG_CONFIG_HOME/zsh/zfunctions/completions
+    $fpath
+)
+
+check_com() { # {{{
+    for arg in "$@"; do
+        [[ -x ${commands[$arg]} ]] || [[ -x $arg ]] || return 1
+    done
+} # }}}
+
+# source zsh files {{{
+zfiles=(
+    aliases
+    compsys
+    env
+    hooks
+    options
+    vi-mode
+    prompt
+    zle
+)
+
+for f in $zfiles; do
+    f=$XDG_CONFIG_HOME/zsh/$f
+    if [[ -r $f ]]; then
+        source $f
+    else
+        echo $f not found 1>&2
+    fi
+done
+unset f zfiles
+# }}}
+
+# Keychain {{{
+() {
+    local ssh_key=~/.ssh/id_dsa
+    if [[ -f $ssh_key ]] && check_com keychain; then
+        keychain --agents ssh $ssh_key
+        source ~/.keychain/$HOST-sh
+    fi
+}
+# }}}
+
+# fortune {{{
+if check_com fortune; then
+    echo
+    fortune
+    echo
+fi
+# }}}

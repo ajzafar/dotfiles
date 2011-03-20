@@ -1,0 +1,4 @@
+include "/usr/share/themes/Emacs/gtk-2.0-key/gtkrc"
+
+gtk-font-name = "Segoe UI 9"
+gtk-error-bell = 0

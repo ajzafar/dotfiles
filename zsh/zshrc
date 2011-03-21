@@ -40,9 +40,10 @@ unset f zfiles
 
 # Keychain {{{
 () {
-    local ssh_key=~/.ssh/id_dsa
-    if [[ -f $ssh_key ]] && check_com keychain; then
-        keychain --agents ssh $ssh_key
+    local -a keys
+    keys=( ~/.ssh/id_[rd]sa(N) )
+    if (( $#keys )) && check_com keychain; then
+        keychain --agents ssh $keys
         source ~/.keychain/$HOST-sh
     fi
 }

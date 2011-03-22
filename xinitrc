@@ -33,17 +33,17 @@ case $2 in
     openbox)
         ifrun exec openbox
         ;;
-    awesome)
-        ifrun exec awesome
-        ;;
     xfce4)
         ifrun exec startxfce4
         ;;
-    e16|enlightenment|*)
+    e16|enlightenment)
         ifrun exec e16 -f
         ;;
     twm)
         ifrun exec twm
+        ;;
+    awesome|*)
+        ifrun exec awesome
         ;;
 esac
 # }}}

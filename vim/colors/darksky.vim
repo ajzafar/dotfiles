@@ -1,11 +1,13 @@
 " Named after the bblean theme darksky by ratednc-17.com
 " Written by Adnan Zafar, mostly based on the default Vim theme
 
-set background=dark
-
-let g:colors_name = 'darksky'
+if &t_Co >= 88 || has('gui_running')
+    set background=dark
+endif
 
 hi clear
+
+let g:colors_name = 'darksky'
 
 hi Normal        guifg=#98a0aa  guibg=#1a1c20
 hi NonText       guifg=#4d98a6  guibg=#0a0c10  gui=NONE

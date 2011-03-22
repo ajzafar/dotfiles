@@ -1,4 +1,3 @@
-URxvt.perl-ext-common: selection,selection-autotransform,matcher,tabbed
 Xft.antialias: 1
 Xft.hinting: 0
 Xft.rgba: rgb

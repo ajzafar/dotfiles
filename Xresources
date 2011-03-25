@@ -7,7 +7,7 @@ URxvt.*.font: xft:Menlo:pixelsize=12
 URxvt.*.boldFont: xft:Menlo:pixelsize=12
 URxvt.*.italicFont: xft:Menlo:italic:pixelsize=12
 URxvt.*.boldItalicFont: xft:Menlo:italic:pixelsize=12
-URxvt.urlLauncher: /usr/bin/firefox
+URxvt.urlLauncher: chrome
 URxvt.utmpInhibit: true
 URxvt.perl-ext-common: selection,selection-autotransform,matcher,tabbed
 *.utmpInhibit: true
@@ -15,3 +15,6 @@ URxvt.perl-ext-common: selection,selection-autotransform,matcher,tabbed
 *.foreground: #98a0aa
 gnuplot*background: #ffffff
 gnuplot*foreground: #000000
+Xcursor.theme: Vienna3
+Xcursor.theme_core: true
+Xcursor.size: 16

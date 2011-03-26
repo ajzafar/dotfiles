@@ -168,8 +168,10 @@ if has("autocmd")
     augroup myVimrc
     au!
 
-    " For all text files set 'textwidth' to 80 characters.
-    au FileType text,markdown setlocal spell fo+=a fo+=t
+    " For filetypes where I'll mostly be writing prose, enable spelling and 'tw'
+    " based wrapping
+    au FileType text,markdown setl spell fo+=a fo+=t
+    au FileType gitcommit setl spell fo+=t
 
     " Make K use internal help when editing VimScript or vimrc
     au FileType vim* setlocal kp=:help

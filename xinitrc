@@ -26,7 +26,7 @@ ifrun xscreensaver &
 # }}}
 
 # WM selection {{{
-case $2 in
+case ${XSESSION:-awesome} in
     flux*)
         ifrun exec startfluxbox
         ;;
@@ -42,7 +42,7 @@ case $2 in
     twm)
         ifrun exec twm
         ;;
-    awesome|*)
+    awesome)
         ifrun exec awesome
         ;;
 esac

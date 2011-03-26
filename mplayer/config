@@ -1,6 +1,6 @@
 [default]
 ao=alsa
-fstype=none
+# fstype=none
 geometry=50%:50%
 softvol=yes
 vf=screenshot

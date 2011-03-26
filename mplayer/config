@@ -2,6 +2,7 @@
 ao=alsa
 # fstype=none
 geometry=50%:50%
+ontop=yes
 softvol=yes
 vf=screenshot
 vo=xv,x11

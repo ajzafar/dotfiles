@@ -52,4 +52,6 @@ if exists('g:loaded_surround')
     " vim-surround: q for `foo' and Q for ``foo''
     let b:surround_{char2nr('q')} = "`\r'"
     let b:surround_{char2nr('Q')} = "``\r''"
+    " for sets
+    let b:surround_{char2nr('s')} = "\\{ \r \\}"
 endif

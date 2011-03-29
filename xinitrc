@@ -22,7 +22,6 @@ ifrun conky -d -c ${XDG_CONFIG_HOME}/conkyrc-$(hostname)
 # Backgrounded programs {{{
 ifrun tilda &
 ifrun unclutter -idle 1.5 -jitter 5 -noevents &
-ifrun xscreensaver &
 # }}}
 
 # WM selection {{{

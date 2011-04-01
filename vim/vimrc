@@ -267,6 +267,9 @@ nnoremap ZZ :up<CR>
 nnoremap ZQ :x<CR>
 nnoremap ZX :q!<CR>
 
+" Make the current line blank
+nnoremap <leader>e 0D
+
 """"" Improvements (taken from godlygeek's vimrc)
 
 " Switching with the alternate file preserves column/line

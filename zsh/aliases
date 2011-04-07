@@ -49,10 +49,3 @@ if [[ -n $DISPLAY ]]; then
     unset i
 fi
 # }}}
-
-# autoload aliases {{{
-for func in pass vimh zmv; {
-    alias $func="autoload -U $func; unalias $func; $func"
-}
-unset func
-# }}}

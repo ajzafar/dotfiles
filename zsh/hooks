@@ -80,3 +80,17 @@ function zshaddhistory { # {{{
 
     return 0
 } # }}}
+
+function command_not_found_handler { # {{{
+    local -a funcs
+    funcs=( ${^fpath}/$1(N) )
+
+    if (( $#funcs > 0 )); then
+        autoload -U $1
+        # exec makes the return value from the function work without showing the
+        # "command not found" message
+        exec "$@"
+    else
+        return 1 # make zsh show "command not found"
+    fi
+} # }}}

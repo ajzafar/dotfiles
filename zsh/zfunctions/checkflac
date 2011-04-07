@@ -1,0 +1,13 @@
+local -a flacs
+
+if (( $# > 0 )); then
+    flacs=( "$@" )
+else
+    flacs=( *.flac(N) )
+fi
+
+(( $#flacs == 0 )) && return 1
+
+metaflac --add-replay-gain $flacs
+flac -d $flacs
+rm *.wav

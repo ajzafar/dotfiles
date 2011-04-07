@@ -38,6 +38,8 @@ chalias sudo sudo='sudo '
 # extension aliases {{{
 chalias -d -s epdfview pdf=epdfview
 chalias -s mono exe=mono
+for i in gif jpg jpeg png; chalias -d -s feh $i=feh
+unset i
 
 # vids {{{
 if [[ -n $DISPLAY ]]; then

@@ -300,6 +300,10 @@ inoremap <C-@> <C-g>u<C-@>
 """" ^L as Esc
 noremap <C-l> <Esc>
 noremap! <C-l> <Esc>
+" In select mode, mapmode-v mappings go to visual mode, trigger the map, then go
+" back to select mode, making the above map do nothing. So we make a separate
+" map. See :h Select-mode-mapping
+snoremap <C-l> <Esc>
 " so that the default <C-l> is available
 nnoremap <C-l> <Esc><C-l>
 

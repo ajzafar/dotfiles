@@ -293,6 +293,10 @@ inoremap <C-a> <C-o>^
 " Create a new undo block before clearing the line
 inoremap <c-u> <c-g>u<c-u>
 
+" Since I use <C-@> in tmux and my brain sucks, I keep pushing this in Vim.
+" Let's at least make that undoable.
+inoremap <C-@> <C-g>u<C-@>
+
 """" ^L as Esc
 noremap <C-l> <Esc>
 noremap! <C-l> <Esc>

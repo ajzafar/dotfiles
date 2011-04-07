@@ -304,8 +304,8 @@ noremap! <C-l> <Esc>
 " back to select mode, making the above map do nothing. So we make a separate
 " map. See :h Select-mode-mapping
 snoremap <C-l> <Esc>
-" so that the default <C-l> is available
-nnoremap <C-l> <Esc><C-l>
+" Esc doesn't do anything in normal mode, so there's no need for a short map
+nunmap <C-l>
 
 """" Function keys
 " <F2> will be used for snipmate.

@@ -1,5 +1,6 @@
-gitconfig
 easytag
+fonts.conf
+gitconfig
 gtkrc.mine
 irssi
 mplayer
@@ -7,13 +8,12 @@ ncmpc
 screenrc
 ssh
 tilda
+vim
+vim/gvimrc
+vim/vimrc
 wgetpaste.conf
 xinitrc
-zsh/zprofile
-zsh/zshrc
-zsh/zshenv
 zsh/zlogout
-vim
-vim/vimrc
-vim/gvimrc
-fonts.conf
+zsh/zprofile
+zsh/zshenv
+zsh/zshrc

@@ -10,7 +10,6 @@ ifrun() { # {{{
 
 # Single run programs {{{
 ifrun xrdb -merge ${XDG_CONFIG_HOME}/Xresources
-ifrun xrdb -merge ${XDG_CONFIG_HOME}/Xresources-$(hostname)
 ifrun xsetroot -cursor_name Vienna3
 # }}}
 

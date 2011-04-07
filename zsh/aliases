@@ -44,16 +44,9 @@ unset i
 # vids {{{
 if [[ -n $DISPLAY ]]; then
     PLAYER=mplayer
-    vids=(
-        avi
-        mkv
-        mp4
-    )
 
-    for i in $vids; {
-        alias -s $i='${(z)PLAYER}'
-    }
-    unset vids i
+    for i in avi mkv mov mp4 ogv wmv; alias -s $i='${(z)PLAYER}'
+    unset i
 fi
 # }}}
 

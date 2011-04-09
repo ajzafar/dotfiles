@@ -8,6 +8,7 @@ ncmpc
 screenrc
 ssh
 tilda
+tmux.conf
 vim
 vim/gvimrc
 vim/vimrc

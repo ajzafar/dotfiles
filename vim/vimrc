@@ -233,7 +233,7 @@ noremap _ <nop>
 " Don't use Ex mode, use Q for formatting
 " Derived from the default vimrc
 " This is mapped in an unwanted form in Gentoo's system vimrc, so unmap it first
-unmap Q
+silent! unmap Q
 nnoremap Q gq
 xnoremap Q gq
 

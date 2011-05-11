@@ -4,6 +4,7 @@ ao=alsa
 geometry=50%:50%
 ontop=yes
 softvol=yes
+use-filename-title=yes
 vf=screenshot
 vo=xv,x11
 volume=40

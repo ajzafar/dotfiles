@@ -53,8 +53,6 @@ if has('persistent_undo')
 endif
 
 """" Reading settings
-set secure              " try to make per-directory settings safe
-set exrc                " enable per-directory vimrc (more power than modelines)
 set modeline
 set viminfo+=n~/.cache/vim/viminfo
 

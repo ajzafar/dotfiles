@@ -81,7 +81,7 @@ zstyle ':completion:*:manuals.*' insert-sections true
 () {
     local -a ignore_users
     ignore_users=( adm bitlbee bin daemon dbus games haldaemon halt lp mail man
-        messagebus mysql news nfsnobody nobody ntp operator polipo portage
+        messagebus mpd mysql news nfsnobody nobody ntp operator polipo portage
         postmaster pulse rpc shutdown smmsp sshd sync uucp )
     zstyle ':completion:*:users' ignored-patterns ${ignore_users}
 }

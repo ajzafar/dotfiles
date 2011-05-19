@@ -18,10 +18,13 @@ chalias() {
 } # }}}
 
 # coreutils aliases {{{
-chalias ls ls='ls --color=auto'
-chalias ls dir='ls --color=auto'
-chalias grep grep='grep --color=auto'
-chalias grep egrep='grep -E --color=auto'
+if check_com gls; then
+    alias ls='gls --color=auto'
+elif [[ $(uname) == Linux ]]; then
+    alias ls='ls --color=auto'
+fi
+alias dir=ls
+alias egrep='grep -E'
 # }}}
 
 # apps-based aliases {{{

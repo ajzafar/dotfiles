@@ -6,13 +6,9 @@
 set nocompatible
 
 """ Pathogen
-filetype off
 set rtp+=~/.vim/pathogen
-if v:version < 703 && !has('gui') || &t_Co < 88
-    let g:pathogen_disabled = [ 'csapprox' ]
-endif
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call pathogen#infect()
+Helptags
 
 """ Vim Settings
 """" Patterns and search behavior

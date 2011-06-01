@@ -338,9 +338,6 @@ imap <F2> <C-O><F2>
 """" NERD Commenter
 let g:NERDSpaceDelims = 1
 
-"""" NERD Tree
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
-
 """" CSApprox
 let g:CSApprox_hook_post = [
             \ 'hi Normal ctermfg=NONE ctermbg=NONE',

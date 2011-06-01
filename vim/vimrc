@@ -148,13 +148,6 @@ if &t_Co > 2 || has("gui_running")
     colors darksky
 endif
 
-" Use the inkpot colorscheme when using vimdiff
-" Unfortunately, this requires 256 color support
-" TODO: make my colorscheme work well for vimdiff
-if &diff && (&t_Co > 16 || has('gui_running'))
-    colors inkpot
-endif
-
 """ Autocommands
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")

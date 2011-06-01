@@ -39,6 +39,12 @@ hi PmenuSel      guifg=#a9a9a9  guibg=bg       gui=reverse
 hi PmenuSbar     guifg=#cecece  guibg=bg       gui=reverse
 hi PmenuThumb    guifg=#676767  guibg=bg       gui=reverse
 
+" Colors heavily influenced/taken from inkpot
+hi DiffAdd       guifg=#cdd8e6  guibg=#012773  gui=NONE
+hi DiffDelete    guifg=#cdd8e6  guibg=#6d3030  gui=NONE
+hi DiffChange    guifg=#cdd8e6  guibg=#306d30  gui=NONE
+hi DiffText      guifg=#cdd8e6  guibg=#4a2a4a  gui=NONE
+
 hi! link VertSplit StatusLineNC
 hi! link ErrorMsg Error
 hi! link SpecialKey NonText

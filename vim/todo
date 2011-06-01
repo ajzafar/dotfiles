@@ -5,6 +5,3 @@ plugins to use/consider
 - Ack https://github.com/mileszs/ack.vim
 - xptemplate https://github.com/drmingdrmer/xptemplate
 - syntastic https://github.com/scrooloose/syntastic
-
-colorscheme
-- better diff support

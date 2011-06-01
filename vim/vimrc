@@ -160,6 +160,9 @@ if has("autocmd")
     au FileType text,markdown setl spell fo+=a fo+=t
     au FileType gitcommit setl spell fo+=t
 
+    " Disable modelines for certain git related files
+    au FileType gitcommit,gitrebase setl nomodeline
+
     " Make K use internal help when editing VimScript or vimrc
     au FileType vim* setlocal kp=:help
 

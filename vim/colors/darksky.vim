@@ -22,7 +22,7 @@ hi IncSearch     guifg=#303030  guibg=#cd8b60  gui=bold
 hi MatchParen    guifg=NONE     guibg=#095959
 
 hi StatusLine    guifg=NONE     guibg=NONE     gui=reverse
-hi StatusLineNC  guifg=#b9b9b9  guibg=#3e3e5e  gui=NONE
+hi StatusLineNC  guifg=#b9b9b9  guibg=#292936  gui=NONE
 hi! link VertSplit StatusLineNC
 
 hi Folded        guifg=Cyan     guibg=#101216
@@ -50,6 +50,6 @@ hi DiffChange    guifg=#cdd8e6  guibg=#306d30  gui=NONE
 hi DiffDelete    guifg=#cdd8e6  guibg=#6d3030  gui=NONE
 hi DiffText      guifg=#cdd8e6  guibg=#4a2a4a  gui=NONE
 
-hi TabLine       guifg=#b8c0ca  guibg=#3e3e5e  gui=NONE
-hi TabLineFill   guifg=NONE     guibg=#3e3e5e  gui=NONE
+hi TabLine       guifg=#b8c0ca  guibg=#292936  gui=NONE
+hi TabLineFill   guifg=NONE     guibg=#292936  gui=NONE
 hi TabLineSel    guifg=#b8c0ca  guibg=#0a0c10  gui=bold

@@ -343,7 +343,7 @@ let g:CSApprox_hook_post = [
             \ 'hi Normal ctermfg=NONE ctermbg=NONE',
             \ 'hi Visual ctermfg=NONE ctermbg=NONE cterm=reverse',
             \ ]
-let g:CSApprox_attr_map = { 'bold' : '', 'italic' : '', 'sp' : '' }
+let g:CSApprox_attr_map = { 'bold' : '', 'italic' : '', 'sp' : 'fg' }
 
 ""
 "" taken from godlygeek's vimrc. Pretty nice way to handle folding.

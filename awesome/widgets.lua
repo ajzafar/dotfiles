@@ -51,7 +51,7 @@ mytasklist.buttons = awful.util.table.join(
 
 mpdwidget = widget({ type = "textbox" })
 mpdwidget:buttons(awful.util.table.join(awful.button({ }, 1, mpd_notify)))
-vicious.register(mpdwidget, vicious.widgets.mpd, "MPD: ${state} ${volume}%", 7)
+vicious.register(mpdwidget, vicious.widgets.mpd, "MPD: ${state} ${volume}%", 13, { mpd_pass, mpd_host })
 cpuwid = awful.widget.graph()
 cpuwid:set_background_color('#1a1c20')
 cpuwid:set_color('#98a0aa')

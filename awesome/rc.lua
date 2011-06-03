@@ -48,7 +48,5 @@ end
 
 for i,v in ipairs{ 'tags.lua', 'menu.lua', 'widgets.lua',
                    'keys.lua', 'rules.lua', 'signals.lua' } do
-    if not awefile(v) then
-        error()
-    end
+    awefile(v)
 end

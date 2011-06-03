@@ -17,7 +17,7 @@ terminal       = "urxvtc"
 editor_cmd     = terminal .. " -e " .. os.getenv("EDITOR")
 modkey         = "Mod4"
 mpd_cover_size = 200
-host           = awful.util.pread('hostname')
+host           = awful.util.pread('hostname'):match('%S*')
 
 function load_theme(name)
     beautiful.init(string.format('%s/themes/%s/theme.lua', confdir, name))

@@ -50,7 +50,7 @@ function awefile(file)
     return status
 end
 
-for i,v in ipairs{ 'tags.lua', 'menu.lua', 'widgets.lua',
+for i,v in ipairs{ 'tags.lua', 'menu.lua', 'wibox.lua',
                    'keys.lua', 'rules.lua', 'signals.lua' } do
     awefile(v)
 end

@@ -28,7 +28,10 @@ load_theme('dsblue')
 function mpd_notify()
     local t = awful.util.pread("mpc current -f '%artist%\n%album%\n%track%: %title%'")
     t = t:gsub('&', '&amp;') -- sanitize for Pango
-    local cover = '/mnt/music/' .. string.gsub(awful.util.pread('mpc current -f %file%'), '[^/]+$', 'cover.jpg')
+    local cover
+    if mpd_host == host then
+        cover = '/mnt/music/' .. awful.util.pread('mpc current -f %file%'):gsub('[^/]+$', 'cover.jpg')
+    end
     naughty.notify{ text = t,
                     icon = cover,
                     icon_size = mpd_cover_size }

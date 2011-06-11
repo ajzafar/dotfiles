@@ -10,6 +10,8 @@
     ci = commit
     co = checkout
     st = status
+    dc = diff --cached
+    di = diff
 [core]
     autocrlf     = input
     excludesfile = ~/.gitignore

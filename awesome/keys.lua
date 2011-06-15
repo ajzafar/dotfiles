@@ -6,6 +6,10 @@ function mpd_cmd(cmd, notify)
     end
 end
 
+function os_wrap(cmd)
+    return function() os.execute(cmd) end
+end
+
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -79,7 +83,8 @@ globalkeys = awful.util.table.join(
             awful.menu.menu_keys.down = { "Down", "Alt_L" }
             local cmenu = awful.menu.clients({width=245}, { keygrabber=true, coords={x=525, y=330} })
         end),
-    awful.key({modkey}, "space", function() os.execute("xlock -mode blank") end),
+    awful.key({modkey}, "space", os_wrap('xlock -mode blank')),
+    awful.key({ },                  "XF86ScreenSaver", os_wrap('xlock -mode blank')),
     -- MPD control
     awful.key({modkey, "Control" }, "space", mpd_cmd('toggle', false)),
     awful.key({modkey, "Control", "Mod1" }, "space", mpd_notify),
@@ -88,10 +93,9 @@ globalkeys = awful.util.table.join(
     awful.key({modkey, "Control" }, "Up", mpd_cmd('volume +5', false)),
     awful.key({modkey, "Control" }, "Down", mpd_cmd('volume -5', false)),
     -- Special Thinkpad keys
-    awful.key({ },                  "XF86Display", function () os.execute("xset dpms force off") end),
-    awful.key({ },                  "XF86ScreenSaver", function () os.execute("xlock -mode blank") end),
+    awful.key({ },                  "XF86Display", os_wrap('xset dpms force off')),
     -- Volume keys
-    awful.key({ "Shift" },          "XF86AudioMute", function () os.execute("amixer sset Speaker toggle") end),
+    awful.key({ "Shift" },          "XF86AudioMute", os_wrap('amixer set Speaker toggle')),
     -- awful.key({ },                  "XF86AudioMute", function () obvious_alsa:mute() end),
     -- awful.key({ },                  "XF86AudioRaiseVolume", function () obvious_alsa:raise("5%") end),
     -- awful.key({ },                  "XF86AudioLowerVolume", function () obvious_alsa:lower("5%") end)

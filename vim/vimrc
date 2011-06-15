@@ -60,7 +60,7 @@ set noautoread
 set noequalalways
 set splitright
 set hidden
-set switchbuf=usetab
+set switchbuf=useopen
 
 """" Folding
 set foldmethod=marker

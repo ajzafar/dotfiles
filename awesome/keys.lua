@@ -96,9 +96,9 @@ globalkeys = awful.util.table.join(
     awful.key({ },                  "XF86Display", os_wrap('xset dpms force off')),
     -- Volume keys
     awful.key({ "Shift" },          "XF86AudioMute", os_wrap('amixer set Speaker toggle')),
-    -- awful.key({ },                  "XF86AudioMute", function () obvious_alsa:mute() end),
-    -- awful.key({ },                  "XF86AudioRaiseVolume", function () obvious_alsa:raise("5%") end),
-    -- awful.key({ },                  "XF86AudioLowerVolume", function () obvious_alsa:lower("5%") end)
+    awful.key({ },                  "XF86AudioMute", os_wrap('amixer set Master toggle')),
+    awful.key({ },                  "XF86AudioRaiseVolume", os_wrap('amixer sset Master 5%+')),
+    awful.key({ },                  "XF86AudioLowerVolume", os_wrap('amixer sset Master 5%-')),
     nil -- so I can reorder keys without hassle
 )
 

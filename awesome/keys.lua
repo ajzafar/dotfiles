@@ -87,9 +87,12 @@ globalkeys = awful.util.table.join(
     awful.key({ },                  "XF86ScreenSaver", os_wrap('xlock -mode blank')),
     -- MPD control
     awful.key({modkey, "Control" }, "space", mpd_cmd('toggle', false)),
+    awful.key({}, "XF86AudioPlay", mpd_cmd('toggle', false)),
     awful.key({modkey, "Control", "Mod1" }, "space", mpd_notify),
     awful.key({modkey, "Control" }, "Left", mpd_cmd('prev', true)),
+    awful.key({}, "XF86AudioPrev", mpd_cmd('prev', true)),
     awful.key({modkey, "Control" }, "Right", mpd_cmd('next', true)),
+    awful.key({}, "XF86AudioNext", mpd_cmd('next', true)),
     awful.key({modkey, "Control" }, "Up", mpd_cmd('volume +5', false)),
     awful.key({modkey, "Control" }, "Down", mpd_cmd('volume -5', false)),
     -- Special Thinkpad keys

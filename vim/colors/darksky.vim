@@ -26,6 +26,7 @@ hi StatusLineNC  guifg=#b9b9b9  guibg=#292936  gui=NONE
 hi! link VertSplit StatusLineNC
 
 hi Folded        guifg=Cyan     guibg=#101216
+hi! link FoldColumn Folded
 
 hi Comment       guifg=#467af2
 hi Constant      guifg=#e6171a

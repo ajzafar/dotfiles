@@ -294,7 +294,10 @@ noremap! <C-l> <Esc>
 " back to select mode, making the above map do nothing. So we make a separate
 " map. See :h Select-mode-mapping
 snoremap <C-l> <Esc>
-" Esc doesn't do anything in normal mode, so there's no need for a short map
+" In mapmode-c, <Esc> runs the command as typed, so we use <C-c>. See :h c_<Esc>
+cnoremap <C-l> <C-c>
+" Esc doesn't really do anything in normal mode, so unmap <C-l> so we can still
+" use it to redraw
 nunmap <C-l>
 
 """" Function keys

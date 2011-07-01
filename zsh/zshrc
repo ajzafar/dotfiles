@@ -11,7 +11,14 @@ fpath=(
 
 check_com() { # {{{
     for arg in "$@"; do
-        [[ -x ${commands[$arg]} ]] || [[ -x $arg ]] || return 1
+        if [[ -n ${commands[$arg]}  ]] || \
+           [[ -n ${aliases[$arg]}   ]] || \
+           [[ -n ${functions[$arg]} ]]
+        then
+            return 0
+        else
+            return 1
+        fi
     done
 } # }}}
 

@@ -7,7 +7,7 @@ function mpd_cmd(cmd, notify)
 end
 
 function os_wrap(cmd)
-    return function() os.execute(cmd) end
+    return function() os.execute(cmd .. '> /dev/null') end
 end
 
 -- {{{ Mouse bindings

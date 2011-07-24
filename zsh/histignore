@@ -20,3 +20,6 @@ startx(| *)
 (p|)kill(| *)
 ping *
 bt[grl](| *)
+ssh *
+clear *
+sleep *

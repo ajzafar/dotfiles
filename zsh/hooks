@@ -69,6 +69,17 @@ function zshaddhistory { # {{{
     local -a words
     words=( ${(z)line} )
 
+    while (( ${#words} > 0 )); do # {{{
+        case ${words[1]} in
+            (*=*) ;& # variable assignments
+            (sudo) ;&
+            (exec) ;&
+            (torify) ;&
+            (noglob) shift words ;;
+            (*) break ;;
+        esac
+    done # }}}
+
     # if the command contained only one word or starts with a space
     (( ${#words} == 1 )) || [[ ${line[1]} == ' ' ]] && return 1
 

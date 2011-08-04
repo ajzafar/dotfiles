@@ -20,8 +20,8 @@ t.fg_normal = "#d3deeb"
 t.fg_focus  = "#e8e6f8"
 t.fg_urgent = "#CC9393"
 
-t.bg_normal = "#363945"
-t.bg_focus  = "#591516"
+t.bg_normal = "#363945bb"
+t.bg_focus  = "#591516dd"
 t.bg_urgent = "#cc3739"
 
 -- Borders
@@ -31,10 +31,10 @@ t.border_focus  = "#546273"
 t.border_marked = "#ff4500"
 
 -- Titlebars
-t.titlebar_bg_focus  = "#005aab"
-t.titlebar_bg_normal = "#0c3457"
-t.titlebar_fg_focus  = "#e8e6f8"
+t.titlebar_bg_normal = "#0c3457bb"
+t.titlebar_bg_focus  = "#005aabdd"
 t.titlebar_fg_normal = "#d3deeb"
+t.titlebar_fg_focus  = "#e8e6f8"
 
 -- Widget colors
 t.widget_fg = '#98a0aa'

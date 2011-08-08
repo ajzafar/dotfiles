@@ -1,3 +1,5 @@
+require('widgets')
+
 -- {{{ Widget creation
 -- Create a textclock widget
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
@@ -56,11 +58,8 @@ cpuwid = awful.widget.graph()
 cpuwid:set_background_color('#1a1c20')
 cpuwid:set_color('#98a0aa')
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 7)
-memwid = awful.widget.progressbar({ height = 10 })
-memwid:set_background_color('#1a1c20')
-memwid:set_color('#98a0aa')
-vicious.register(memwid, vicious.widgets.mem, "$1")
-
+memwid = widgets.memory.new()
+vicious.register(memwid, vicious.widgets.mem, widgets.memory.vicious_format, 7)
 randrwid = widget{ type = 'textbox' }
 randrwid.text = 'Unknown'
 function randrfunc(state, external, main)

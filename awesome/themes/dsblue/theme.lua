@@ -35,6 +35,10 @@ t.titlebar_bg_focus  = "#005aab"
 t.titlebar_bg_normal = "#0c3457"
 t.titlebar_fg_focus  = "#e8e6f8"
 t.titlebar_fg_normal = "#d3deeb"
+
+-- Widget colors
+t.widget_fg = '#98a0aa'
+t.widget_bg = '#1a1c20'
 -- }}}
 
 -- other variables:

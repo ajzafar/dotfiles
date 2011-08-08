@@ -60,33 +60,7 @@ cpuwid:set_color('#98a0aa')
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 7)
 memwid = widgets.memory.new()
 vicious.register(memwid, vicious.widgets.mem, widgets.memory.vicious_format, 7)
-randrwid = widget{ type = 'textbox' }
-randrwid.text = 'Unknown'
-function randrfunc(state, external, main)
-    local state = state or 'off'
-    local external = external or 'S-video'
-    local main = main or 'VGA-0'
-    local cmd = 'xrandr --output ' .. external
-    if state ~= 'off' then
-        cmd = cmd .. ' --auto; xrandr --output ' .. external .. ' --' .. state .. ' ' .. main
-    else
-        cmd = cmd .. ' --off'
-    end
-
-    return function()
-        os.execute(cmd)
-        randrwid.text = state
-    end
-end
-randrmenu = awful.menu{ items = {
-    { 'Off', randrfunc('off') },
-    { 'Below', randrfunc('below') },
-    { 'Above', randrfunc('above') },
-    { 'Left', randrfunc('left-of') },
-    { 'Right', randrfunc('right-of') }
-}}
-
-randrwid:buttons( awful.button({ }, 1, function() awful.menu.toggle(randrmenu) end))
+randrwid = widgets.randr.new()
 -- }}}
 
 botbox = {}

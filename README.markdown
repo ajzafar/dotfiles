@@ -10,4 +10,10 @@ this repo at `~/.config`, and use `setup.sh` to symlink files that need
 symlinking. (The actual location doesn't matter, but `~/.config` makes sense to
 me.) Some links are unnecessary but done anyway for convenience.
 
+## Copying ##
+
+Everything in this repository written/created by me are in the public domain.
+Anything not written by me will have information either in the source or in
+a `README` in the same directory.
+
 [xdg-spec]: http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html

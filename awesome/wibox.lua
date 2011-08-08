@@ -58,6 +58,8 @@ cpuwid = widgets.cpu.new()
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 5)
 memwid = widgets.memory.new()
 vicious.register(memwid, vicious.widgets.mem, widgets.memory.vicious_format, 7)
+volwid = widgets.volume.new()
+vicious.register(volwid, vicious.widgets.volume, "$1", 3, 'Master')
 randrwid = widgets.randr.new()
 -- }}}
 
@@ -70,6 +72,7 @@ wids = {
     cpuwid, separate,
     memwid, separate,
     randrwid, separate,
+    volwid, separate,
 }
 
 mounts = { '/', '/home', '/mnt/music' }

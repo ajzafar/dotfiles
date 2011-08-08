@@ -75,7 +75,7 @@ wids = {
     volwid, separate,
 }
 
-mounts = { '/', '/home', '/mnt/music' }
+mounts = { '/', '/home', host == 'deskbert' and '/mnt/music' or nil}
 fswids = {}
 for i, m in ipairs(mounts) do
     local fmt = string.format('%s ${%s used_gb}/${%s size_gb}', m, m, m)

@@ -51,9 +51,7 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
-mpdwidget = widget({ type = "textbox" })
-mpdwidget:buttons(awful.util.table.join(awful.button({ }, 1, mpd_notify)))
-vicious.register(mpdwidget, vicious.widgets.mpd, "MPD: ${state} ${volume}%", 13, { mpd_pass, mpd_host })
+mpdwid = widgets.mpd.new{ hostname = mpd_host, password = mpd_pass }
 cpuwid = widgets.cpu.new()
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 5)
 memwid = widgets.memory.new()
@@ -68,7 +66,7 @@ botbox = awful.wibox({ position = "bottom", screen = 1 })
 botbox.opacity = 10
 wids = {
     separate,
-    mpdwidget, separate,
+    mpdwid, separate,
     cpuwid, separate,
     memwid, separate,
     randrwid, separate,

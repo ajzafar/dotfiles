@@ -32,7 +32,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # cache completions when available (think apt completion)
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zshcompletion
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/completion_cache
 
 # Some completions can use perl instead of awk, which works better
 check_com perl && zstyle ':completion:*' use-perl on

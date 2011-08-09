@@ -1,6 +1,6 @@
 # zsh zle set up
 
-source $XDG_CONFIG_HOME/zsh/terminfo
+source $ZDOTDIR/terminfo
 
 # for bindings that should be available for both viins and vicmd
 for keymap in viins vicmd; do

@@ -14,7 +14,4 @@ vim/gvimrc
 vim/vimrc
 wgetpaste.conf
 xinitrc
-zsh/zlogout
-zsh/zprofile
 zsh/zshenv
-zsh/zshrc

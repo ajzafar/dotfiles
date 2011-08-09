@@ -4,8 +4,8 @@
 # Do this early on so my functions will be available in my setup
 # and prepend so that my functions can override system functions
 fpath=(
-    $XDG_CONFIG_HOME/zsh/zfunctions
-    $XDG_CONFIG_HOME/zsh/zfunctions/completions
+    $ZDOTDIR/zfunctions
+    $ZDOTDIR/zfunctions/completions
     $fpath
 )
 
@@ -35,7 +35,7 @@ zfiles=(
 )
 
 for f in $zfiles; do
-    f=$XDG_CONFIG_HOME/zsh/$f
+    f=$ZDOTDIR/$f
     if [[ -r $f ]]; then
         source $f
     else

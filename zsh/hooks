@@ -65,7 +65,7 @@ function preexec { # {{{
 
 function zshaddhistory { # {{{
     setopt localoptions extended_glob
-    local line=${1%%$'\n'} filter_file=${2:-~/.config/zsh/histignore}
+    local line=${1%%$'\n'} filter_file=${2:-$ZDOTDIR/histignore}
     local -a words
     words=( ${(z)line} )
 

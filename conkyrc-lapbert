@@ -123,15 +123,6 @@ ${alignr 10}${top_mem mem 2}
 ${color lightgrey} ${top_mem name 3}
 ${alignr 10}${top_mem mem 3}
 
-${color #aaaaaa}MEM: ${alignr 10}${color}$memperc%
-${membar 3,110}
-${color #aaaaaa}SWAP: ${alignr 10}${color}$swapperc%
-${swapbar 3,110}
-
-${color #aaaaaa}ROOT:${alignr 10}${color} ${fs_free_perc /}% free
-${fs_bar 3,110 /}
-${color #aaaaaa}HOME:${alignr 10}${color} ${fs_free_perc /home}% free
-${fs_bar 3,110 /home}
 ${color #aaaaaa}WIN:${alignr 10}${color} ${fs_free_perc /mnt/win}% free
 ${fs_bar 3,110 /mnt/win}
 

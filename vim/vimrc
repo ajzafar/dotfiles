@@ -241,8 +241,23 @@ nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 
 " What's the syntax attribute associated with the current word?
-" Taken from :h synID()
-nnoremap <leader>g :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+" Based on graywh's ShowSynStack() and ShowSynIDs() and :h synID()
+if exists('*synstack')
+    fun! ShowSyn()
+        let ids = synstack(line('.'), col('.'))
+        let names = {}
+        for id in ids
+            let names[synIDattr(id, 'name')] = synIDattr(synIDtrans(id), 'name')
+        endfor
+        echo names
+    endf
+else
+    fun! ShowSyn()
+        let id = synID(line('.'), col('.'))
+        echo synIDattr(id, 'name') synIDattr(synIDtrans(id), 'name')
+    endf
+endif
+nnoremap <leader>g :call ShowSyn()<CR>
 
 " Remove trailing whitespace
 nnoremap <leader>ws :%s/\s\+$//e<CR>

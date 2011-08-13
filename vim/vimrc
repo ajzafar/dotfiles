@@ -158,7 +158,7 @@ if has("autocmd")
     " For filetypes where I'll mostly be writing prose, enable spelling and 'tw'
     " based wrapping
     au FileType text,markdown setl spell fo+=a fo+=t
-    au FileType gitcommit setl spell fo+=t
+    au FileType gitcommit setl spell fo+=t tw=72
 
     " Disable modelines for certain git related files
     au FileType gitcommit,gitrebase setl nomodeline

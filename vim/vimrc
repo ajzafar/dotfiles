@@ -142,7 +142,6 @@ let g:tex_flavor = 'latex'
 let g:is_posix = 1
 
 " Switch syntax highlighting on when the terminal has colors
-" TODO Make Tilda report a 256 term. Or stop using Tilda.
 if &t_Co > 2 || has("gui_running")
     syntax on
     colors darksky

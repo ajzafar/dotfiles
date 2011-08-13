@@ -22,3 +22,8 @@ brightness=0
 contrast=0
 hue=0
 saturation=0
+
+[gapless]
+ao=pcm:nowaveheader:fast:file=aufifo
+vc=null
+vo=null

@@ -281,6 +281,11 @@ nnoremap <C-6> <C-6>`"
 " <C-g> shows full path and buffer number
 nnoremap <C-g> 2<C-g>
 
+"""" Visual mode mappings
+" Avoid including the end of line when using $ in visual character mode. It can
+" still be selected with $l.
+xnoremap <expr> $ mode() == 'v' ? '$h' : '$'
+
 """" Command line mappings
 " Emacs bindings. Hate me if you must.
 " Taken from godlygeek's vimrc

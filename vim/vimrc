@@ -8,7 +8,6 @@ set nocompatible
 """ Pathogen
 set rtp+=~/.vim/pathogen
 call pathogen#infect()
-Helptags
 
 """ Vim Settings
 """" Patterns and search behavior

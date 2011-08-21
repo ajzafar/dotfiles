@@ -1,3 +1,4 @@
+extends c
 # Read File Into Vector
 snippet readfile
 	std::vector<char> v;
@@ -32,3 +33,5 @@ snippet fori
 	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
 		${4:/* code */}
 	}
+snippet inc
+	#include <${1:iostream}>

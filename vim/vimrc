@@ -353,10 +353,9 @@ for [key, val] in items(opt_toggle)
 endfor
 
 """ Plugins
-"""" snipMate
-let g:snippets_dir = '~/.vim/snippets'
+"""" SnipMate
 " Reread snippets
-nnoremap <F2> :call ReloadSnippets(&ft)<CR>
+nnoremap <F2> :ReloadSnippets<CR>
 imap <F2> <C-O><F2>
 
 """" NERD Commenter

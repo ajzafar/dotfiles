@@ -23,19 +23,7 @@ check_com() { # {{{
 } # }}}
 
 # source zsh files {{{
-zfiles=(
-    aliases
-    compsys
-    env
-    hooks
-    options
-    vi-mode
-    prompt
-    zle
-)
-
-for f in $zfiles; do
-    f=$ZDOTDIR/$f
+for f in $ZDOTDIR/<->-*; do
     if [[ -r $f ]]; then
         source $f
     else

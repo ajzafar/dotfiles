@@ -1,7 +1,5 @@
 # zsh zle set up
 
-source $ZDOTDIR/terminfo
-
 # for bindings that should be available for both viins and vicmd
 for keymap in viins vicmd; do
     alias bindkey="bindkey -M $keymap"

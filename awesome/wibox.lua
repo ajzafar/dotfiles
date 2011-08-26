@@ -51,7 +51,9 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
-mpdwid = widgets.mpd.new{ hostname = mpd_host, password = mpd_pass }
+mpdwid = widgets.mpd.new{ hostname = mpd_host,
+                          password = mpd_pass,
+                          onclick  = mpd_notify }
 cpuwid = widgets.cpu.new()
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 5)
 memwid = widgets.memory.new()

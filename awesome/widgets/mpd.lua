@@ -1,10 +1,12 @@
 require('lib.mpd')
 
-local awful = { widget = awful.widget }
+local awful = { widget = awful.widget, button = awful.button }
 local beautiful = beautiful
+local ipairs = ipairs
 local mpd = { new = mpd.new }
 local string = { match = string.match }
 local timer = timer
+local type = type
 local widget = widget
 
 module('widgets.mpd')
@@ -52,6 +54,13 @@ function new(args)
     timer:start()
     update()
     local widget = { timebar, label, volbar, layout = awful.widget.layout.horizontal.leftright }
+
+    if type(args.onclick) == 'function' then
+        for i,v in ipairs(widget) do
+            local wid = v.widget or v
+            wid:buttons(awful.button({}, 1, args.onclick))
+        end
+    end
 
     return widget
 end

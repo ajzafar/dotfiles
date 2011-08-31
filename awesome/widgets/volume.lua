@@ -8,7 +8,7 @@ module('widgets.volume')
 local function muted_channel(channel)
     local channel = channel or 'Master'
 
-    local f = io.popen('amixer get ' .. channel)
+    local f = io.popen('amixer get ' .. channel .. ' 2> /dev/null')
     local mixer = f:read('*all') or ''
     f:close()
 

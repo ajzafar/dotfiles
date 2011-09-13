@@ -217,6 +217,9 @@ let maplocalleader = '_'
 noremap - <nop>
 noremap _ <nop>
 
+sunmap -
+sunmap _
+
 """" Normal mode mappings
 " Don't use Ex mode, use Q for formatting
 " Derived from the default vimrc

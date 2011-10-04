@@ -64,32 +64,21 @@ function preexec { # {{{
 } # }}}
 
 function zshaddhistory { # {{{
-    setopt localoptions extended_glob
-    local line=${1%%$'\n'} filter_file=${2:-$ZDOTDIR/histignore}
-    local -a words
-    words=( ${(z)line} )
+    # The line without the trailing newline
+    local line=${1%%$'\n'}
 
-    while (( ${#words} > 0 )); do # {{{
-        case ${words[1]} in
-            (*=*) ;& # variable assignments
-            (sudo) ;&
-            (exec) ;&
-            (torify) ;&
-            (noglob) shift words ;;
-            (*) break ;;
-        esac
-    done # }}}
+    # If the line ends in ' #', then remove the trailing # and whitespace, then
+    # place it in the current history, change history list. Else just place the
+    # line in the history list. We need to place the line in the history list to
+    # get rid of the trailing ' #'.
+    if [[ ${line[-2,-1]} == ' #' ]]; then
+        line=${line%% ##\#}
+        print -sr -- $line
+        fc -p $histfile
+    fi
 
-    # if the command contained only one word or starts with a space
-    (( ${#words} == 1 )) || [[ ${line[1]} == ' ' ]] && return 1
-
-    (( ${+HISTFILE} )) && [[ -f ${filter_file} ]] && while read -r filt; do
-        if [[ $line == ${~filt} ]]; then
-            return 1
-        fi
-    done < $filter_file
-
-    return 0
+    print -sr -- $line
+    return 1
 } # }}}
 
 function command_not_found_handler { # {{{

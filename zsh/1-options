@@ -34,7 +34,8 @@ setopt hist_no_functions
 # history env {{{
 #
 # history file
-HISTFILE="$XDG_CACHE_HOME/zsh/history"
+histfile="$XDG_CACHE_HOME/zsh/history"
+fc -R $histfile
 # history file size in lines
 SAVEHIST=1000
 # current shell history size in lines

@@ -267,11 +267,10 @@ nnoremap <leader>ws :%s/\s\+$//e<CR>
 nnoremap <leader>v V`]
 
 " ZZ -- save
-" ZQ -- save and quit
-" ZX -- quit unconditionally
+" ZQ -- quit unconditionally
+" ZX -- save and quit
 nnoremap ZZ :up<CR>
-nnoremap ZQ :x<CR>
-nnoremap ZX :q!<CR>
+nnoremap ZX :x<CR>
 
 " Make the current line blank
 nnoremap <leader>e 0D

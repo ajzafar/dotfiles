@@ -1,3 +1,4 @@
+require('widgets.battery')
 require('widgets.cpu')
 require('widgets.memory')
 require('widgets.mpd')

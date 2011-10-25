@@ -7,7 +7,6 @@ setl softtabstop=2
 setl formatoptions+=c
 setl formatoptions+=o
 setl formatoptions+=r
-let &l:flp = '\v\\%(item|prob)%([\[{].{-}[\]}])?\s*'
 
 setl commentstring=%%%s
 

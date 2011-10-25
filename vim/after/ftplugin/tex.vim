@@ -35,17 +35,9 @@ else
 endif
 
 " Tabular {{{
-if exists('g:tabular_loaded')
-    let b:tab_form = 'l1'
-    " This basically replaces the ending \\ with a @, tabularizes it, then
-    " replaces the @ with the original \\
-    AddTabularPipeline! tex_table / & /
-                \ map(a:lines, "substitute(v:val, '\\\\\\\\', '@', '')") |
-                \ tabular#TabularizeStrings(a:lines, '[&@]', b:tab_form) |
-                \ map(a:lines, "substitute(v:val, '@', '\\\\\\\\', '')")
+if exists(':Tabularize')
+    AddTabularPattern tex_table /&\|\\\\/
     nnoremap <buffer> <silent> <leader>tt :Tabularize tex_table<CR>
-    nnoremap <buffer> <expr> <silent> <leader>tn ":let b:tab_form = '" .
-                \ input("New tabular format (count field separators): ") . "'<CR>"
 endif
 " }}}
 

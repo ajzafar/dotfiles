@@ -15,7 +15,7 @@ module('widgets.mpd')
 
 function new(args)
     local args = args or {}
-    local mcon = mpd.new(args)
+    local mcon = args.connection or mpd.new(args)
     local label = widget{ type = 'textbox' }
     local timebar = awful.widget.progressbar{ height = 10 }
     local volbar = awful.widget.progressbar()

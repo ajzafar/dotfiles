@@ -4,21 +4,23 @@
 -- message. Lastly, I can modify one file and, in most cases, simply rerun
 -- awefile('thefile.lua') for the changes to take effect.
 
-require("awful")
-require("awful.autofocus")
-require("awful.rules")
-require("beautiful")
-require("naughty")
+require('awful')
+require('awful.autofocus')
+require('awful.rules')
+require('beautiful')
+require('naughty')
 
-require("vicious")
+require('vicious')
+require('lib.mpd')
 
-confdir        = awful.util.getdir('config')
-terminal       = "urxvtc"
-editor_cmd     = terminal .. " -e " .. os.getenv("EDITOR")
-modkey         = "Mod4"
-mpd_cover_size = 200
-host           = awful.util.pread('hostname'):match('%S*')
+confdir            = awful.util.getdir('config')
+terminal           = "urxvtc"
+editor_cmd         = terminal .. " -e " .. os.getenv("EDITOR")
+modkey             = "Mod4"
+mpd_cover_size     = 200
+host               = awful.util.pread('hostname'):match('%S*')
 mpd_pass, mpd_host = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
+mpd_con            = mpd.new{ hostname = mpd_host, password = mpd_pass }
 
 function load_theme(name)
     beautiful.init(string.format('%s/themes/%s/theme.lua', confdir, name))
@@ -26,14 +28,12 @@ end
 load_theme('dsblue')
 
 function mpd_notify()
-    local t = awful.util.pread("mpc current -f '%artist%\n%album%\n%track%: %title%'")
-    t = t:gsub('&', '&amp;') -- sanitize for Pango
-    local cover
-    if mpd_host == host then
-        cover = '/mnt/music/' .. awful.util.pread('mpc current -f %file%'):gsub('[^/]+$', 'cover.jpg')
-    end
-    naughty.notify{ text = t,
-                    icon = cover,
+    local song = mpd_con:send('currentsong')
+    local t = string.format("%s\n%s\n%s: %s", song.artist, song.album,
+                                              song.track, song.title):gsub('&', '&amp;')
+    local cover = '/mnt/music/' .. t.file:gsub('[^/]+$', 'cover.jpg')
+    naughty.notify{ text      = t,
+                    icon      = cover,
                     icon_size = mpd_cover_size }
 end
 

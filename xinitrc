@@ -16,6 +16,7 @@ ifrun xsetroot -cursor_name Vienna3
 # Forking programs {{{
 ifrun urxvtd -q -o -f
 ifrun conky -d -c ${XDG_CONFIG_HOME}/conkyrc-$(hostname)
+ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
 # }}}
 
 # Backgrounded programs {{{

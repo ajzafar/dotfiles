@@ -20,7 +20,7 @@ modkey             = "Mod4"
 mpd_cover_size     = 200
 host               = awful.util.pread('hostname'):match('%S*')
 mpd_pass, mpd_host = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
-mpd_con            = mpd.new{ hostname = mpd_host, password = mpd_pass }
+mpd_con            = mpd.new{ hostname = mpd_host, password = mpd_pass, retry = 20 }
 
 function load_theme(name)
     beautiful.init(string.format('%s/themes/%s/theme.lua', confdir, name))

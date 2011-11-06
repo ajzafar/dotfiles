@@ -29,9 +29,10 @@ load_theme('dsblue')
 
 function mpd_notify()
     local song = mpd_con:send('currentsong')
+    if song.errormsg then return end
     local t = string.format("%s\n%s\n%s: %s", song.artist, song.album,
                                               song.track, song.title):gsub('&', '&amp;')
-    local cover = '/mnt/music/' .. t.file:gsub('[^/]+$', 'cover.jpg')
+    local cover = '/mnt/music/' .. song.file:gsub('[^/]+$', 'cover.jpg')
     naughty.notify{ text      = t,
                     icon      = cover,
                     icon_size = mpd_cover_size }
@@ -42,9 +43,8 @@ function awefile(file)
         pcall(function() dofile(confdir .. '/' .. file) end)
 
     if not status then
-        naughty.notify{
-            text = 'Unable to load ' .. file .. '\nError: ' .. err,
-            timeout = 0}
+        naughty.notify{ text = 'Unable to load ' .. file .. '\nError: ' .. err,
+                        timeout = 0 }
     end
 
     return status

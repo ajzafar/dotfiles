@@ -29,10 +29,17 @@ function new(args)
     return widget
 end
 
+local labels = {
+    ["↯"] = "F",
+    ["⌁"] = "U",
+    ["+"] = "C",
+    ["-"] = "D"
+}
+
 function vicious_format(widget, args)
     local percentage = args[2]
 
-    widget[1].text = args[1]
+    widget[1].text = labels[args[1]]
     widget[2]:set_value(percentage)
     widget.time = args[3]
 

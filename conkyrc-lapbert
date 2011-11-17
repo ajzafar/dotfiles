@@ -103,10 +103,6 @@ ${alignr 10}$loadavg
 ${color #aaaaaa}Processes: ${color}$processes
 ${color #aaaaaa}Running:   ${color}$running_processes
 
-${color #aaaaaa}Battery:
-${alignr 7}${color}$battery_short $battery_time
-${battery_bar 3,110 BAT0}
-
 ${color #aaaaaa}Highest CPU (%):
 ${color #ddaa00} ${top name 1}
 ${alignr 10}${top cpu 1}

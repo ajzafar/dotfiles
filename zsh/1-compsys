@@ -76,6 +76,8 @@ zstyle ':completion:*:manuals' menu select yes
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.*' insert-sections true
 
+# Ignore lost+found for cd (taken from Frank Terbeck)
+zstyle ':completion:*:cd:*' ignored-patterns '(*/)#lost+found'
 
 # Ignore some users
 () {

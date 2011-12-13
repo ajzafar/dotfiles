@@ -1,5 +1,5 @@
 audible-bell = no
-auto-center = no
+auto-center = yes
 bell-on-wrap = no
 crossfade-time = 5
 enable-colors = yes

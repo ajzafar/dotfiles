@@ -363,6 +363,11 @@ imap <F2> <C-O><F2>
 """" NERD Commenter
 let g:NERDSpaceDelims = 1
 
+"""" Commentary
+nmap <leader>c  <Plug>Commentary
+xmap <leader>c  <Plug>Commentary
+nmap <leader>cc <Plug>CommentaryLine
+
 """" CSApprox
 let g:CSApprox_hook_post = [
             \ 'hi Normal ctermfg=NONE ctermbg=NONE',

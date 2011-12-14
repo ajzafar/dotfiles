@@ -9,8 +9,6 @@ setl formatoptions+=o
 setl formatoptions+=r
 let &l:flp = '\v\\%(item|prob)%([\[{]\ze.{-}[\]}])?\s*'
 
-setl commentstring=%%%s
-
 setl spell
 let g:tex_comment_nospell = 1
 

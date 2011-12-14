@@ -18,7 +18,7 @@ layouts =
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names  = { "☎", "♐", "❦", "♈", 5, 6, 7, 8, 9 },
+    names  = { '☿', '♀', '♁', '♂', '♃', '♄', '♅', '♆', '♇' },
     layout = { 2, 12 },
 }
 

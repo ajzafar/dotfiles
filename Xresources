@@ -9,6 +9,8 @@ URxvt.*.italicFont: xft:Menlo:italic:size=9
 URxvt.*.boldItalicFont: xft:Menlo:italic:size=9
 URxvt.urlLauncher: chrome
 URxvt.utmpInhibit: true
+URxvt.*.color4: #264ead
+URxvt.*.color12: #4171e2
 URxvt.perl-ext-common: selection,selection-autotransform,matcher,tabbed
 *.utmpInhibit: true
 *.background: #1a1c20

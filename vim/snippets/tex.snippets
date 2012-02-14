@@ -192,3 +192,9 @@ snippet mrel
 	\mathrel{${1:R}}
 snippet cyc
 	\cyclic{${1:a}}
+snippet fig
+	\begin{${1:figure}} % $2 {{{
+		${0:% the $1}
+		\caption{${2:caption}}
+		\label{${3:label}}
+	\end{$1} % }}}

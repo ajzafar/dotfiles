@@ -88,6 +88,8 @@ zstyle ':completion:*:cd:*' ignored-patterns '(*/)#lost+found'
     zstyle ':completion:*:users' ignored-patterns ${ignore_users}
 }
 
+zstyle ':completion:*:*:vim:*:*files' ignored-patterns '*.(aux|log|pdf)'
+
 autoload -Uz compinit; compinit
 
 check_com epdfview && compdef _pdf epdfview

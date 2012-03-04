@@ -102,6 +102,8 @@ globalkeys = awful.util.table.join(
     awful.key({ },                  "XF86AudioMute", os_wrap('amixer set Master toggle')),
     awful.key({ },                  "XF86AudioRaiseVolume", os_wrap('amixer sset Master 5%+')),
     awful.key({ },                  "XF86AudioLowerVolume", os_wrap('amixer sset Master 5%-')),
+    awful.key({ "Shift", "Mod1" },  "1", os_wrap('setxkbmap -layout us -variant dvorak')),
+    awful.key({ "Shift", "Mod1" },  "2", os_wrap('setxkbmap -layout us')),
     nil -- so I can reorder keys without hassle
 )
 

@@ -21,8 +21,7 @@ awful.rules.rules = {
                                   },
                      border_width = 0,
                    },
-      callback = awful.titlebar.remove
-    },
+      callback = awful.titlebar.remove },
     { rule = { class = "MPlayer" },
       properties = { floating = true,
                      border_width = 0,
@@ -43,4 +42,12 @@ awful.rules.rules = {
       properties = { tag = tags[1][1] } },
     { rule = { class = "feh" },
       properties = { floating = true } },
+    { rule = { class = "Wine",
+               instance = "explorer.exe" },
+      properties = { floating = true,
+                     size_hints_honor = true,
+                     border_width = 0,
+                     ontop = true
+                   },
+      callback = awful.titlebar.remove },
 }

@@ -6,7 +6,7 @@
 set nocompatible
 
 """ Pathogen
-set rtp+=~/.vim/pathogen
+runtime pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 """ Vim Settings

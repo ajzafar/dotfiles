@@ -360,9 +360,6 @@ endfor
 nnoremap <F2> :ReloadSnippets<CR>
 imap <F2> <C-O><F2>
 
-"""" NERD Commenter
-let g:NERDSpaceDelims = 1
-
 """" Commentary
 nmap <leader>c  <Plug>Commentary
 xmap <leader>c  <Plug>Commentary

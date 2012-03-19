@@ -92,8 +92,6 @@ use_spacer left
 # stuff after 'TEXT' will be formatted on screen
 
 TEXT
-${color #aaaaaa}time_t:
-${alignr 10}${color}${time %s}
 ${color #aaaaaa}Uptime:
 ${alignr 10}${color}$uptime
 ${color #aaaaaa}CPU:${color} ${cpu cpu1}% ${cpu cpu2}%
@@ -118,16 +116,6 @@ ${color lightgrey} ${top_mem name 2}
 ${alignr 10}${top_mem mem 2}
 ${color lightgrey} ${top_mem name 3}
 ${alignr 10}${top_mem mem 3}
-
-${color #aaaaaa}WIN:${alignr 10}${color} ${fs_free_perc /mnt/win}% free
-${fs_bar 3,110 /mnt/win}
-
-${color #aaaaaa}NET:${alignr 10}wlan0
-${color}Up: ${color}${alignr 10}${upspeed wlan0}/s
-${upspeedgraph wlan0 15,110 000000 ffffff}
-
-${color}Down: ${color}${alignr 10}${downspeed wlan0}/s${color}
-${downspeedgraph wlan0 15,110 000000 ffffff}
 
 ${color}Strength: ${color}${alignr 10}${wireless_link_qual_perc wlan0}%
 ${wireless_link_bar 3,110 wlan0}

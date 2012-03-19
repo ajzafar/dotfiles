@@ -1,9 +1,9 @@
 vid_properties = { floating = true,
-                     border_width = 0,
-                     sticky = true,
-                     focus = true,
-                     tag = tags[screen.count()][1],
-                     ontop = true,
+                   border_width = 0,
+                   sticky = true,
+                   focus = true,
+                   tag = tags[screen.count()][1],
+                   ontop = true,
                  }
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -31,7 +31,8 @@ awful.rules.rules = {
                    },
       callback = awful.titlebar.remove },
     { rule = { class = "MPlayer" },
-      properties = vid_properties,
+      properties = awful.util.table.join(vid_properties,
+                                         { size_hints_honor = true }),
       callback = awful.titlebar.remove },
     { rule = { class = "gimp" },
       properties = { floating = true,

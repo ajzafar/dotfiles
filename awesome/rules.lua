@@ -3,7 +3,7 @@ vid_properties = { floating = true,
                      sticky = true,
                      focus = true,
                      tag = tags[screen.count()][1],
-                     ontop = true
+                     ontop = true,
                  }
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -11,7 +11,8 @@ awful.rules.rules = {
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      keys = clientkeys,
-                     buttons = clientbuttons
+                     buttons = clientbuttons,
+                     size_hints_honor = false,
                    },
       callback = awful.titlebar.add
     },

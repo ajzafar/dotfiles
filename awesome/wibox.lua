@@ -61,6 +61,8 @@ vicious.register(volwid, vicious.widgets.volume, "$1", 3, 'Master')
 randrwid = widgets.randr.new()
 batwid = widgets.battery.new()
 vicious.register(batwid, vicious.widgets.bat, widgets.battery.vicious_format, 5, 'BAT0')
+netwid = widgets.net.new()
+vicious.register(netwid, vicious.widgets.net, widgets.net.vicious_format, 11)
 -- }}}
 
 botbox = {}
@@ -74,6 +76,7 @@ wids = {
     randrwid, separate,
     volwid, separate,
     batwid, separate,
+    netwid, separate,
 }
 
 mounts = { '/', '/home', host == 'deskbert' and '/mnt/music' or nil}

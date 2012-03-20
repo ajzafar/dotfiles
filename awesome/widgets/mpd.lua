@@ -4,7 +4,8 @@ local awful = { widget = awful.widget, button = awful.button }
 local beautiful = beautiful
 local ipairs = ipairs
 local mpd = { new = mpd.new }
-local string = { match = string.match }
+local os = { date = os.date }
+local string = { match = string.match, format = string.format }
 local timer = timer
 local type = type
 local widget = widget
@@ -24,6 +25,11 @@ local function add_onclick(widget, func)
     end
 end
 
+local function seconds_to_string(sec)
+    local t = os.date("*t", sec)
+    return string.format("%d:%02d", t.min, t.sec)
+end
+
 function new(args)
     local args = args or {}
     local mcon = args.connection or mpd.new(args)
@@ -31,8 +37,8 @@ function new(args)
     local timebar = awful.widget.progressbar{ height = 9 }
     local volbar = awful.widget.progressbar()
 
-    label.width = 35
-    label.align = 'center'
+    label.width = 100
+    label.align = 'left'
     timebar:set_background_color(beautiful.widget_bg)
     timebar:set_color(beautiful.widget_fg)
     volbar:set_background_color(beautiful.widget_bg)
@@ -43,19 +49,17 @@ function new(args)
 
     local function update()
         local s = mcon:send('status')
+        local elapsed, total = string.match(s.time or '0:0', '([%d]+):([%d]+)')
+        label.text = string.format("[%s/%s] ", seconds_to_string(elapsed or 0),
+                                               seconds_to_string(total or 0))
 
-        label.text = s['state'] == 'play' and '>' or '|'
-        label.text = label.text .. (s['random']  == '1' and 'z' or '-')
-        label.text = label.text .. (s['repeat']  == '1' and 'r' or '-')
-        label.text = label.text .. (s['single']  == '1' and 's' or '-')
-        label.text = label.text .. (s['consume'] == '1' and 'c' or '-')
+        timebar:set_value(elapsed / (total == 0 and 1 or total))
 
-        if s.time then
-            local elapsed, total = string.match(s.time, '([%d]+):([%d]+)')
-            timebar:set_value(elapsed / total)
-        else
-            timebar:set_value(0)
-        end
+        label.text = label.text .. (s['state'] == 'play' and '⟩' or '|') .. ' '
+        label.text = label.text .. (s['repeat']  == '1' and 'r' or '')
+        label.text = label.text .. (s['random']  == '1' and 'z' or '')
+        label.text = label.text .. (s['single']  == '1' and 's' or '')
+        label.text = label.text .. (s['consume'] == '1' and 'c' or '')
 
         volbar:set_value(s['volume'])
     end
@@ -64,7 +68,9 @@ function new(args)
     timer:add_signal('timeout', update)
     timer:start()
     update()
-    local widget = { { timebar, label, layout = awful.widget.layout.vertical.flex }, volbar, layout = awful.widget.layout.horizontal.leftright }
+    local widget = { { timebar, label,
+                       layout = awful.widget.layout.vertical.flex },
+                     volbar, layout = awful.widget.layout.horizontal.leftright }
     -- I don't know.
     awful.widget.layout.margins[widget[1]] = { right = -95 }
 

@@ -17,7 +17,7 @@ function new(args)
     local args = args or {}
     local mcon = args.connection or mpd.new(args)
     local label = widget{ type = 'textbox' }
-    local timebar = awful.widget.progressbar{ height = 10 }
+    local timebar = awful.widget.progressbar{ height = 9 }
     local volbar = awful.widget.progressbar()
 
     label.width = 35

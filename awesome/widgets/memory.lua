@@ -5,8 +5,8 @@ module('widgets.memory')
 
 function new(args)
     local args = args or {}
-    local ram = awful.widget.progressbar{ height = 10 }
-    local swap = awful.widget.progressbar{ height = 10 }
+    local ram = awful.widget.progressbar{ height = 9 }
+    local swap = awful.widget.progressbar{ height = 9 }
 
     ram:set_background_color(beautiful.widget_bg)
     ram:set_color(beautiful.widget_fg)

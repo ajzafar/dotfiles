@@ -13,6 +13,17 @@ module('widgets.mpd')
 
 -- This is a very ugly, rudimentary MPD widget. At some point it'll be pretty.
 
+local function add_onclick(widget, func)
+    for i,v in ipairs(widget) do
+        if type(v) == 'table' and not v.widget then
+            add_onclick(v, func)
+        else
+            local wid = v.widget or v
+            wid:buttons(awful.button({}, 1, func))
+        end
+    end
+end
+
 function new(args)
     local args = args or {}
     local mcon = args.connection or mpd.new(args)
@@ -53,13 +64,12 @@ function new(args)
     timer:add_signal('timeout', update)
     timer:start()
     update()
-    local widget = { timebar, label, volbar, layout = awful.widget.layout.horizontal.leftright }
+    local widget = { { timebar, label, layout = awful.widget.layout.vertical.flex }, volbar, layout = awful.widget.layout.horizontal.leftright }
+    -- I don't know.
+    awful.widget.layout.margins[widget[1]] = { right = -95 }
 
     if type(args.onclick) == 'function' then
-        for i,v in ipairs(widget) do
-            local wid = v.widget or v
-            wid:buttons(awful.button({}, 1, args.onclick))
-        end
+        add_onclick(widget, args.onclick)
     end
 
     return widget

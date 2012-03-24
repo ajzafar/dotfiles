@@ -25,14 +25,14 @@ function new(args)
     local widget = { down, up, layout = awful.widget.layout.vertical.flex }
     -- I'm not sure why this is needed, but without it the next widget overlaps
     -- this one.
-    awful.widget.layout.margins[widget] = { right = 24 }
+    awful.widget.layout.margins[widget] = { right = 30 }
     return widget
 end
 
 function vicious_format(widget, args)
-    widget[1][1].text = string.format('D %03d ', args['{eth0 down_kb}'])
+    widget[1][1].text = string.format('D %04d ', args['{eth0 down_kb}'])
     widget[1][2]:add_value(args['{eth0 down_kb}'])
-    widget[2][1].text = string.format('U %03d ', args['{eth0 up_kb}'])
+    widget[2][1].text = string.format('U %04d ', args['{eth0 up_kb}'])
     widget[2][2]:add_value(args['{eth0 up_kb}'])
 
     return 1

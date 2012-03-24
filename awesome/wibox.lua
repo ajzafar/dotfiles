@@ -63,12 +63,14 @@ batwid = widgets.battery.new()
 vicious.register(batwid, vicious.widgets.bat, widgets.battery.vicious_format, 5, 'BAT0')
 netwid = widgets.net.new()
 vicious.register(netwid, vicious.widgets.net, widgets.net.vicious_format, 11)
+diskwid = widgets.disk.new{ mounts = { '/', '/home', '/mnt/music' } } -- , '/mnt/music' } }
+vicious.register(diskwid, vicious.widgets.fs, widgets.disk.vicious_format, 29)
 -- }}}
 
 botbox = {}
 botbox = awful.wibox({ position = "bottom", screen = 1 })
 botbox.opacity = 10
-wids = {
+botbox.widgets = {
     separate,
     mpdwid, separate,
     cpuwid, separate,
@@ -77,19 +79,9 @@ wids = {
     volwid, separate,
     batwid, separate,
     netwid, separate,
+    diskwid, separate,
+    layout = awful.widget.layout.horizontal.leftright
 }
-
-mounts = { '/', '/home', host == 'deskbert' and '/mnt/music' or nil}
-fswids = {}
-for i, m in ipairs(mounts) do
-    local fmt = string.format('%s ${%s used_gb}/${%s size_gb}', m, m, m)
-    local w = widget({ type = "textbox" })
-    vicious.register(w, vicious.widgets.fs, fmt, 120)
-    table.insert(fswids, w)
-    table.insert(fswids, separate)
-end
-botbox.widgets = awful.util.table.join(wids, fswids,
-    { layout = awful.widget.layout.horizontal.leftright })
 
 -- {{{ Place widgets
 for s = 1, screen.count() do

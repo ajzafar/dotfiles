@@ -1,5 +1,6 @@
 require('widgets.battery')
 require('widgets.cpu')
+require('widgets.disk')
 require('widgets.memory')
 require('widgets.mpd')
 require('widgets.net')

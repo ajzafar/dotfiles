@@ -65,6 +65,8 @@ netwid = widgets.net.new()
 vicious.register(netwid, vicious.widgets.net, widgets.net.vicious_format, 11)
 diskwid = widgets.disk.new{ mounts = { '/', '/home', '/mnt/music' } } -- , '/mnt/music' } }
 vicious.register(diskwid, vicious.widgets.fs, widgets.disk.vicious_format, 29)
+
+promptwid = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
 -- }}}
 
 botbox = {}
@@ -80,13 +82,13 @@ botbox.widgets = {
     batwid, separate,
     netwid, separate,
     diskwid, separate,
+    promptwid,
     layout = awful.widget.layout.horizontal.leftright
 }
 
 -- {{{ Place widgets
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)

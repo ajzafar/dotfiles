@@ -8,8 +8,9 @@ fpath=(
     $ZDOTDIR/zfunctions/completions
     $fpath
 )
+autoload -Uz add-zsh-hook
 
-check_com() { # {{{
+function check_com() { # {{{
     for arg in "$@"; do
         if [[ -n ${commands[$arg]}  ]] || \
            [[ -n ${aliases[$arg]}   ]] || \

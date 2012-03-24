@@ -1,6 +1,6 @@
 # zsh hooks
 
-function termtitle { # {{{
+function termtitle() { # {{{
     local wd
     if [[ $1 = '-p' ]]; then
         wd='%n@%m:%15<..<%~%<< '
@@ -22,13 +22,15 @@ function termtitle { # {{{
     esac # }}}
 } # }}}
 
-function chpwd precmd { # {{{
+function clear_title() { # {{{
     [[ -t 1 ]] || return
     # show wd
     termtitle -p
 } # }}}
+add-zsh-hook chpwd clear_title
+add-zsh-hook precmd clear_title
 
-function preexec { # {{{
+function set_title() { # {{{
     [[ -t 1 ]] || return
     local -a words
 
@@ -62,8 +64,9 @@ function preexec { # {{{
     done
 
 } # }}}
+add-zsh-hook preexec set_title
 
-function zshaddhistory { # {{{
+function add_to_history() { # {{{
     # The line without the trailing newline
     local line=${1%%$'\n'}
 
@@ -80,8 +83,9 @@ function zshaddhistory { # {{{
     print -sr -- $line
     return 1
 } # }}}
+add-zsh-hook zshaddhistory set_title
 
-function command_not_found_handler { # {{{
+function command_not_found_handler() { # {{{
     local -a funcs
     funcs=( ${^fpath}/$1(N) )
 

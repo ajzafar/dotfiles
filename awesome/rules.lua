@@ -52,6 +52,7 @@ awful.rules.rules = {
                      border_width = 0,
                      ontop = true
                    },
+    },
     { rule = { class = "Huludesktop.bin" },
       properties = vid_properties,
       callback = awful.titlebar.remove },

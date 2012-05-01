@@ -1,3 +1,10 @@
+vid_properties = { floating = true,
+                     border_width = 0,
+                     sticky = true,
+                     focus = true,
+                     tag = tags[screen.count()][1],
+                     ontop = true
+                 }
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -23,13 +30,7 @@ awful.rules.rules = {
                    },
       callback = awful.titlebar.remove },
     { rule = { class = "MPlayer" },
-      properties = { floating = true,
-                     border_width = 0,
-                     sticky = true,
-                     focus = true,
-                     tag = tags[screen.count()][1],
-                     ontop = true
-                 },
+      properties = vid_properties,
       callback = awful.titlebar.remove },
     { rule = { class = "gimp" },
       properties = { floating = true,
@@ -49,5 +50,7 @@ awful.rules.rules = {
                      border_width = 0,
                      ontop = true
                    },
+    { rule = { class = "Huludesktop.bin" },
+      properties = vid_properties,
       callback = awful.titlebar.remove },
 }

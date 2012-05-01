@@ -11,6 +11,8 @@ ifrun() { # {{{
 # Single run programs {{{
 ifrun xrdb -merge ${XDG_CONFIG_HOME}/Xresources
 ifrun xsetroot -cursor_name Vienna3
+ifrun xset mouse 1
+ifrun xmodmap ${XDG_CONFIG_HOME}/Xmodmap
 # }}}
 
 # Forking programs {{{

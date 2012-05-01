@@ -7,8 +7,8 @@ module('widgets.randr')
 
 local function randrfunc(state, external, main)
     local state = state or 'off'
-    local external = external or 'S-video'
-    local main = main or 'VGA-0'
+    local external = external or 'LVDS1'
+    local main = main or 'VGA1'
     local cmd = 'xrandr --output ' .. external
     if state ~= 'off' then
         cmd = string.format('%s --auto; %s --%s %s', cmd, cmd, state, main)

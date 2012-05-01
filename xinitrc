@@ -27,6 +27,14 @@ ifrun unclutter -idle 1.5 -jitter 5 -noevents &
 ifrun ~/.dropbox-dist/dropboxd &
 # }}}
 
+# Synergy {{{
+if test "X$(hostname)" == "Xlapbert"; then
+    ifrun synergys
+else
+    ifrun synergyc lapbert
+fi
+# }}}
+
 # WM selection {{{
 case ${XSESSION:-awesome} in
     flux*)

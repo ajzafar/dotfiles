@@ -27,7 +27,8 @@ local menu = awful.menu{ items = {
     { 'Below', randrfunc('below') },
     { 'Above', randrfunc('above') },
     { 'Left', randrfunc('left-of') },
-    { 'Right', randrfunc('right-of') }
+    { 'Right', randrfunc('right-of') },
+    { 'Same', randrfunc('same-as') },
 }}
 
 function new(args)

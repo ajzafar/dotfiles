@@ -30,7 +30,7 @@ awful.rules.rules = {
                      border_width = 0,
                    },
       callback = awful.titlebar.remove },
-    { rule = { class = "MPlayer" },
+    { rule = { class = "mplayer2" },
       properties = awful.util.table.join(vid_properties,
                                          { size_hints_honor = true }),
       callback = awful.titlebar.remove },

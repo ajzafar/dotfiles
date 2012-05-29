@@ -17,7 +17,7 @@ confdir            = awful.util.getdir('config')
 terminal           = "urxvtc"
 editor_cmd         = terminal .. " -e " .. os.getenv("EDITOR")
 modkey             = "Mod4"
-mpd_cover_size     = 200
+mpd_cover_size     = 300
 host               = awful.util.pread('hostname'):match('%S*')
 mpd_pass, mpd_host = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
 mpd_con            = mpd.new{ hostname = mpd_host, password = mpd_pass, retry = 20 }

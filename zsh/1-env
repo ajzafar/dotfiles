@@ -1,7 +1,6 @@
 # zsh interactive env variables
 
 if [[ -n $DISPLAY ]]; then
-    export BROWSER="firefox"
     export WINEDEBUG="-all"
 fi
 

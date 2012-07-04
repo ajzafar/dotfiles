@@ -7,7 +7,7 @@ URxvt.*.font: xft:Menlo:size=9
 URxvt.*.boldFont: xft:Menlo:size=9
 URxvt.*.italicFont: xft:Menlo:italic:size=9
 URxvt.*.boldItalicFont: xft:Menlo:italic:size=9
-URxvt.urlLauncher: chrome
+URxvt.urlLauncher: firefox
 URxvt.utmpInhibit: true
 URxvt.*.color4: #264ead
 URxvt.*.color12: #4171e2

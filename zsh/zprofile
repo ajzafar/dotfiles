@@ -3,7 +3,8 @@
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
+export BROWSER="firefox"
 export EDITOR="vim"
-export VISUAL=$EDITOR
 export LESS="-R -M --shift 5 -i"
 export PAGER="less"
+export VISUAL=$EDITOR

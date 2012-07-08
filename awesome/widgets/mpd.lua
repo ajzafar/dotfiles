@@ -36,6 +36,7 @@ function new(args)
     local label = widget{ type = 'textbox' }
     local timebar = awful.widget.progressbar{ height = 9 }
     local volbar = awful.widget.progressbar()
+    local songid = -1
 
     label.width = 100
     label.align = 'left'
@@ -62,6 +63,11 @@ function new(args)
         label.text = label.text .. (s['consume'] == '1' and 'c' or '')
 
         volbar:set_value(s['volume'])
+
+        if songid ~= s['songid'] then
+            songid = s['songid']
+            args.onclick()
+        end
     end
 
     local timer = timer{ timeout = 11 }

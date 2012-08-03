@@ -34,6 +34,3 @@
 [submodule "vim/bundle/commentary"]
         path = vim/bundle/commentary
         url = https://github.com/tpope/vim-commentary.git
-[submodule "vim/bundle/delimitmate"]
-	path = vim/bundle/delimitmate
-	url = https://github.com/Raimondi/delimitMate.git

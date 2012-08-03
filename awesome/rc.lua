@@ -10,7 +10,7 @@ require('awful.rules')
 require('beautiful')
 require('naughty')
 
-require('vicious')
+vicious = require('vicious')
 require('lib.mpd')
 
 confdir            = awful.util.getdir('config')

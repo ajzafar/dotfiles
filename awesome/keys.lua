@@ -63,6 +63,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "n", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "n", function () awful.layout.inc(layouts, -1) end),
+    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     awful.key({            }, "Print", function () awful.util.spawn("sshot.sh") end),
     -- Prompt
@@ -128,9 +129,9 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "i",      function (c) c.minimized = not c.minimized    end),
+    awful.key({ modkey,           }, "i",      function (c) c.minimized = true               end),
     awful.key({ modkey,           }, "d",      function (c) awful.titlebar.remove(c)         end),
-    awful.key({ modkey,           }, "p",      function (c) c.sticky = not c.sticky end),
+    awful.key({ modkey,           }, "p",      function (c) c.sticky = not c.sticky          end),
     awful.key({ modkey, "Control" }, "d",      function (c) c.border_width = c.border_width ~= 0 and 0 or beautiful.border_width             end),
     awful.key({ modkey, "Shift"   }, "d",
         function (c)

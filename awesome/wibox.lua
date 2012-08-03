@@ -57,19 +57,20 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
-mpdwid = widgets.mpd.new{ connection = mpd_con, onclick = mpd_notify }
+mpdwid = widgets.mpd.new{ notify = mpd_notify }
+vicious.register(mpdwid, widgets.mpd.vicious_worker, widgets.mpd.vicious_format, 3, { connection = mpd_con })
 cpuwid = widgets.cpu.new()
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 5)
 memwid = widgets.memory.new()
 vicious.register(memwid, vicious.widgets.mem, widgets.memory.vicious_format, 7)
 volwid = widgets.volume.new()
-vicious.register(volwid, vicious.widgets.volume, "$1", 3, 'Master')
+vicious.register(volwid, vicious.widgets.volume, "$1", 2, 'Master')
 randrwid = widgets.randr.new()
 batwid = widgets.battery.new()
 vicious.register(batwid, vicious.widgets.bat, widgets.battery.vicious_format, 5, 'BAT0')
 netwid = widgets.net.new()
 vicious.register(netwid, vicious.widgets.net, widgets.net.vicious_format, 11)
-diskwid = widgets.disk.new{ mounts = { '/', '/home', '/mnt/music' } } -- , '/mnt/music' } }
+diskwid = widgets.disk.new{ mounts = { '/', '/home', '/mnt/music' } }
 vicious.register(diskwid, vicious.widgets.fs, widgets.disk.vicious_format, 29)
 
 promptwid = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })

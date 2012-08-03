@@ -9,10 +9,16 @@ local string = { match = string.match, format = string.format }
 local timer = timer
 local type = type
 local widget = widget
+local vicious = { force = vicious.force }
 
 module('widgets.mpd')
 
 -- This is a very ugly, rudimentary MPD widget. At some point it'll be pretty.
+
+-- FIXME: This should be a part of the widget table, but that doesn't work for
+-- for some reason.
+notify = function() end
+local songid = -1
 
 local function add_onclick(widget, func)
     for i,v in ipairs(widget) do
@@ -32,11 +38,9 @@ end
 
 function new(args)
     local args = args or {}
-    local mcon = args.connection or mpd.new(args)
     local label = widget{ type = 'textbox' }
     local timebar = awful.widget.progressbar{ height = 9 }
     local volbar = awful.widget.progressbar()
-    local songid = -1
 
     label.width = 100
     label.align = 'left'
@@ -48,41 +52,55 @@ function new(args)
     volbar:set_width(5)
     volbar:set_max_value(100)
 
-    local function update()
-        local s = mcon:send('status')
-        local elapsed, total = string.match(s.time or '0:0', '([%d]+):([%d]+)')
-        label.text = string.format("[%s/%s] ", seconds_to_string(elapsed or 0),
-                                               seconds_to_string(total or 0))
-
-        timebar:set_value(elapsed / (total == 0 and 1 or total))
-
-        label.text = label.text .. (s['state'] == 'play' and '⟩' or '|') .. ' '
-        label.text = label.text .. (s['repeat']  == '1' and 'r' or '')
-        label.text = label.text .. (s['random']  == '1' and 'z' or '')
-        label.text = label.text .. (s['single']  == '1' and 's' or '')
-        label.text = label.text .. (s['consume'] == '1' and 'c' or '')
-
-        volbar:set_value(s['volume'])
-
-        if songid ~= s['songid'] then
-            songid = s['songid']
-            args.onclick()
-        end
-    end
-
-    local timer = timer{ timeout = 11 }
-    timer:add_signal('timeout', update)
-    timer:start()
-    update()
     local widget = { { timebar, label,
                        layout = awful.widget.layout.vertical.flex },
-                     volbar, layout = awful.widget.layout.horizontal.leftright }
+                       volbar, layout = awful.widget.layout.horizontal.leftright, }
     -- I don't know.
     awful.widget.layout.margins[widget[1]] = { right = -95 }
 
-    if type(args.onclick) == 'function' then
-        add_onclick(widget, args.onclick)
+    notify = function(updated)
+        if not updated then
+            vicious.force{widget}
+        end
+        args.notify()
+    end
+
+    if type(args.notify) == 'function' then
+        add_onclick(widget, notify)
     end
 
     return widget
+end
+
+function vicious_format(widget, args)
+    local s = args.status or {}
+    local elapsed, total = string.match(s.time or '0:0', '([%d]+):([%d]+)')
+
+    widget[1][1]:set_value(elapsed / (total == 0 and 1 or total))
+
+    widget[1][2].text = string.format('[%s/%s] ', args.elapsed, args.total_time)
+    widget[1][2].text = widget[1][2].text .. (s['state'] == 'play' and '⟩' or '|') .. ' '
+    widget[1][2].text = widget[1][2].text .. (s['repeat']  == '1' and 'r' or '')
+    widget[1][2].text = widget[1][2].text .. (s['random']  == '1' and 'z' or '')
+    widget[1][2].text = widget[1][2].text .. (s['single']  == '1' and 's' or '')
+    widget[1][2].text = widget[1][2].text .. (s['consume'] == '1' and 'c' or '')
+
+    widget[2]:set_value(s['volume'])
+
+    if songid ~= s['songid'] then
+        songid = s['songid']
+        notify(true)
+    end
+end
+
+function vicious_worker(format, warg)
+    local warg = warg or {}
+    local mcon = warg.connection or mpd.new{warg}
+
+    local data = { status = mcon:send('status'), song = mcon:send('currentsong') }
+
+    data.elapsed = seconds_to_string(string.match(data.status.time or '0:0', '([%d]+):[%d]+') or 0)
+    data.total_time = seconds_to_string(data.song.time or 0)
+
+    return data
 end

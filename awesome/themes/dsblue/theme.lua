@@ -7,7 +7,7 @@
 t               = {}
 t.name          = 'dsblue'
 local tp        = confdir .. '/themes/' .. t.name
-local wpcmd     = 'awsetbg -r '..os.getenv('XDG_CONFIG_HOME')..'/backgrounds/'..host
+local wpcmd     = 'awsetbg -r '..os.getenv('XDG_CONFIG_HOME')..'/backgrounds'
 t.wallpaper_cmd = { wpcmd, wpcmd }
 
 t.font        = "sans 9"

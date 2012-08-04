@@ -42,10 +42,11 @@ function new(args)
     local timebar = awful.widget.progressbar{ height = 9 }
     local volbar = awful.widget.progressbar()
 
-    label.width = 100
+    label.width = 125
     label.align = 'left'
     timebar:set_background_color(beautiful.widget_bg)
     timebar:set_color(beautiful.widget_fg)
+    timebar:set_width(125)
     volbar:set_background_color(beautiful.widget_bg)
     volbar:set_color(beautiful.widget_fg)
     volbar:set_vertical(true)
@@ -56,7 +57,7 @@ function new(args)
                        layout = awful.widget.layout.vertical.flex },
                        volbar, layout = awful.widget.layout.horizontal.leftright, }
     -- I don't know.
-    awful.widget.layout.margins[widget[1]] = { right = -95 }
+    awful.widget.layout.margins[widget[1]] = { right = -120 }
 
     notify = function(updated)
         if not updated then

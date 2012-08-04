@@ -263,7 +263,12 @@ endif
 nnoremap <leader>g :call ShowSyn()<CR>
 
 " Remove trailing whitespace
-nnoremap <leader>ws :%s/\s\+$//e<CR>
+function! RemoveWS()
+    let l:save_reg = @/
+    %s/\s\+$//e
+    let @/ = l:save_reg
+endfunction
+nnoremap <leader>ws :call RemoveWS()<CR>
 
 " Reselect what was just pasted (taken from Steve Losh)
 nnoremap <leader>v V`]

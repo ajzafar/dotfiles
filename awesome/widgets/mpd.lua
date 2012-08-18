@@ -15,11 +15,6 @@ module('widgets.mpd')
 
 -- This is a very ugly, rudimentary MPD widget. At some point it'll be pretty.
 
--- FIXME: This should be a part of the widget table, but that doesn't work for
--- for some reason.
-notify = function() end
-local songid = -1
-
 local function add_onclick(widget, func)
     for i,v in ipairs(widget) do
         if type(v) == 'table' and not v.widget then
@@ -59,15 +54,16 @@ function new(args)
     -- I don't know.
     awful.widget.layout.margins[widget[1]] = { right = -120 }
 
-    notify = function(updated)
+    function widget.notify(updated)
         if not updated then
             vicious.force{widget}
         end
         args.notify()
     end
+    widget.songid = -1
 
     if type(args.notify) == 'function' then
-        add_onclick(widget, notify)
+        add_onclick(widget, widget.notify)
     end
 
     return widget
@@ -88,9 +84,9 @@ function vicious_format(widget, args)
 
     widget[2]:set_value(s['volume'])
 
-    if songid ~= s['songid'] then
-        songid = s['songid']
-        notify(true)
+    if widget.songid ~= s['songid'] then
+        widget.songid = s['songid']
+        widget.notify(true)
     end
 end
 

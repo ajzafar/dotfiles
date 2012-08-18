@@ -1,8 +1,8 @@
 function mpd_cmd(cmd, notify)
-    local notify = notify and mpd_notify or nil
+    local notify = notify and mpdwid.notify or nil
     return function()
         os.execute('mpc ' .. cmd .. ' > /dev/null')
-        if notify then notify() end
+        if notify then notify(false) end
     end
 end
 
@@ -89,7 +89,7 @@ globalkeys = awful.util.table.join(
     -- MPD control
     awful.key({modkey, "Control" }, "space", mpd_cmd('toggle', false)),
     awful.key({}, "XF86AudioPlay", mpd_cmd('toggle', false)),
-    awful.key({modkey, "Control", "Mod1" }, "space", mpd_notify),
+    awful.key({modkey, "Control", "Mod1" }, "space", mpdwid.notify),
     awful.key({modkey, "Control" }, "Left", mpd_cmd('prev', true)),
     awful.key({}, "XF86AudioPrev", mpd_cmd('prev', true)),
     awful.key({modkey, "Control" }, "Right", mpd_cmd('next', true)),

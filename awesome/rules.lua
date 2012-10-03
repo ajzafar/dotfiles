@@ -53,6 +53,8 @@ awful.rules.rules = {
                      ontop = true
                    },
     },
+    { rule = { class = "Skype" },
+      properties = { floating = true, } },
     { rule = { class = "Huludesktop.bin" },
       properties = vid_properties,
       callback = awful.titlebar.remove },

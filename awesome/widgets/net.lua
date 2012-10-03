@@ -53,9 +53,9 @@ end
 
 function vicious_format(widget, args)
     local iface = ifaces[widget.idx] or 'eth0'
-    widget[1][1].text = string.format('D %04d ', args['{' .. iface .. ' down_kb}'])
+    widget[1][1].text = string.format('D %04d ', args['{' .. iface .. ' down_kb}'] or 0)
     widget[1][2]:add_value(args['{eth0 down_kb}'])
-    widget[2][1].text = string.format('U %04d ', args['{' .. iface .. ' up_kb}'])
+    widget[2][1].text = string.format('U %04d ', args['{' .. iface .. ' up_kb}'] or 0)
     widget[2][2]:add_value(args['{eth0 up_kb}'])
 
     return 1

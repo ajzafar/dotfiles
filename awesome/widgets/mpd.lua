@@ -85,7 +85,7 @@ function vicious_format(widget, args)
     widget[2]:set_value(s['volume'])
 
     if widget.songid ~= s['songid'] then
-        widget.songid = s['songid']
+        widget.songid = s['songid'] or -1
         widget.notify(true)
     end
 end

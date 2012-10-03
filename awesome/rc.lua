@@ -29,7 +29,11 @@ load_theme('dsblue')
 
 function mpd_notify()
     local song = mpd_con:send('currentsong')
-    if song.errormsg then return end
+    if song.errormsg or not
+        (song.artist and song.album and song.track and song.title)
+    then
+        return
+    end
     local t = string.format("%s\n%s\n%s: %s", song.artist, song.album,
                                               song.track, song.title):gsub('&', '&amp;')
     local cover = '/mnt/music/' .. song.file:gsub('[^/]+$', 'cover.jpg')

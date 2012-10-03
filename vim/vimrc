@@ -178,6 +178,9 @@ if has("autocmd")
     " Most ftplugins set this automatically, but not these
     au FileType vim,sh setl fo+=croql
 
+    " gnuplot comments
+    au FileType gnuplot setl commentstring=#%s
+
     " From :h last-position-jump
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler

@@ -14,5 +14,6 @@ vim
 vim/gvimrc
 vim/vimrc
 wgetpaste.conf
+XCompose
 xinitrc
 zsh/zshenv

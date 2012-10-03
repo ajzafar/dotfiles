@@ -10,6 +10,11 @@ this repo at `~/.config` and use `setup.sh` to symlink files as needed. (The
 actual location doesn't matter, but `~/.config` makes sense to me.) Some links
 are unnecessary but created for convenience.
 
+# XCompose #
+
+The file `XCompose` is taken from the [kragen/xcompose GitHub
+repository][xcompose].
+
 ## Copying ##
 
 Everything in this repository written/created by me are in the public domain.
@@ -17,3 +22,4 @@ Anything not written by me will have information either in the source or in
 a `README` in the same directory.
 
 [xdg-spec]: http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+[xcompose]: https://github.com/kragen/xcompose

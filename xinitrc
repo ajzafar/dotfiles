@@ -28,10 +28,11 @@ ifrun ~/.dropbox-dist/dropboxd &
 # }}}
 
 # Synergy {{{
-if test "X$(hostname)" == "Xlapbert"; then
+synergy_host='mesabert'
+if test "X$(hostname)" == "X${synergy_host}"; then
     ifrun synergys
 else
-    ifrun synergyc lapbert
+    ifrun synergyc $synergy_host
 fi
 # }}}
 

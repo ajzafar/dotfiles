@@ -1,5 +1,5 @@
 [default]
-ao=alsa
+ao=pulse,alsa
 geometry=50%:50%
 ontop=yes
 softvol=yes

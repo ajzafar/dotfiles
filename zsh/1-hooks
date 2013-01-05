@@ -83,7 +83,7 @@ function add_to_history() { # {{{
     print -sr -- $line
     return 1
 } # }}}
-add-zsh-hook zshaddhistory set_title
+add-zsh-hook zshaddhistory add_to_history
 
 function command_not_found_handler() { # {{{
     local -a funcs

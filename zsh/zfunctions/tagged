@@ -13,6 +13,8 @@ for artist in *; do
 
     if (( ${#have} == 0 )); then
         echo "Don't have $artist. Skipping"
+    elif (( ${#have} > 1 )); then
+        print -l "Multiple $artist directories:" $have "Skipping"
     else
         dest=${have[1]}
 

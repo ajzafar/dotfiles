@@ -198,10 +198,6 @@ if has("autocmd")
     " Taken from godlygeek's vimrc
     au Filetype * let &l:ofu = (len(&ofu) ? &ofu : 'syntaxcomplete#Complete')
 
-    " I'm not sure where I took this from.
-    " Source the vimrc after editing
-    au BufWritePost {,.}vimrc source $MYVIMRC
-
     " Turn off list while in insert mode.
     " Seeing trailing spaces while typing them is annoying
     au InsertEnter * setl nolist

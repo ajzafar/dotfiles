@@ -28,6 +28,8 @@ alias egrep='grep -E'
 # }}}
 
 # apps-based aliases {{{
+check_com mplayer || chalias mplayer2 mplayer=mplayer2
+
 chalias hamachi ham='sudo -u hamachi hamachi -c /etc/hamachi'
 chalias -d mplayer mplfs='mplayer -fs'
 chalias mplayer stream='http_proxy= mplayer -volume 100 http://deskbert:9362/stream'
@@ -41,14 +43,14 @@ chalias sudo sudo='sudo '
 # extension aliases {{{
 chalias -d -s mupdf pdf=mupdf
 chalias -s mono exe=mono
-for i in gif jpg jpeg png; chalias -d -s feh $i=feh
+
+# pics
+for i in gif jpg jpeg png
+    chalias -d -s feh $i=feh
+
+# videos
+for i in avi flv mkv mov mp4 ogv wmv
+    chalias -d -s mplayer $i=mplayer
+
 unset i
-
-# vids {{{
-if [[ -n $DISPLAY ]]; then
-    PLAYER=mplayer
-
-    for i in avi mkv mov mp4 ogv wmv; alias -s $i='${(z)PLAYER}'
-    unset i
-fi
 # }}}

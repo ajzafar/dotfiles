@@ -41,21 +41,13 @@
 -- OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 -- SUCH DAMAGE.
 
-
-require("socket")
-
--- Grab env
-local socket = socket
-local string = string
-local tonumber = tonumber
-local setmetatable = setmetatable
-local os = os
+local socket = require('socket')
 
 -- Music Player Daemon Lua library.
-module("mpd")
+_M = {}
 
-MPD = {
-} MPD_mt = { __index = MPD }
+_M.MPD = { }
+_M.MPD_mt = { __index = _M.MPD }
 
 -- create and return a new mpd client.
 -- the settings argument is a table with theses keys:
@@ -65,7 +57,7 @@ MPD = {
 --      password: the server's password (default nil, no password)
 --      timeout:  time in sec to wait for connect() and receive() (default 1)
 --      retry:    time in sec to wait before reconnect if error (default 60)
-function new(settings)
+function _M.new(settings)
     local client = {}
     if settings == nil then settings = {} end
 
@@ -76,7 +68,7 @@ function new(settings)
     client.timeout  = settings.timeout or 1
     client.retry    = settings.retry or 60
 
-    setmetatable(client, MPD_mt)
+    setmetatable(client, _M.MPD_mt)
 
     return client
 end
@@ -98,7 +90,7 @@ end
 --      table is:
 --              { errormsg = "could not connect" }
 --
-function MPD:send(action)
+function _M.MPD:send(action)
     local command = string.format("%s\n", action)
     local values = {}
 
@@ -159,30 +151,30 @@ function MPD:send(action)
     return values
 end
 
-function MPD:next()
+function _M.MPD:next()
     return self:send("next")
 end
 
-function MPD:previous()
+function _M.MPD:previous()
     return self:send("previous")
 end
 
-function MPD:stop()
+function _M.MPD:stop()
     return self:send("stop")
 end
 
 -- no need to check the new value, mpd will set the volume in [0,100]
-function MPD:volume_up(delta)
+function _M.MPD:volume_up(delta)
     local stats = self:send("status")
     local new_volume = tonumber(stats.volume) + delta
     return self:send(string.format("setvol %d", new_volume))
 end
 
-function MPD:volume_down(delta)
+function _M.MPD:volume_down(delta)
     return self:volume_up(-delta)
 end
 
-function MPD:toggle_random()
+function _M.MPD:toggle_random()
     local stats = self:send("status")
     if tonumber(stats.random) == 0 then
         return self:send("random 1")
@@ -191,7 +183,7 @@ function MPD:toggle_random()
     end
 end
 
-function MPD:toggle_repeat()
+function _M.MPD:toggle_repeat()
     local stats = self:send("status")
     if tonumber(stats["repeat"]) == 0 then
         return self:send("repeat 1")
@@ -200,7 +192,7 @@ function MPD:toggle_repeat()
     end
 end
 
-function MPD:toggle_play()
+function _M.MPD:toggle_play()
     if self:send("status").state == "stop" then
         return self:send("play")
     else
@@ -208,13 +200,13 @@ function MPD:toggle_play()
     end
 end
 
-function MPD:seek(delta)
+function _M.MPD:seek(delta)
     local stats   = self:send("status")
     local current = stats.time:match("^(%d+):")
     return self:send(string.format("seek %d %d", stats.songid, current + delta))
 end
 
-function MPD:protocol_version()
+function _M.MPD:protocol_version()
     if not self.version then
         -- send a "status" command to init the connection
         local s = self:send("status")
@@ -224,5 +216,7 @@ function MPD:protocol_version()
     end
     return self.version
 end
+
+return _M
 
 -- vim:filetype=lua:tabstop=8:shiftwidth=4:expandtab:

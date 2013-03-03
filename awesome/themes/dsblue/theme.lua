@@ -4,11 +4,11 @@
 --  - the Modern Glass Blue GTK+ theme
 --  - the bblean theme darksky by ratednc-17.com
 
-t               = {}
-t.name          = 'dsblue'
-local tp        = confdir .. '/themes/' .. t.name
-local wpcmd     = 'awsetbg -r '..os.getenv('XDG_CONFIG_HOME')..'/backgrounds'
-t.wallpaper_cmd = { wpcmd, wpcmd }
+t           = {}
+t.name      = 'dsblue'
+local tp    = confdir .. '/themes/' .. t.name
+local wpcmd = 'awsetbg -r '..os.getenv('XDG_CONFIG_HOME')..'/backgrounds'
+t.wallpaper = os.getenv('XDG_CONFIG_HOME') .. '/backgrounds/kTgH8.jpg'
 
 t.font        = "sans 9"
 t.menu_height = "15"

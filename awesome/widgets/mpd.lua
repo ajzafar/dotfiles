@@ -1,29 +1,8 @@
-require('lib.mpd')
-
-local awful = { widget = awful.widget, button = awful.button }
-local beautiful = beautiful
-local ipairs = ipairs
-local mpd = { new = mpd.new }
-local os = { date = os.date }
-local string = { match = string.match, format = string.format }
-local timer = timer
-local type = type
-local widget = widget
-local vicious = { force = vicious.force }
-
-module('widgets.mpd')
+local wmpd = {}
 
 -- This is a very ugly, rudimentary MPD widget. At some point it'll be pretty.
 
-local function add_onclick(widget, func)
-    for i,v in ipairs(widget) do
-        if type(v) == 'table' and not v.widget then
-            add_onclick(v, func)
-        else
-            local wid = v.widget or v
-            wid:buttons(awful.button({}, 1, func))
-        end
-    end
+local function add_onclick(w, func)
 end
 
 local function seconds_to_string(sec)
@@ -31,28 +10,38 @@ local function seconds_to_string(sec)
     return string.format("%d:%02d", t.min, t.sec)
 end
 
-function new(args)
-    local args = args or {}
-    local label = widget{ type = 'textbox' }
-    local timebar = awful.widget.progressbar{ height = 9 }
-    local volbar = awful.widget.progressbar()
+function wmpd.new(args)
+    local args      = args or {}
+    local widget    = wibox.layout.fixed.horizontal()
+    widget.time     = wibox.widget.textbox()
+    widget.flags    = wibox.widget.textbox()
+    widget.progress = awful.widget.progressbar()
+    widget.volume   = awful.widget.progressbar()
+    widget.bottom   = wibox.layout.fixed.horizontal()
+    widget.vertical = wibox.layout.flex.vertical()
 
-    label.width = 125
-    label.align = 'left'
-    timebar:set_background_color(beautiful.widget_bg)
-    timebar:set_color(beautiful.widget_fg)
-    timebar:set_width(125)
-    volbar:set_background_color(beautiful.widget_bg)
-    volbar:set_color(beautiful.widget_fg)
-    volbar:set_vertical(true)
-    volbar:set_width(5)
-    volbar:set_max_value(100)
+    widget.time:set_align('left')
+    widget.time:set_text('[0:00/0:00]')
 
-    local widget = { { timebar, label,
-                       layout = awful.widget.layout.vertical.flex },
-                       volbar, layout = awful.widget.layout.horizontal.leftright, }
-    -- I don't know.
-    awful.widget.layout.margins[widget[1]] = { right = -120 }
+    widget.flags:set_align('left')
+    widget.flags:set_text('|')
+
+    widget.progress:set_background_color(beautiful.widget_bg)
+    widget.progress:set_color(beautiful.widget_fg)
+    widget.progress:set_width(125)
+
+    widget.volume:set_background_color(beautiful.widget_bg)
+    widget.volume:set_color(beautiful.widget_fg)
+    widget.volume:set_vertical(true)
+    widget.volume:set_width(5)
+    widget.volume:set_max_value(100)
+
+    widget.bottom:add(widget.time)
+    widget.bottom:add(widget.flags)
+    widget.vertical:add(widget.progress)
+    widget.vertical:add(widget.bottom)
+    widget:add(widget.vertical)
+    widget:add(widget.volume)
 
     function widget.notify(updated)
         if not updated then
@@ -62,27 +51,27 @@ function new(args)
     end
     widget.songid = -1
 
-    if type(args.notify) == 'function' then
-        add_onclick(widget, widget.notify)
+    for i,v in ipairs{ widget.time, widget.progress, widget.flags, widget.volume } do
+        local wid = v.widget or v
+        wid:buttons(awful.button({}, 1, widget.notify))
     end
 
     return widget
 end
 
-function vicious_format(widget, args)
+function wmpd.vicious_format(widget, args)
     local s = args.status or {}
     local elapsed, total = string.match(s.time or '0:0', '([%d]+):([%d]+)')
 
-    widget[1][1]:set_value(elapsed / (total == 0 and 1 or total))
-
-    widget[1][2].text = string.format('[%s/%s] ', args.elapsed, args.total_time)
-    widget[1][2].text = widget[1][2].text .. (s['state'] == 'play' and '⟩' or '|') .. ' '
-    widget[1][2].text = widget[1][2].text .. (s['repeat']  == '1' and 'r' or '')
-    widget[1][2].text = widget[1][2].text .. (s['random']  == '1' and 'z' or '')
-    widget[1][2].text = widget[1][2].text .. (s['single']  == '1' and 's' or '')
-    widget[1][2].text = widget[1][2].text .. (s['consume'] == '1' and 'c' or '')
-
-    widget[2]:set_value(s['volume'])
+    widget.time:set_text(string.format('[%s/%s] ', args.elapsed, args.total_time))
+    widget.progress:set_value(elapsed / (total == 0 and 1 or total))
+    widget.volume:set_value(s['volume'])
+    widget.flags:set_text(string.format('%s %s%s%s%s',
+                          s['state'] == 'play' and '⟩' or '|',
+                          s['repeat']  == '1' and 'r' or '',
+                          s['random']  == '1' and 'z' or '',
+                          s['single']  == '1' and 's' or '',
+                          s['consume'] == '1' and 'c' or ''))
 
     if widget.songid ~= s['songid'] then
         widget.songid = s['songid'] or -1
@@ -90,7 +79,7 @@ function vicious_format(widget, args)
     end
 end
 
-function vicious_worker(format, warg)
+function wmpd.vicious_worker(format, warg)
     local warg = warg or {}
     local mcon = warg.connection or mpd.new{warg}
 
@@ -101,3 +90,5 @@ function vicious_worker(format, warg)
 
     return data
 end
+
+return wmpd

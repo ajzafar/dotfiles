@@ -1,45 +1,42 @@
-local awful = { widget = awful.widget, button = awful.button }
-local beautiful = beautiful
-local string = { format = string.format }
-local widget = widget
-local ipairs = ipairs
-local table = { getn = table.getn }
-local vicious = { force = vicious.force }
-local naughty = { notify = naughty.notify }
-
-module('widgets.net')
-
-local ifaces = {}
+local net = {}
 
 local function cycle_idx(w)
     w.idx = w.idx + 1
-    if w.idx > table.getn(ifaces) then
-        w.idx = w.idx % table.getn(ifaces)
+    if w.idx > table.getn(w.ifaces) then
+        w.idx = w.idx % table.getn(w.ifaces)
     end
-    naughty.notify{ text = ifaces[w.idx] }
+    naughty.notify{ text = w.ifaces[w.idx] }
 end
 
-function new(args)
-    local args = args or {}
-    local down = { widget{ type = 'textbox' }, awful.widget.graph{ height = 9 },
-                   layout = awful.widget.layout.horizontal.leftright }
-    local up = { widget{ type = 'textbox' }, awful.widget.graph{ height = 9 },
-                 layout = awful.widget.layout.horizontal.leftright }
-    ifaces = args.ifaces or { 'eth0', 'wlan0' }
+function net.new(args)
+    local args   = args or {}
+    local widget = wibox.layout.flex.vertical()
+    local down   = wibox.layout.fixed.horizontal()
+    local up     = wibox.layout.fixed.horizontal()
 
-    down[2]:set_background_color(beautiful.widget_bg)
-    down[2]:set_color(beautiful.widget_fg)
-    down[2]:set_scale(true)
-    down[1].text = 'D 0 '
-    up[2]:set_background_color(beautiful.widget_bg)
-    up[2]:set_color(beautiful.widget_fg)
-    up[2]:set_scale(true)
-    up[1].text = 'U 0 '
+    widget.down_label = wibox.widget.textbox()
+    widget.down_bar   = awful.widget.graph()
+    widget.up_label   = wibox.widget.textbox()
+    widget.up_bar     = awful.widget.graph()
+    widget.idx        = 1
+    widget.ifaces     = args.ifaces or { 'eth0', 'wlan0' }
 
-    local widget = { down, up, idx = 1, layout = awful.widget.layout.vertical.flex }
-    -- I'm not sure why this is needed, but without it the next widget overlaps
-    -- this one.
-    awful.widget.layout.margins[widget] = { right = 30 }
+    widget.down_bar:set_background_color(beautiful.widget_bg)
+    widget.down_bar:set_color(beautiful.widget_fg)
+    widget.down_bar:set_scale(true)
+    widget.down_label:set_text('D 0 ')
+    widget.up_bar:set_background_color(beautiful.widget_bg)
+    widget.up_bar:set_color(beautiful.widget_fg)
+    widget.up_bar:set_scale(true)
+    widget.up_label:set_text('U 0 ')
+
+    down:add(widget.down_label)
+    down:add(widget.down_bar)
+    up:add(widget.up_label)
+    up:add(widget.up_bar)
+
+    widget:add(down)
+    widget:add(up)
 
     for i_,v_ in ipairs(widget) do
         for i,v in ipairs(v_) do
@@ -51,12 +48,13 @@ function new(args)
     return widget
 end
 
-function vicious_format(widget, args)
-    local iface = ifaces[widget.idx] or 'eth0'
-    widget[1][1].text = string.format('D %04d ', args['{' .. iface .. ' down_kb}'] or 0)
-    widget[1][2]:add_value(args['{eth0 down_kb}'])
-    widget[2][1].text = string.format('U %04d ', args['{' .. iface .. ' up_kb}'] or 0)
-    widget[2][2]:add_value(args['{eth0 up_kb}'])
+function net.vicious_format(widget, args)
+    local iface = widget.ifaces[widget.idx] or 'eth0'
 
-    return 1
+    widget.down_label:set_text(string.format('D %04d ', args['{' .. iface .. ' down_kb}'] or 0))
+    widget.down_bar:add_value(args['{eth0 down_kb}'])
+    widget.up_label:set_text(string.format('U %04d ', args['{' .. iface .. ' up_kb}'] or 0))
+    widget.up_bar:add_value(args['{eth0 up_kb}'])
 end
+
+return net

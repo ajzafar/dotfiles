@@ -1,41 +1,30 @@
-local awful = { widget = awful.widget, button = awful.button }
-local beautiful = beautiful
-local ipairs = ipairs
-local string = { format = string.format }
-local table = { getn = table.getn }
-local vicious = { force = vicious.force }
-local widget = widget
-
-module('widgets.disk')
-
--- FIXME: This should be a part of the widget table
--- For some reason, storing it in the table doesn't work. After the first
--- update, the table seems to be...empty
-local mounts = {}
+local disk = {}
 
 local function cycle_idx(w)
     w.idx = w.idx + 1
-    if w.idx > table.getn(mounts) then
-        w.idx = w.idx % table.getn(mounts)
+    if w.idx > table.getn(w.mounts) then
+        w.idx = w.idx % table.getn(w.mounts)
     end
 end
 
-function new(args)
+function disk.new(args)
     local args = args or {}
-    local label = widget{ type = 'textbox' }
-    local bar = awful.widget.progressbar{ height = 9 }
-    mounts = args.mounts or { '/' }
+    local widget = wibox.layout.flex.vertical()
 
-    label.width = 100
-    label.align = 'left'
-    bar:set_background_color(beautiful.widget_bg)
-    bar:set_color(beautiful.widget_fg)
+    widget.label = wibox.widget.textbox()
+    widget.bar = awful.widget.progressbar()
+    widget.mounts = args.mounts or { '/' }
+    widget.idx = 0
 
-    local widget = { bar, label, idx = 0, layout = awful.widget.layout.vertical.flex }
-    -- I have no idea
-    awful.widget.layout.margins[widget] = { right = -118 }
+    -- label.width = 100
+    widget.label:set_align('left')
+    widget.bar:set_background_color(beautiful.widget_bg)
+    widget.bar:set_color(beautiful.widget_fg)
 
-    for i,v in ipairs(widget) do
+    widget:add(widget.bar)
+    widget:add(widget.label)
+
+    for i,v in ipairs{widget.label, widget.bar} do
         local wid = v.widget or v
         wid:buttons(awful.button({}, 1, function() vicious.force{widget} end))
     end
@@ -43,12 +32,15 @@ function new(args)
     return widget
 end
 
-function vicious_format(widget, args)
+function disk.vicious_format(widget, args)
     cycle_idx(widget)
 
-    local mount = mounts[widget.idx] or '/'
+    local mount = widget.mounts[widget.idx] or '/'
     local used, size = args['{' .. mount .. ' used_gb}'] or 0,
                        args['{' .. mount .. ' size_gb}'] or 1
-    widget[1]:set_value(used / size)
-    widget[2].text = string.format('%s %0.1f/%0.1f', mount, used, size)
+
+    widget.bar:set_value(used / size)
+    widget.label:set_text(string.format('%s %0.1f/%0.1f', mount, used, size))
 end
+
+return disk

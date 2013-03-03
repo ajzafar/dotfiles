@@ -14,7 +14,6 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      size_hints_honor = false,
                    },
-      callback = awful.titlebar.add
     },
     { rule = {}, callback = awful.client.setslave },
     { rule = { class = "Tilda" ,
@@ -28,12 +27,11 @@ awful.rules.rules = {
                                     program_size = true
                                   },
                      border_width = 0,
-                   },
-      callback = awful.titlebar.remove },
+                   }, },
     { rule = { class = "mplayer2" },
       properties = awful.util.table.join(vid_properties,
                                          { size_hints_honor = true }),
-      callback = awful.titlebar.remove },
+      },
     { rule = { class = "gimp" },
       properties = { floating = true,
                      tag = tags[1][5] } },
@@ -56,6 +54,5 @@ awful.rules.rules = {
     { rule = { class = "Skype" },
       properties = { floating = true, } },
     { rule = { class = "Huludesktop.bin" },
-      properties = vid_properties,
-      callback = awful.titlebar.remove },
+      properties = vid_properties, },
 }

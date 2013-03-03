@@ -1,18 +1,21 @@
-local awful = { widget = awful.widget }
-local beautiful = beautiful
+local cpu = {}
 
-module('widgets.cpu')
-
-function new(args)
+function cpu.new(args)
     local args = args or {}
-    local bar = awful.widget.graph()
+    local widget = wibox.layout.mirror()
+    widget.graph = awful.widget.graph()
 
-    bar:set_background_color(beautiful.widget_bg)
-    bar:set_color(beautiful.widget_fg)
+    widget:set_reflection{ vertical = true }
+    widget.graph:set_background_color(beautiful.widget_bg)
+    widget.graph:set_color(beautiful.widget_fg)
 
-    local function addval(widget, val)
-        widget[1]:add_value(val)
+    function widget.add_value(widget, val)
+        widget.graph:add_value(val)
     end
 
-    return { bar, add_value = addval, layout = awful.widget.layout.horizontal.leftright }
+    widget:set_widget(widget.graph)
+
+    return widget
 end
+
+return cpu

@@ -89,7 +89,7 @@ globalkeys = awful.util.table.join(
     -- MPD control
     awful.key({modkey, "Control" }, "space", mpd_cmd('toggle', false)),
     awful.key({}, "XF86AudioPlay", mpd_cmd('toggle', false)),
-    awful.key({modkey, "Control", "Mod1" }, "space", mpdwid.notify),
+    awful.key({modkey, "Control", "Mod1" }, "space", mpdwid.notify or nil),
     awful.key({modkey, "Control" }, "Left", mpd_cmd('prev', true)),
     awful.key({}, "XF86AudioPrev", mpd_cmd('prev', true)),
     awful.key({modkey, "Control" }, "Right", mpd_cmd('next', true)),
@@ -130,13 +130,13 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "i",      function (c) c.minimized = true               end),
-    awful.key({ modkey,           }, "d",      function (c) awful.titlebar.remove(c)         end),
+    -- awful.key({ modkey,           }, "d",      function (c) awful.titlebar.remove(c)         end),
     awful.key({ modkey,           }, "p",      function (c) c.sticky = not c.sticky          end),
     awful.key({ modkey, "Control" }, "d",      function (c) c.border_width = c.border_width ~= 0 and 0 or beautiful.border_width             end),
-    awful.key({ modkey, "Shift"   }, "d",
-        function (c)
-            awful.titlebar.add(c, { modkey = modkey })
-        end),
+    -- awful.key({ modkey, "Shift"   }, "d",
+    --     function (c)
+    --         awful.titlebar.add(c, { modkey = modkey })
+    --     end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal

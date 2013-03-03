@@ -4,14 +4,14 @@
 -- message. Lastly, I can modify one file and, in most cases, simply rerun
 -- awefile('thefile.lua') for the changes to take effect.
 
-require('awful')
-require('awful.autofocus')
-require('awful.rules')
-require('beautiful')
-require('naughty')
-
-vicious = require('vicious')
-require('lib.mpd')
+gears           = require('gears')
+awful           = require('awful')
+awful.autofocus = require('awful.autofocus')
+awful.rules     = require('awful.rules')
+beautiful       = require('beautiful')
+naughty         = require('naughty')
+vicious         = require('vicious')
+mpd             = require('lib.mpd')
 
 confdir            = awful.util.getdir('config')
 terminal           = "urxvtc"
@@ -56,7 +56,7 @@ function awefile(file)
     return status
 end
 
-for i,v in ipairs{ 'tags.lua', 'menu.lua', 'wibox.lua',
+for i,v in ipairs{ 'tags.lua', 'menu.lua', 'wi.lua',
                    'keys.lua', 'rules.lua', 'signals.lua' } do
     awefile(v)
 end
@@ -73,7 +73,7 @@ end
 -- Handle runtime errors after startup
 do
     local in_error = false
-    awesome.add_signal("debug::error", function (err)
+    awesome.connect_signal("debug::error", function (err)
         -- Make sure we don't go into an endless error loop
         if in_error then return end
         in_error = true

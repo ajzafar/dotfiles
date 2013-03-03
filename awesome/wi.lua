@@ -1,16 +1,17 @@
-require('widgets')
+widgets = require('widgets')
+wibox = require('wibox')
 
 -- {{{ Widget creation
 -- Create a textclock widget
-mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
-mytextclock = awful.widget.textclock({ align = "right" }, "%A %x %k:%M:%S", 1)
+mytextclock = awful.widget.textclock("%A %x %k:%M:%S", 1)
 mytextclock:buttons(awful.button({ }, 1, function() naughty.notify{ text = awful.util.pread("date +'%s'") } end ))
-separate = widget({ type = "textbox" })
-separate.text = ' <span color="black">|</span> '
+separate = wibox.widget.textbox()
+separate:set_markup(' <span color="black">|</span> ')
 
 -- Create a systray
-mysystray = widget({ type = "systray" })
+mysystray = wibox.widget.systray()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -63,6 +64,9 @@ cpuwid = widgets.cpu.new()
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 5)
 memwid = widgets.memory.new()
 vicious.register(memwid, vicious.widgets.mem, widgets.memory.vicious_format, 7)
+-- memwid = awful.widget.progressbar()
+-- memwid:set_max_value(100)
+-- vicious.register(memwid, vicious.widgets.mem, function(widget, args) for k,v in ipairs(args) do print(k,v) end; widget:set_value(98) return 1 end, 7)
 volwid = widgets.volume.new()
 vicious.register(volwid, vicious.widgets.volume, "$1", 2, 'Master')
 randrwid = widgets.randr.new()
@@ -73,25 +77,31 @@ vicious.register(netwid, vicious.widgets.net, widgets.net.vicious_format, 11)
 diskwid = widgets.disk.new{ mounts = { '/', '/home', '/mnt/music' } }
 vicious.register(diskwid, vicious.widgets.fs, widgets.disk.vicious_format, 29)
 
-promptwid = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+promptwid = awful.widget.prompt()
 -- }}}
 
-botbox = {}
 botbox = awful.wibox({ position = "bottom", screen = 1 })
 botbox.opacity = 10
-botbox.widgets = {
-    separate,
-    mpdwid, separate,
-    cpuwid, separate,
-    memwid, separate,
-    randrwid, separate,
-    volwid, separate,
-    batwid, separate,
-    netwid, separate,
-    diskwid, separate,
-    promptwid,
-    layout = awful.widget.layout.horizontal.leftright
-}
+local layout = wibox.layout.fixed.horizontal()
+layout:add(separate)
+layout:add(mpdwid)
+layout:add(separate)
+layout:add(cpuwid)
+layout:add(separate)
+layout:add(memwid)
+layout:add(separate)
+layout:add(randrwid)
+layout:add(separate)
+layout:add(volwid)
+layout:add(separate)
+layout:add(batwid)
+layout:add(separate)
+layout:add(netwid)
+layout:add(separate)
+layout:add(diskwid)
+layout:add(separate)
+layout:add(promptwid)
+botbox:set_widget(layout)
 
 -- {{{ Place widgets
 for s = 1, screen.count() do
@@ -105,29 +115,29 @@ for s = 1, screen.count() do
                            awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
-    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
+    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     -- Create a tasklist widget
-    mytasklist[s] = awful.widget.tasklist(function(c)
-                                              return awful.widget.tasklist.label.currenttags(c, s)
-                                          end, mytasklist.buttons)
+    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
     -- Add widgets to the wibox - order matters
-    mywibox[s].widgets = {
-        {
-            mylauncher,
-            s == 1 and mytaglist[s],
-            mypromptbox[s],
-            layout = awful.widget.layout.horizontal.leftright
-        },
-        mylayoutbox[s],
-        mytextclock,
-        s == 1 and mysystray or nil,
-        mytasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft
-    }
 
+    local left_layout = wibox.layout.fixed.horizontal()
+    left_layout:add(mylauncher)
+    left_layout:add(mytaglist[s])
+
+    local right_layout = wibox.layout.fixed.horizontal()
+    if s == 1 then right_layout:add(mysystray) end
+    right_layout:add(mytextclock)
+    right_layout:add(mylayoutbox[s])
+
+    local layout = wibox.layout.align.horizontal()
+    layout:set_left(left_layout)
+    layout:set_middle(mytasklist[s])
+    layout:set_right(right_layout)
+
+    mywibox[s]:set_widget(layout)
 end
 -- }}}

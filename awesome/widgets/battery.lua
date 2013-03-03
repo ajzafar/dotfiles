@@ -1,25 +1,20 @@
-local awful = { widget = awful.widget,
-                button = awful.button }
-local beautiful = beautiful
-local ipairs = ipairs
-local naughty = { notify = naughty.notify }
-local widget = widget
+local battery = {}
 
-module('widgets.battery')
-
-function new(args)
+function battery.new(args)
     local args = args or {}
-    local b = awful.widget.progressbar()
-    local t = widget{ type = 'textbox' }
+    local widget = wibox.layout.fixed.horizontal()
+    widget.bar = awful.widget.progressbar()
+    widget.label = wibox.widget.textbox()
+    widget.time = ''
 
-    b:set_color(beautiful.widget_fg)
-    b:set_background_color(beautiful.widget_bg)
-    b:set_vertical(true)
-    b:set_width(5)
-    b:set_max_value(100)
-    t.width = 12
+    widget.bar:set_color(beautiful.widget_fg)
+    widget.bar:set_background_color(beautiful.widget_bg)
+    widget.bar:set_vertical(true)
+    widget.bar:set_width(5)
+    widget.bar:set_max_value(100)
 
-    local widget = { t, b, layout = awful.widget.layout.horizontal.leftright, time = '' }
+    widget:add(widget.label)
+    widget:add(widget.bar)
 
     for i,v in ipairs(widget) do
         local wid = v.widget or v
@@ -30,22 +25,24 @@ function new(args)
 end
 
 local labels = {
-    ["↯"] = "F",
-    ["⌁"] = "U",
-    ["+"] = "C",
-    ["-"] = "D"
+    ["↯"] = "F ",
+    ["⌁"] = "U ",
+    ["+"] = "C ",
+    ["-"] = "D "
 }
 
-function vicious_format(widget, args)
+function battery.vicious_format(widget, args)
     local percentage = args[2]
 
-    widget[1].text = labels[args[1]]
-    widget[2]:set_value(percentage)
+    widget.label:set_text(labels[args[1]])
+    widget.bar:set_value(percentage)
     widget.time = args[3]
 
     if percentage < 10 then
-        widget[2]:set_background_color('#ff0000')
+        widget.bar:set_background_color('#ff0000')
     else
-        widget[2]:set_background_color(beautiful.widget_bg)
+        widget.bar:set_background_color(beautiful.widget_bg)
     end
 end
+
+return battery

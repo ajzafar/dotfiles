@@ -1,9 +1,4 @@
-local awful = awful
-local os = { execute = os.execute }
-local string = { format = string.format }
-local widget = widget
-
-module('widgets.randr')
+local randr = {}
 
 local function randrfunc(state, external, main)
     local state = state or 'off'
@@ -22,7 +17,7 @@ local function randrfunc(state, external, main)
     end
 end
 
-local menu = awful.menu{ items = {
+local menu = { items = {
     { 'Off', randrfunc('off') },
     { 'Below', randrfunc('below') },
     { 'Above', randrfunc('above') },
@@ -31,13 +26,14 @@ local menu = awful.menu{ items = {
     { 'Same', randrfunc('same-as') },
 }}
 
-function new(args)
+function randr.new(args)
     local args = args or {}
-    local widget = widget{ type = 'textbox' }
+    local widget = wibox.widget.textbox()
 
-    widget.text = 'Unknown'
-    widget.width = 50
+    widget:set_text('Unknown')
     widget:buttons(awful.button({ }, 1, function() awful.menu.toggle(menu) end))
 
     return widget
 end
+
+return randr

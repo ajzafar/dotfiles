@@ -1,9 +1,4 @@
-local awful = { widget = awful.widget }
-local beautiful = beautiful
-local io = { popen = io.popen }
-local string = { match = string.match }
-
-module('widgets.volume')
+local volume = {}
 
 local function muted_channel(channel)
     local channel = channel or 'Master'
@@ -15,19 +10,25 @@ local function muted_channel(channel)
     return string.match(mixer, '%[([%l]*)%]') == 'off'
 end
 
-function new(args)
+function volume.new(args)
     local args = args or {}
-    local b = awful.widget.progressbar()
+    local widget = wibox.layout.flex.horizontal()
+    widget.bar = awful.widget.progressbar()
 
-    b:set_color(beautiful.widget_fg)
-    b:set_background_color(beautiful.widget_bg)
-    b:set_vertical(true)
-    b:set_width(5)
-    local function setval(w, val)
-        b:set_value(val)
-        b:set_color(muted_channel('Master') and '#365e92' or beautiful.widget_fg)
-        b:set_background_color(muted_channel('Speaker') and '#13326c' or beautiful.widget_bg)
+    widget.bar:set_color(beautiful.widget_fg)
+    widget.bar:set_background_color(beautiful.widget_bg)
+    widget.bar:set_vertical(true)
+    widget.bar:set_width(5)
+
+    widget:add(widget.bar)
+
+    function widget.set_value(w, val)
+        w.bar:set_value(val)
+        w.bar:set_color(muted_channel('Master') and '#365e92' or beautiful.widget_fg)
+        w.bar:set_background_color(muted_channel('Speaker') and '#13326c' or beautiful.widget_bg)
     end
 
-    return { i, b, layout = awful.widget.layout.horizontal.leftright, set_value = setval }
+    return widget
 end
+
+return volume

@@ -47,6 +47,10 @@ client.connect_signal("manage", function (c, startup)
         awful.titlebar(c):set_widget(layout)
     end
 
+    local swidth = 50
+    -- wiboxes are 20 pixels thick by default
+    c:struts{ left = swidth - 20, right = swidth - 20, bottom = swidth, top = swidth }
+
     -- Put windows in a smart way, only if they do not set an initial position.
     if not c.size_hints.user_position and not c.size_hints.program_position and not startup then
         awful.placement.no_overlap(c)

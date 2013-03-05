@@ -20,6 +20,6 @@ welcome-screen-list = yes
 wide-cursor = yes
 wrap-around = no
 
-list-format = "[[%composer% - ]%artist% #[%album%#] [%track%: ]%title%|%file%] #[%time%#]"
+list-format = "[[%composer% - ]%artist% #[%album% (%date%)#] [%track%: ]%title%|%file%] #[%time%#]"
 status-format = "[[%composer% - ]%artist% #[%album%#] %title%]|%file%"
 xterm-title-format = "[%artist% #[%album%#] %title%]|%file%"

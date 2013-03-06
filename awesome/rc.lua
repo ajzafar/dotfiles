@@ -21,6 +21,7 @@ mpd_cover_size     = 300
 host               = awful.util.pread('hostname'):match('%S*')
 mpd_pass, mpd_host = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
 mpd_con            = mpd.new{ hostname = mpd_host, password = mpd_pass, retry = 20 }
+mpd_notify_id = 0
 
 function load_theme(name)
     beautiful.init(string.format('%s/themes/%s/theme.lua', confdir, name))
@@ -38,9 +39,10 @@ function mpd_notify()
         string.format(song.date and '%s (%s)' or '%s', song.album, song.date),
         song.track, song.title):gsub('&', '&amp;')
     local cover = '/mnt/music/' .. song.file:gsub('[^/]+$', 'cover.jpg')
-    naughty.notify{ text      = t,
-                    icon      = cover,
-                    icon_size = mpd_cover_size }
+    mpd_notify_id = naughty.notify{ text        = t,
+                                    icon        = cover,
+                                    icon_size   = mpd_cover_size,
+                                    replaces_id = mpd_notify_id, }.id
 end
 
 function awefile(file)

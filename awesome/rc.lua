@@ -13,15 +13,18 @@ naughty         = require('naughty')
 vicious         = require('vicious')
 mpd             = require('lib.mpd')
 
-confdir            = awful.util.getdir('config')
-terminal           = "urxvtc"
-editor_cmd         = terminal .. " -e " .. os.getenv("EDITOR")
-modkey             = "Mod4"
-mpd_cover_size     = 300
-host               = awful.util.pread('hostname'):match('%S*')
-mpd_pass, mpd_host = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
-mpd_con            = mpd.new{ hostname = mpd_host, password = mpd_pass, retry = 20 }
-mpd_notify_id = 0
+confdir             = awful.util.getdir('config')
+terminal            = "urxvtc"
+editor_cmd          = terminal .. " -e " .. os.getenv("EDITOR")
+modkey              = "Mod4"
+mpd_cover_size      = 300
+host                = awful.util.pread('hostname'):match('%S*')
+mpd_pass, mpd_host  = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
+mpd_con             = mpd.new{ hostname = mpd_host,
+                               password = mpd_pass,
+                               retry    = 20 }
+mpd_notify_id       = 0
+mpd_notify_position = 'bottom_left'
 
 function load_theme(name)
     beautiful.init(string.format('%s/themes/%s/theme.lua', confdir, name))
@@ -42,6 +45,7 @@ function mpd_notify()
     mpd_notify_id = naughty.notify{ text        = t,
                                     icon        = cover,
                                     icon_size   = mpd_cover_size,
+                                    position    = mpd_notify_position,
                                     replaces_id = mpd_notify_id, }.id
 end
 

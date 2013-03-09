@@ -381,9 +381,6 @@ let g:CSApprox_attr_map = { 'bold' : '', 'italic' : '', 'sp' : 'fg' }
 """" Flatfoot
 let g:flatfoot_{char2nr("\<C-D>")} = '\d'
 
-"""" DelimitMate
-imap <C-F> <Plug>delimitMateJumpMany
-
 ""
 "" taken from godlygeek's vimrc. Pretty nice way to handle folding.
 "" vim:fdm=expr

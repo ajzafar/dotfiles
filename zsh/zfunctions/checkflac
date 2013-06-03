@@ -1,10 +1,16 @@
 local -a flacs
 
-if (( $# > 0 )); then
-    flacs=( "$@" )
-else
-    flacs=( *.flac(N) )
+if (( argc == 0 )); then
+    set -- .
 fi
+
+for arg in $argv; do
+    if [[ $arg == *.flac ]]; then
+        flacs+=( $arg )
+    elif [[ -d $arg ]]; then
+        flacs+=( $arg/*.flac(N) )
+    fi
+done
 
 (( $#flacs == 0 )) && return 1
 

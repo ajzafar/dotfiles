@@ -7,9 +7,6 @@
 t           = {}
 t.name      = 'dsblue'
 local tp    = confdir .. '/themes/' .. t.name
-local wpcmd = 'awsetbg -r '..os.getenv('XDG_CONFIG_HOME')..'/backgrounds'
-t.wallpaper = os.getenv('XDG_CONFIG_HOME') .. '/backgrounds/kTgH8.jpg'
-
 t.font        = "sans 9"
 t.menu_height = "15"
 t.menu_width  = "150"

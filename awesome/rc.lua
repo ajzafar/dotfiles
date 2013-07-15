@@ -30,6 +30,7 @@ function load_theme(name)
     beautiful.init(string.format('%s/themes/%s/theme.lua', confdir, name))
 end
 load_theme('dsblue')
+os.execute('feh -z --bg-fill ' .. confdir .. '/../backgrounds')
 
 function mpd_notify()
     local song = mpd_con:send('currentsong')

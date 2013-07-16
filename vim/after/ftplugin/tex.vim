@@ -7,6 +7,7 @@ setl softtabstop=2
 setl formatoptions+=c
 setl formatoptions+=o
 setl formatoptions+=r
+setl formatoptions+=t
 let &l:flp = '\v\\%(item|prob)%([\[{]\ze.{-}[\]}])?\s*'
 
 setl spell

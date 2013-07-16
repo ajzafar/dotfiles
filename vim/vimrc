@@ -304,7 +304,8 @@ cnoremap <ESC>f    <S-Right>
 
 """" Insert mode mappings
 " Some nice Emacs-like bindings. Hate me if you must.
-inoremap <C-e> <C-o>$
+" Do make sure they don't mess with insert-completion
+inoremap <expr> <C-E> pumvisible() ? '<C-E>' : '<C-O>$'
 inoremap <C-a> <C-o>^
 
 " Create a new undo block before clearing the line
@@ -382,7 +383,6 @@ let g:CSApprox_attr_map = { 'bold' : '', 'italic' : '', 'sp' : 'fg' }
 """" Flatfoot
 let g:flatfoot_{char2nr("\<C-D>")} = '\d'
 
-""
 "" taken from godlygeek's vimrc. Pretty nice way to handle folding.
 "" vim:fdm=expr
 "" vim:fde=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'""*')-2)\:'='

@@ -1,6 +1,6 @@
 fonts.conf
 gitconfig
-gitignore
+cvsignore
 gtkrc.mine
 irssi
 mplayer

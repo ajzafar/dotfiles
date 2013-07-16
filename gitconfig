@@ -14,6 +14,6 @@
     di = diff
 [core]
     autocrlf     = input
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.cvsignore
 [color]
     ui = auto

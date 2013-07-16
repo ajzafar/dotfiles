@@ -19,7 +19,7 @@ hi! link SpecialKey NonText
 hi Error         guifg=#ffffff  guibg=#6e2e2e
 hi! link ErrorMsg Error
 hi IncSearch     guifg=#303030  guibg=#cd8b60  gui=bold
-hi MatchParen    guifg=NONE     guibg=#095959
+hi MatchParen    guifg=#303030  guibg=#cd8b60
 
 hi StatusLine    guifg=NONE     guibg=NONE     gui=reverse
 hi StatusLineNC  guifg=#b9b9b9  guibg=#292936  gui=NONE

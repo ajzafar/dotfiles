@@ -26,10 +26,10 @@ iab <buffer> lam lambda<C-R>=EatChar('\s')<CR>
 compiler tex
 
 if ! ( filereadable('Makefile') || filereadable('makefile') )
-    nnoremap <buffer> <F4> :make %:r<CR>
+    nnoremap <buffer> <F4> :make! %:r<CR>
     let &mp = 'pdf' . &mp
 else
-    nnoremap <buffer> <F4> :make<CR>
+    nnoremap <buffer> <F4> :make!<CR>
 endif
 
 """ Plugin settings

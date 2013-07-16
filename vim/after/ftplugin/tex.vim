@@ -34,7 +34,7 @@ endif
 
 """ Plugin settings
 if exists(':Tabularize')
-    AddTabularPattern tex_table /&\|\\\\/
+    AddTabularPattern! tex_table /&\|\\\\/
     nnoremap <buffer> <silent> <leader>tt :Tabularize tex_table<CR>
 endif
 

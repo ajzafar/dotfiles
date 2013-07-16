@@ -1,0 +1,5 @@
+[ui]
+username = Adnan Zafar <adnanjzafar@gmail.com>
+ignore = ~/.cvsignore
+[extensions]
+rebase =

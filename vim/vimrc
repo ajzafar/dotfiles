@@ -127,6 +127,7 @@ endif
 set history=100          " keep 50 lines of command line history
 set wildmenu
 set wildmode=longest:full,full
+set suffixes+=.pdf,.log,.aux  " pdfTeX output files
 
 """" Tags
 set tags+=~/.vim/tags.d/systags

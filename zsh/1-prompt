@@ -9,7 +9,7 @@ autoload -Uz vcs_info
     local user ppath end
 
     # if root, display red and don't display username
-    user="%(!.%F{red}.%F{green})%(${psvvcsidx}V..%n@)%m%k"
+    user="%(!.%F{red}.%F{green})%m%k"
     ppath='%F{blue}%32<..<%~'
     end='%b%f%k'
 
@@ -37,7 +37,7 @@ function set-rprompt () {
         shelldepth=${shelldepth/N/3}
     fi
     # date in 12:34:56 Mon 06/14/2010
-    date="%D{%T %a %m/%d/%Y}"
+    date="%D{%T}"
 
     RPROMPT="${vimode}${exitcode}${shelldepth}${vcs}${date}"
     RPROMPT2=$RPROMPT

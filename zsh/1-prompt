@@ -1,5 +1,7 @@
 # zsh prompts
 
+autoload -Uz vcs_info
+
 # Normal prompts {{{
 () {
     # Based on the default gentoo prompt
@@ -7,7 +9,7 @@
     local user ppath end
 
     # if root, display red and don't display username
-    user='%(!.%F{red}.%F{green}%n@)%m%k'
+    user="%(!.%F{red}.%F{green})%(${psvvcsidx}V..%n@)%m%k"
     ppath='%F{blue}%32<..<%~'
     end='%b%f%k'
 
@@ -17,9 +19,12 @@
 } # }}}
 
 # RPROMPT {{{
-() {
-    local vimode exitcode shelldepth date
+function set-rprompt () {
+    local vcs vimode exitcode shelldepth date
+    vcs_info
 
+    # Get vcs_info messages
+    vcs="${vcs_info_msg_0_//\{\}} "
     # Use $psvar[$psvmodeidx] as defined by vi-mode
     vimode="%F{white}%${psvmodeidx}v%f "
     # if previous command exited with nonzero status...
@@ -34,9 +39,11 @@
     # date in 12:34:56 Mon 06/14/2010
     date="%D{%T %a %m/%d/%Y}"
 
-    RPROMPT="${vimode}${exitcode}${shelldepth}${date}"
+    RPROMPT="${vimode}${exitcode}${shelldepth}${vcs}${date}"
     RPROMPT2=$RPROMPT
-} # }}}
+}
+add-zsh-hook precmd set-rprompt
+# }}}
 
 # the prompt we see when being asked for substitutions
 SPROMPT="zsh: correct '%R' to '%r'? [N/y/a/e] "

@@ -47,7 +47,7 @@ client.connect_signal("manage", function (c, startup)
         awful.titlebar(c):set_widget(layout)
     end
 
-    local swidth = 20
+    local swidth = 15
     -- wiboxes are 20 pixels thick by default
     c:struts{ left = swidth , right = swidth, bottom = swidth + 20, top = swidth + 20 }
 

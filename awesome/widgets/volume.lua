@@ -12,7 +12,7 @@ end
 
 function volume.new(args)
     local args = args or {}
-    local widget = wibox.layout.flex.horizontal()
+    local widget = wibox.layout.fixed.horizontal()
     widget.bar = awful.widget.progressbar()
 
     widget.bar:set_color(beautiful.widget_fg)

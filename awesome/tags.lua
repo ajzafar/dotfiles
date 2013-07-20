@@ -19,7 +19,7 @@ layouts =
 -- Define a tag table which hold all screen tags.
 tags = {
     names  = { '☿', '♀', '♁', '♂', '♃', '♄', '♅', '♆', '♇' },
-    layout = { 2, 12 },
+    layout = { 4, 12 },
 }
 
 for i = 1, table.getn(tags.names) do

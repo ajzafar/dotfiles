@@ -7,6 +7,7 @@ use-filename-title=yes
 vf=screenshot
 vo=gl,xv,x11
 volume=40
+cache=8192
 
 [hd]
 lavdopts=fast=1:skiploopfilter=all

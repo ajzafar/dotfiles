@@ -1,8 +1,8 @@
 zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:git:*' check-for-changes true
 
-zstyle ':vcs_info:*' formats '[%b%f{%m%c%u}]'
-zstyle ':vcs_info:*' actionformats '[%F{red}%a%f|%b{%m%c%u}]'
+zstyle ':vcs_info:*' formats '[%F{green}%b%f{%m%c%u}]'
+zstyle ':vcs_info:*' actionformats '[%F{red}%a%f|%F{green}b%f{%m%c%u}]'
 zstyle ':vcs_info:*' stagedstr '%F{green}S%f'
 zstyle ':vcs_info:*' unstagedstr '%F{red}U%f'
 

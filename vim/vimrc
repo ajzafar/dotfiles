@@ -199,10 +199,16 @@ if has("autocmd")
     " Taken from godlygeek's vimrc
     au Filetype * let &l:ofu = (len(&ofu) ? &ofu : 'syntaxcomplete#Complete')
 
-    " Turn off list while in insert mode.
-    " Seeing trailing spaces while typing them is annoying
-    au InsertEnter * setl nolist
-    au InsertLeave * setl list
+    " Seeing trailing spaces while typing them is annoying, so disable that
+    " listchar while in insert mode. This listchar is duplicated above so that
+    " it will be in effect even if we never enter insert mode.
+    if &enc =~ '\vu(tf|cs)' " if Unicode...
+        au InsertEnter * setl listchars-=trail:∎
+        au InsertLeave * setl listchars+=trail:∎
+    else
+        au InsertEnter * setl listchars-=trail:-
+        au InsertLeave * setl listchars+=trail:-
+    endif
 
     " Files in ~/.config/zsh are ft=zsh
     au BufNewFile,BufRead ~/.config/zsh/* setl ft=zsh

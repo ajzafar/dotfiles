@@ -8,3 +8,19 @@ snippet lfun
 	end
 snippet ifun
 	function ${1:name}(${2:args}) ${3:body} end
+snippet for Numeric for, var=start,end,step
+	for ${1:i}=${2:1},${3:10} do
+		${4:print(i)}
+	end
+snippet for Generic for, table values with pairs()
+	for ${1:k},${2:v} in pairs(${3:table_name}) do
+		${0:-- body}
+	end
+snippet for Generic for, indexed table values with ipairs()
+	for ${1:i},${2:v} in ipairs(${3:table_name}) do
+		${0:-- body}
+	end
+snippet for Generic for
+	for ${1:i,v} in ${2:iterator}(${3:args}) do
+		${0:-- body}
+	end

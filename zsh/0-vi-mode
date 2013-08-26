@@ -217,20 +217,24 @@ if (( ${+widgets[.history-incremental-pattern-search-backward]} )); then
     function history-incremental-pattern-search-backward() {
         ft-markminibuf .history-incremental-pattern-search-backward
     }
+    zle -N history-incremental-pattern-search-backward
 else
     function history-incremental-search-backward() {
         ft-markminibuf .history-incremental-search-backward
     }
+    zle -N history-incremental-pattern-backward
 fi
 
 if (( ${+widgets[.history-incremental-pattern-search-forward]} )); then
     function history-incremental-pattern-search-forward() {
         ft-markminibuf .history-incremental-pattern-search-forward
     }
+    zle -N history-incremental-pattern-search-forward
 else
     function history-incremental-search-forward() {
         ft-markminibuf .history-incremental-search-forward
     }
+    zle -N history-incremental-pattern-forward
 fi
 
 function ft-vi-search-back() {

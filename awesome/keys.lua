@@ -10,6 +10,11 @@ function os_wrap(cmd)
     return function() os.execute(cmd .. '> /dev/null') end
 end
 
+function client_center_mouse(client)
+    local geom = client:geometry()
+    mouse.coords({ x = geom.x + geom.width / 2, y = geom.y + geom.height / 2 }, true)
+end
+
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -27,18 +32,32 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
+            if client.focus then
+                client.focus:raise()
+                client_center_mouse(client.focus)
+            end
         end),
     awful.key({ modkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
+            if client.focus then
+                client.focus:raise()
+                client_center_mouse(client.focus)
+            end
         end),
     awful.key({ modkey, "Control" }, "m", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, "Shift"   }, "j",
+        function ()
+            awful.client.swap.byidx(1)
+            client_center_mouse(client.focus)
+        end),
+    awful.key({ modkey, "Shift"   }, "k",
+        function ()
+            awful.client.swap.byidx(-1)
+            client_center_mouse(client.focus)
+        end),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
@@ -47,6 +66,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.history.previous()
             if client.focus then
                 client.focus:raise()
+                client_center_mouse(client.focus)
             end
         end),
 

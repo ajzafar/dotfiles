@@ -1,10 +1,15 @@
 zstyle ':vcs_info:*' enable git hg
-zstyle ':vcs_info:git:*' check-for-changes true
-
-zstyle ':vcs_info:*' formats '[%F{green}%b%f{%m%c%u}]'
-zstyle ':vcs_info:*' actionformats '[%F{red}%a%f|%F{green}b%f{%m%c%u}]'
+zstyle ':vcs_info:*' formats '[%b{%m%c%u}]'
+zstyle ':vcs_info:*' actionformats '[%F{red}%a%f|%b{%m%c%u}]'
+zstyle ':vcs_info:*' branchformat '%F{green}%b%f'
 zstyle ':vcs_info:*' stagedstr '%F{green}S%f'
 zstyle ':vcs_info:*' unstagedstr '%F{red}U%f'
+
+zstyle ':vcs_info:git:*' check-for-changes true
+
+zstyle ':vcs_info:hg:*' formats '[%b@%i]'
+zstyle ':vcs_info:hg:*' hgrevformat '%F{cyan}%r%f:%F{cyan}%7.7h%f'
+zstyle ':vcs_info:hg:*' get-revision true
 
 # The next two hooks were originally taken from Seth House's blog post:
 # <http://eseth.org/2010/git-in-zsh.html>

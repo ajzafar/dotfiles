@@ -13,7 +13,8 @@ for keymap in viins vicmd; do
     bindkey ${key[Left]}    backward-char
     bindkey ${key[Right]}   forward-char
 
-    bindkey '^R' history-incremental-search-backward
+    bindkey '^R' history-incremental-pattern-search-backward
+    bindkey '^Xr' history-incremental-pattern-search-forward
     bindkey '^A' vi-beginning-of-line
     bindkey '^E' vi-end-of-line
     bindkey '^U' kill-whole-line

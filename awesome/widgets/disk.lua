@@ -41,19 +41,16 @@ function disk.new(args)
     widget:add(widget.bar)
     widget:add(widget.label)
 
-    for i,v in ipairs{widget.label, widget.bar} do
-        local wid = v.widget or v
-        wid:buttons(awful.button({}, 1, function() vicious.force{widget} end))
-        wid:buttons(awful.button({}, 3,
-                    function()
-                        if widget.menu and widget.menu.wibox.visible then
-                            widget.menu:hide()
-                        else
-                            create_menu(widget)
-                            widget.menu:show()
-                        end
-                    end))
-    end
+    widget:buttons(awful.button({}, 1, function() vicious.force{widget} end))
+    widget:buttons(awful.button({}, 3,
+                        function()
+                            if widget.menu and widget.menu.wibox.visible then
+                                widget.menu:hide()
+                            else
+                                create_menu(widget)
+                                widget.menu:show()
+                            end
+                        end))
 
     return widget
 end

@@ -24,7 +24,7 @@ ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
 # Backgrounded programs {{{
 ifrun tilda &
 ifrun unclutter -idle 1.5 -jitter 5 -noevents &
-ifrun ~/.dropbox-dist/dropboxd &
+ifrun dropbox &
 # }}}
 
 # Synergy {{{

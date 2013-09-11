@@ -4,6 +4,13 @@ if [[ -n $DISPLAY ]]; then
     export WINEDEBUG="-all"
 fi
 
+# dircolors goodness
+if [[ -f ~/.dir_colors ]]; then
+    eval $(dircolors ~/.dir_colors)
+elif [[ -f /etc/DIR_COLORS ]]; then
+    eval $(dircolors /etc/DIR_COLORS)
+fi
+
 # less {{{
 # Originally from RichiH
 if check_com less; then

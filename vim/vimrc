@@ -18,8 +18,8 @@ set smartcase
 
 """" Tabs and indentation
 set tabstop=8
-set softtabstop=4
 set shiftwidth=4
+set smarttab
 set shiftround      " Round to a multiple of shiftwidth
 set expandtab
 set cinoptions=(0,g0,b1,l1

@@ -32,6 +32,8 @@ bindkey -M viins ${key[Backspace]} backward-delete-char
 bindkey -M viins '^L' vi-cmd-mode
 # But still let screen clearing be available
 bindkey -M vicmd '^L' clear-screen
+# Leave the minibuffer
+bindkey -M isearch '^L' accept-search
 
 # rationalise-dot {{{
 # This was written entirely by Mikael Magnusson

@@ -5,6 +5,7 @@ widgets.cpu     = require('widgets.cpu')
 widgets.disk    = require('widgets.disk')
 widgets.memory  = require('widgets.memory')
 widgets.mpd     = require('widgets.mpd')
+widgets.todo    = require('widgets.todo')
 widgets.volume  = require('widgets.volume')
 
 return widgets

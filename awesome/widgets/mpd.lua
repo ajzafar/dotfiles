@@ -12,7 +12,7 @@ end
 
 function wmpd.new(args)
     local args      = args or {}
-    local widget    = wibox.layout.fixed.horizontal()
+    local widget    = wibox.layout.align.horizontal()
     widget.time     = wibox.widget.textbox()
     widget.flags    = wibox.widget.textbox()
     widget.progress = awful.widget.progressbar()
@@ -28,7 +28,6 @@ function wmpd.new(args)
 
     widget.progress:set_background_color(beautiful.widget_bg)
     widget.progress:set_color(beautiful.widget_fg)
-    widget.progress:set_width(125)
 
     widget.volume:set_background_color(beautiful.widget_bg)
     widget.volume:set_color(beautiful.widget_fg)
@@ -40,8 +39,8 @@ function wmpd.new(args)
     widget.bottom:add(widget.flags)
     widget.vertical:add(widget.progress)
     widget.vertical:add(widget.bottom)
-    widget:add(widget.vertical)
-    widget:add(widget.volume)
+    widget:set_middle(widget.vertical)
+    widget:set_right(widget.volume)
 
     function widget.notify(updated)
         if not updated then

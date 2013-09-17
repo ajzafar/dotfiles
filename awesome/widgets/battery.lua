@@ -38,7 +38,7 @@ function battery.vicious_format(widget, args)
     widget.bar:set_value(percentage)
     widget.time = args[3]
 
-    if percentage < 10 then
+    if labels[args[1]] == "D " and percentage < 10 then
         widget.bar:set_background_color('#ff0000')
     else
         widget.bar:set_background_color(beautiful.widget_bg)

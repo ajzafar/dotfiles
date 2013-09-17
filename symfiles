@@ -1,7 +1,8 @@
+cvsignore
 fonts.conf
 gitconfig
-cvsignore
 gtkrc.mine
+i3
 irssi
 mplayer
 ncmpc

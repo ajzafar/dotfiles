@@ -57,6 +57,9 @@ case ${XSESSION:-awesome} in
     awesome)
         ifrun exec awesome
         ;;
+    i3)
+        ifrun exec i3
+        ;;
 esac
 # }}}
 

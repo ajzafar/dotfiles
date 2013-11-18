@@ -19,13 +19,13 @@ for keymap in viins vicmd; do
     bindkey '^E' vi-end-of-line
     bindkey '^U' kill-whole-line
     bindkey '^_' undo
+    bindkey '^N' down-line-or-history
+    bindkey '^P' up-line-or-history
 
     unalias bindkey
 done
 
 bindkey -M viins '^[^W' backward-delete-word
-bindkey -M viins '^N'   down-history
-bindkey -M viins '^P'   up-history
 bindkey -M viins ${key[Backspace]} backward-delete-char
 
 # Make ^L switch to vi-cmd mode

@@ -308,6 +308,12 @@ cnoremap <C-A>     <Home>
 cnoremap <ESC>b    <S-Left>
 cnoremap <ESC>f    <S-Right>
 
+" Up/down line or history
+if exists("*wildmenumode")
+    cnoremap <expr> <C-P> wildmenumode() ? '<C-P>' : '<Up>'
+    cnoremap <expr> <C-N> wildmenumode() ? '<C-N>' : '<Up>'
+endif
+
 """" Insert mode mappings
 " Some nice Emacs-like bindings. Hate me if you must.
 " Do make sure they don't mess with insert-completion

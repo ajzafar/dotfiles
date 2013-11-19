@@ -48,7 +48,7 @@ zle -N cd-zle_-
 bindkey '^[u' cd-zle_..
 bindkey '^[-' cd-zle_-
 
-# rationalise-dot {{{
+# rationalise-dot {{{1
 # This was written entirely by Mikael Magnusson
 # Basically type '...' to get '../..' with successive .'s adding /..
 function rationalise-dot {
@@ -65,4 +65,35 @@ zle -N rationalise-dot
 bindkey . rationalise-dot
 # without this, typing a . aborts incremental history search
 bindkey -M isearch . self-insert
-# }}}
+
+# irssi-down {{{1
+# This was taken entirely from Valodim <https://github.com/Valodim>
+# this function works like history-beginning-search-forward-end, except at the
+# bottom end of history, if the buffer is non-empty, it is put into history.
+# this way, commands can be "stashed away" into history without being run, just
+# like in irssi.
+function irssi-down() {
+    if [[ -n "$BUFFER" && ${(%):-'%!'} == $HISTNO ]]; then
+        print -s "$BUFFER"
+        zle end-of-history
+        BUFFER=''
+    else
+        # compatibility with history-beginning-search-forward-end
+        integer cursor=$CURSOR mark=$MARK
+        if [[ $LASTWIDGET == history-beginning-search-*-end || $LASTWIDGET == irssi-down ]]
+        then
+            CURSOR=$MARK
+        else
+            MARK=$CURSOR
+        fi
+        if zle .history-beginning-search-forward; then
+            zle .end-of-line
+        else
+            CURSOR=$cursor
+            MARK=$mark
+            return 1
+        fi
+    fi
+}
+zle -N irssi-down
+bindkey -M viins ${key[Down]} irssi-down

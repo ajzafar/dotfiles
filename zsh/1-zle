@@ -35,8 +35,7 @@ bindkey -M vicmd '^L' clear-screen
 # Leave the minibuffer
 bindkey -M isearch '^L' accept-search
 
-# These names are kind of gross.
-# Now with ^[u and ^-, we can easily change directories without repeatedly
+# Now with ^[. and ^-, we can easily change directories without repeatedly
 # typing cd .. commands while also preserving our prompt.
 function cd-wrap() {
     cd $1 > /dev/null

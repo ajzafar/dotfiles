@@ -45,7 +45,7 @@ function cd-zle_{..,-}() {
 zle -N cd-zle_..
 zle -N cd-zle_-
 
-bindkey '^[u' cd-zle_..
+bindkey '^[.' cd-zle_..
 bindkey '^[-' cd-zle_-
 
 # rationalise-dot {{{1

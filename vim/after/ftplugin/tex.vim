@@ -20,7 +20,13 @@ function! EatChar(pat)
   return (c =~ a:pat) ? '' : c
 endfunc
 
-iab <buffer> lam lambda<C-R>=EatChar('\s')<CR>
+inoreabbrev <buffer> lam lambda<C-R>=EatChar('\s')<CR>
+inoreabbrev <buffer> eps epsilon
+inoreabbrev <buffer> inv {-1}
+inoreabbrev <buffer> subs subset
+inoreabbrev <buffer> subse subseteq
+inoreabbrev <buffer> sups supset
+inoreabbrev <buffer> supse supseteq
 
 """ :make
 compiler tex

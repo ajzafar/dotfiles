@@ -4,8 +4,9 @@
     email = adnanjzafar@gmail.com
     name  = Adnan Zafar
 [branch]
-    autosetupmerge  = true
     autosetuprebase = always
+[push]
+    default = simple
 [alias]
     ci = commit
     co = checkout

@@ -326,6 +326,13 @@ for i in ['<C-U>', '<C-@>', '<C-R>']
     exe 'inoremap' i '<C-G>u' . i
 endfor
 
+"""" Select mode mappings
+" These are mostly for making things nicer with SnipMate
+
+" I'm not yet certain these are the best way to write these.
+" Enter insert mode before/after the current selection
+snoremap <C-A> <C-C>`<i
+snoremap <C-E> <C-C>`>a
 """" ^L as Esc
 noremap <C-l> <Esc>
 noremap! <C-l> <Esc>

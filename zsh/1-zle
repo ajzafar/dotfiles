@@ -38,15 +38,21 @@ bindkey -M isearch '^L' accept-search
 # These names are kind of gross.
 # Now with ^[u and ^-, we can easily change directories without repeatedly
 # typing cd .. commands while also preserving our prompt.
-function cd-zle_{..,-}() {
-    cd ${WIDGET[(ws:_:)2]} > /dev/null
+function cd-wrap() {
+    cd $1 > /dev/null
     zle reset-prompt
 }
-zle -N cd-zle_..
-zle -N cd-zle_-
+function up-dir() {
+    cd-wrap ..
+}
+function prev-dir() {
+    cd-wrap -
+}
+zle -N up-dir
+zle -N prev-dir
 
-bindkey '^[.' cd-zle_..
-bindkey '^[-' cd-zle_-
+bindkey '^[.' up-dir
+bindkey '^[-' prev-dir
 
 # rationalise-dot {{{1
 # This was written entirely by Mikael Magnusson

@@ -28,7 +28,7 @@ snippet ifdef
 	#ifdef ${1:FOO}
 		${2:#define }
 	#endif
-snippet if
+snippet if preprocessor
 	#if ${1:FOO}
 		${2}
 	#endif
@@ -41,7 +41,7 @@ snippet once
 
 	#endif /* end of include guard: $1 */
 # If Condition
-snippet if
+snippet if conditonal
 	if (${1:/* condition */}) {
 		${2:/* code */}
 	}

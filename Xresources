@@ -1,17 +1,19 @@
 URxvt.*.background: #1a1c20
 URxvt.*.foreground: #98a0aa
-URxvt.*.scrollBar: false
 URxvt.*.fading: 25
 URxvt.*.fadeColor: #1a1c20
 URxvt.*.font: xft:Menlo:size=9
 URxvt.*.boldFont: xft:Menlo:size=9
 URxvt.*.italicFont: xft:Menlo:italic:size=9
 URxvt.*.boldItalicFont: xft:Menlo:italic:size=9
-URxvt.urlLauncher: firefox
-URxvt.utmpInhibit: true
 URxvt.*.color4: #264ead
 URxvt.*.color12: #4171e2
-URxvt.perl-ext-common: selection,selection-autotransform,matcher,tabbed
+URxvt.*.scrollBar: false
+URxvt*iso14755*: false
+URxvt.perl-ext: default,tabbed,url-select
+URxvt.url-select.underline: true
+URxvt.keysym.C-M-r: perl:url-select:select_next
+URxvt*launcher: firefox -new-tab
 *.utmpInhibit: true
 *.background: #1a1c20
 *.foreground: #98a0aa

@@ -13,6 +13,7 @@ hi Normal        guifg=#98a0aa  guibg=#1a1c20
 hi Visual        guifg=fg       guibg=bg       gui=reverse
 
 hi LineNr        guifg=#8b8bcd  guibg=#0a0c10
+hi CursorLineNr  guifg=#6060e5  guibg=#0a0c10
 hi NonText       guifg=#4d98a6  guibg=#0a0c10  gui=NONE
 hi! link SpecialKey NonText
 

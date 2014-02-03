@@ -28,6 +28,9 @@ done
 bindkey -M viins '^[^W' backward-delete-word
 bindkey -M viins ${key[Backspace]} backward-delete-char
 
+# Prevent zsh from eating the next char because it thinks I'm pressing alt
+bindkey -M vicmd '^[' vi-cmd-mode
+
 # Make ^L switch to vi-cmd mode
 bindkey -M viins '^L' vi-cmd-mode
 # But still let screen clearing be available

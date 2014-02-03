@@ -350,20 +350,18 @@ cnoremap <C-L> <C-C>
 nunmap <C-L>
 
 """" Function keys
-" <F2> will be used for snipmate.
-nnoremap <F3> :cnext<CR>
-nnoremap <F4> :make<Space>
-imap <F4> <Esc><F4>
+nnoremap <F2> :make<Space>
+imap <F2> <Esc><F2>
 
 set pastetoggle=<F5>
 
 let opt_toggle = { '<F5>'  : 'paste',
                 \  '<F6>'  : 'spell',
-                \  '<F7>'  : 'toggle#FormatToggle',
-                \  '<F8>'  : 'toggle#MouseToggle',
-                \  '<F9>'  : 'list',
-                \  '<F10>' : 'relativenumber',
-                \  '<F11>' : 'hlsearch',
+                \  '<F7>'  : 'toggle#MouseToggle',
+                \  '<F8>'  : 'toggle#FormatToggle',
+                \  '<F9>'  : 'hlsearch',
+                \  '<F10>' : 'list',
+                \  '<F11>' : 'relativenumber',
                 \  '<F12>' : 'toggle#CCToggle',
                 \}
 
@@ -384,11 +382,6 @@ for [key, val] in items(opt_toggle)
 endfor
 
 """ Plugins
-"""" SnipMate
-" Reread snippets
-nnoremap <F2> :ReloadSnippets<CR>
-imap <F2> <C-O><F2>
-
 """" Commentary
 nmap <leader>c  <Plug>Commentary
 xmap <leader>c  <Plug>Commentary

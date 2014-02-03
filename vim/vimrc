@@ -318,8 +318,8 @@ endif
 """" Insert mode mappings
 " Some nice Emacs-like bindings. Hate me if you must.
 " Do make sure they don't mess with insert-completion
-inoremap <expr> <C-E> pumvisible() ? '<C-E>' : '<C-O>$'
-inoremap <C-a> <C-o>^
+inoremap <expr> <C-E> pumvisible() ? '<C-E>' : '<C-]><C-O>$'
+inoremap <C-A> <C-]><C-O>^
 
 " Some actions in insert mode one might hit accidentally or may not do what one
 " meant. Let's make some of these actions undoable at the very least.
@@ -335,17 +335,19 @@ endfor
 snoremap <C-A> <C-C>`<i
 snoremap <C-E> <C-C>`>a
 """" ^L as Esc
-noremap <C-l> <Esc>
-noremap! <C-l> <Esc>
+noremap <C-L> <Esc>
+noremap! <C-L> <Esc>
+" Make sure to trigger any abbreviations before leaving insert mode
+inoremap <C-L> <C-]><Esc>
 " In select mode, mapmode-v mappings go to visual mode, trigger the map, then go
 " back to select mode, making the above map do nothing. So we make a separate
 " map. See :h Select-mode-mapping
-snoremap <C-l> <Esc>
+snoremap <C-L> <Esc>
 " In mapmode-c, <Esc> runs the command as typed, so we use <C-c>. See :h c_<Esc>
-cnoremap <C-l> <C-c>
+cnoremap <C-L> <C-C>
 " Esc doesn't really do anything in normal mode, so unmap <C-l> so we can still
 " use it to redraw
-nunmap <C-l>
+nunmap <C-L>
 
 """" Function keys
 " <F2> will be used for snipmate.

@@ -1,0 +1,49 @@
+# vim:ft=conkyrc:sw=2:
+
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+
+total_run_times 0
+update_interval 1.0
+
+# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units yes
+
+# How strict should if_up be when testing an interface for being up? The value
+# is one of up, link or address, to check for the interface being solely up,
+# being up and having link or being up, having link and an assigned IP address.
+if_up_strictness address
+
+# Add spaces to keep things from moving about?  This only affects certain
+# objects. use_spacer should have an argument of left, right, or none
+use_spacer none
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale no
+
+# number of cpu samples to average set to 1 to disable averaging
+cpu_avg_samples 2
+
+mpd_host deskbert
+# FIXME: Is there a way to load this using $XDG_CONFIG_HOME or something?
+lua_load ~/.config/i3/conky/escape.lua
+
+# Stuff after 'TEXT' will be formatted on screen
+TEXT
+,[
+  { "full_text" : "${eval ${lua escape ${mpd_smart}}} [${mpd_elapsed}/${mpd_length}]" },
+  { "full_text" : "/ ${fs_free /} free" },
+  { "full_text" : "/home ${fs_free /home} free" },
+  { "full_text" : "CPU: ${cpu 0}%",
+    "min_width" : "CPU: 000%" },
+  { "full_text" : "RAM ${memperc}%",
+    ${if_match ${memperc} > 80}
+    "color" : "\#ff0024",
+    "urgent" : true,
+    ${endif}
+    "min_width" : "RAM 000%" },
+  { "full_text" : "${time %a %x %T}" }
+]

@@ -315,7 +315,7 @@ cnoremap <ESC>f    <S-Right>
 " Up/down line or history
 if exists("*wildmenumode")
     cnoremap <expr> <C-P> wildmenumode() ? '<C-P>' : '<Up>'
-    cnoremap <expr> <C-N> wildmenumode() ? '<C-N>' : '<Up>'
+    cnoremap <expr> <C-N> wildmenumode() ? '<C-N>' : '<Down>'
 endif
 
 """" Insert mode mappings

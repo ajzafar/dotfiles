@@ -18,7 +18,8 @@ ifrun feh -z --bg-fill ${XDG_CONFIG_HOME}/backgrounds
 
 # Forking programs {{{
 ifrun urxvtd -q -o -f
-ifrun conky -d -c ${XDG_CONFIG_HOME}/conkyrc-$(hostname)
+conkyrc=${XDG_CONFIG_HOME}/conkyrc-$(hostname)
+[[ -f $conkyrc ]] && ifrun conky -d -c $conkyrc
 ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
 # }}}
 

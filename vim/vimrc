@@ -214,6 +214,9 @@ if has("autocmd")
     " Files in ~/.config/zsh are ft=zsh
     au BufNewFile,BufRead ~/.config/zsh/* setl ft=zsh
 
+    " Normally I map <CR> to <C-]>. This interferes with the cmdline-window
+    au CmdwinEnter * nnoremap <buffer> <CR> <CR>
+
     augroup END
 endif
 

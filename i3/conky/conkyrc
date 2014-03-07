@@ -31,10 +31,12 @@ mpd_host deskbert
 # FIXME: Is there a way to load this using $XDG_CONFIG_HOME or something?
 lua_load ~/.config/i3/conky/escape.lua
 lua_load ~/.config/i3/conky/mpd.lua
+lua_load ~/.config/i3/conky/todo.lua
 
 # Stuff after 'TEXT' will be formatted on screen
 TEXT
 ,[
+  { "full_text" : "${lua escape ${lua todo}}" },
   { "full_text" : "${lua cursong}[${mpd_elapsed}/${mpd_length}]" },
   { "full_text" : "/ ${fs_free /} free" },
   { "full_text" : "/home ${fs_free /home} free" },

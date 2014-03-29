@@ -24,7 +24,7 @@ cyclohexane
 subring
 irreducibles
 monic
-Abelian
+abelian
 surjective
 outlier
 vertices
@@ -41,3 +41,4 @@ preimage
 coset
 cosets
 melee
+subcover

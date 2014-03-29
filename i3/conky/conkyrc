@@ -36,7 +36,7 @@ lua_load ~/.config/i3/conky/todo.lua
 # Stuff after 'TEXT' will be formatted on screen
 TEXT
 ,[
-  { "full_text" : "${lua escape ${lua todo}}" },
+  { "full_text" : "${lua json_escape ${lua todo}}" },
   { "full_text" : "${lua cursong}[${mpd_elapsed}/${mpd_length}]" },
   { "full_text" : "/ ${fs_free /} free" },
   { "full_text" : "/home ${fs_free /home} free" },

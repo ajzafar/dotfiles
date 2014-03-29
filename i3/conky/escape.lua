@@ -3,6 +3,6 @@
 --
 -- So far that means escape double quotes
 
-function conky_escape(str)
+function conky_json_escape(str)
     return conky_parse(str):gsub('"', '\\"')
 end

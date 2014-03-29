@@ -88,7 +88,7 @@ zstyle ':completion:*:cd:*' ignored-patterns '(*/)#lost+found'
     zstyle ':completion:*:users' ignored-patterns ${ignore_users}
 }
 
-zstyle ':completion:*:*:vim:*:*files' ignored-patterns '*.(aux|log|pdf)'
+zstyle ':completion:*:*:vi(m|ew):*:*files' ignored-patterns '*.(aux|log|pdf)' '*/tags'
 
 autoload -Uz compinit; compinit
 

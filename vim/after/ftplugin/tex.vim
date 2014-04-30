@@ -4,9 +4,7 @@
 setl shiftwidth=2
 setl softtabstop=2
 
-setl formatoptions+=c
-setl formatoptions+=o
-setl formatoptions+=r
+setl formatoptions+=croq
 setl formatoptions+=t
 let &l:flp = '\v\\%(item|prob)%([\[{]\ze.{-}[\]}])?\s*'
 

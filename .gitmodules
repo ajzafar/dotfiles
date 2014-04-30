@@ -43,3 +43,6 @@
 [submodule "vim/dep-bundle/nexus"]
 	path = vim/dep-bundle/nexus
 	url = https://github.com/dahu/Nexus.git
+[submodule "vim/bundle/exchange"]
+	path = vim/bundle/exchange
+	url = https://github.com/tommcdo/vim-exchange.git

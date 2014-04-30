@@ -21,7 +21,7 @@ for artist in *; do
         for album in $artist/*; do
             old_album=$dest/${album:t}
 
-            $dry zcover $album
+            $dry zcover -i $album
             if [[ -d $old_album ]]; then
                 $dry feh $old_album/cover.jpg $album/cover.jpg(N)
                 $dry read -q "preserve?Preserve art for $album (y/n): "

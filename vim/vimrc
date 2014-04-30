@@ -107,6 +107,30 @@ if exists('+rnu')
     set numberwidth=1
 endif
 
+set laststatus=2
+let &statusline = '%<%#Folded# %n %## %f ' " bufnr and filename
+let &stl .= '%h%w%m%r' " help, preview, modifi{ed,able}, readonly + spacer
+let &stl .= '%{(&ro || &pvw || &mod || !&ma || &bt == "help") ? " " : ""}'
+let &stl .= '%#LineNr# ' " change color
+let &stl .= '%{STLSnipMate()}' " SnipMate stops/count if available
+let &stl .= '%{STLQuickfix()}%a%=' " Qucikfix, argument list, end of left matter
+let &stl .= '%{fugitive#head(7)}    ' " branch name or commit if detached
+let &stl .= '%{&filetype}    ' " filetype (no extra characters)
+let &stl .= '%-14.(%l,%c%V %) %P ' " line, col, percent through file
+
+function! STLQuickfix()
+    return exists('w:quickfix_title') ? w:quickfix_title : ''
+endfunction
+
+function! STLSnipMate()
+    let state = get(b:, 'snip_state', {})
+    if exists('state.stop_no') && exists('state.stop_count')
+        return printf('%d/%d', state.stop_no, state.stop_count)
+    else
+        return ''
+    endif
+endfunction
+
 """" Moving/editing
 set backspace=indent,eol,start  " Allow backspacing over everything in insert mode
 set scrolloff=2                 " Show 2 lines above/below cursor when possible

@@ -13,8 +13,8 @@ hi Normal        guifg=#98a0aa  guibg=#1a1c20
 hi Visual        guifg=fg       guibg=bg       gui=reverse
 
 hi LineNr        guifg=#8b8bcd  guibg=#0a0c10
-hi CursorLineNr  guifg=#6060e5  guibg=#0a0c10
 hi NonText       guifg=#4d98a6  guibg=#0a0c10  gui=NONE
+hi! link CursorLineNr LineNr
 hi! link SpecialKey NonText
 
 hi Error         guifg=#ffffff  guibg=#6e2e2e
@@ -23,7 +23,7 @@ hi IncSearch     guifg=#303030  guibg=#cd8b60  gui=bold
 hi MatchParen    guifg=#303030  guibg=#cd8b60
 
 hi StatusLine    guifg=NONE     guibg=NONE     gui=reverse
-hi StatusLineNC  guifg=#b9b9b9  guibg=#292936  gui=NONE
+hi StatusLineNC  guifg=#98a0aa  guibg=#3f404d  gui=NONE
 hi! link VertSplit StatusLineNC
 
 hi Folded        guifg=Cyan     guibg=#101216

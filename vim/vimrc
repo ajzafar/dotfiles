@@ -427,6 +427,13 @@ let g:kweasy_nolist = 1
 nmap <leader>f <Plug>KweasyJump
 nmap <leader>/ <Plug>KweasySearch
 
+"""" SnipMate
+" Empty a stop and move to the next
+" FIXME: Use <Plug>snipMateNext
+smap <BS> x<BS><Plug>snipMateNextOrTrigger
+" The previous map means <Tab> is no longer mapped by SnipMate in select mode,
+" so map it.
+smap <Tab> <Plug>snipMateNextOrTrigger
 
 "" taken from godlygeek's vimrc. Pretty nice way to handle folding.
 "" vim:fdm=expr

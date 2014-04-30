@@ -353,7 +353,7 @@ cnoremap <C-L> <C-C>
 nunmap <C-L>
 
 """" Function keys
-nnoremap <F2> :make<Space>
+nnoremap <expr> <F2> exists('b:make_map') ? b:make_map : ':make '
 imap <F2> <Esc><F2>
 
 set pastetoggle=<F5>

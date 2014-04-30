@@ -30,10 +30,10 @@ inoreabbrev <buffer> supse supseteq
 compiler tex
 
 if ! ( filereadable('Makefile') || filereadable('makefile') )
-    nnoremap <buffer> <F2> :make! %:r<CR>
     let &mp = 'pdf' . &mp
+    let b:make_map = ":make! %:r\<CR>"
 else
-    nnoremap <buffer> <F2> :make!<CR>
+    let b:make_map = ":make!\<CR>"
 endif
 
 """ Plugin settings

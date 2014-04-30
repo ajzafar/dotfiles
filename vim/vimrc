@@ -1,6 +1,7 @@
-" The general layout was taken from godlygeek's vimrc. Most of what I've taken
-" has been labeled.
-"
+" The general layout was taken from godlygeek's vimrc.
+" Most of what I've taken from other places has been labeled.
+scriptencoding utf-8
+
 " Be vim, not vi. Probably redundant since the presence of a vimrc sets nocp,
 " but I like to be sure. This must be first, because it changes other options as
 " a side effect.
@@ -8,7 +9,7 @@ set nocompatible
 
 """ Pathogen
 runtime pathogen/autoload/pathogen.vim
-call pathogen#infect()
+execute pathogen#infect('bundle/{}', 'dep-bundle/{}')
 
 """ Vim Settings
 """" Patterns and search behavior
@@ -76,7 +77,7 @@ set spellfile+=~/.vim/spell/acro.utf-8.add
 set formatoptions=
 set formatoptions+=n " format based on 'flp'
 set formatoptions+=1 " Break before one-letter words
-let &formatlistpat = '^\s*[0-9*-]\+[\]:.)}\t ]\s*'
+let &formatlistpat = '^\s*\([0-9]\+[\]:.)}\t]\|[-*+]\s\)\s*'
 set textwidth=80
 set nojoinspaces
 
@@ -144,7 +145,7 @@ else
     set listchars=tab:>-,trail:-,nbsp:-
 endif
 
-if !&readonly  " Don't use 'list' when invoked as view
+if !&readonly " Don't use 'list' when invoked as view
     set list
 endif
 
@@ -361,6 +362,7 @@ endfor
 " Enter insert mode before/after the current selection
 snoremap <C-A> <C-C>`<i
 snoremap <C-E> <C-C>`>a
+
 """" ^L as Esc
 noremap <C-L> <Esc>
 noremap! <C-L> <Esc>

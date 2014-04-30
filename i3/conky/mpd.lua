@@ -7,10 +7,13 @@ function conky_cursong()
         info[v] = conky_parse('$mpd_' .. v)
     end
 
-    if info['file'] ~= file then
+    if info['file'] ~= '(null)' and info['file'] ~= file then
         file = info['file']
-        os.execute(pango_escape(string.format("notify-send '%s' '%s\n%s: %s'",
-                info['artist'], info['album'], info['track'], info['title'])))
+        os.execute(string.format([[notify-send '%s' '%s\n%s: %s']],
+                escape_quote(info['artist']),
+                escape_quote(info['album']),
+                info['track'],
+                escape_quote(info['title'])))
     end
 
     return ''
@@ -18,4 +21,8 @@ end
 
 function pango_escape(str)
     return str:gsub('&', '&amp;')
+end
+
+function escape_quote(str)
+    return str:gsub("'", "'\\''")
 end

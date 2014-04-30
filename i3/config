@@ -21,10 +21,10 @@ for_window [class="Plugin-container" instance="plugin-container"] fullscreen dis
 for_window [class="Skype"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Wine"] floating enable
-# for_window [class="Tilda"] move scratchpad
-# bindsym Print scratchpad show
 for_window [class="Xfce4-notifyd"] floating enable; border pixel 0; focus mode_toggle
 
+exec urxvt -name 'azscratch' -e tmux attach -t scratch
+for_window [instance="azscratch"] move scratchpad
 
 # Key bindings {{{1
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -39,10 +39,10 @@ bindsym $mod+Ctrl+x kill
 
 # start dmenu (a program launcher)
 bindsym $mod+Mod1+r exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# scratchpad
+bindsym $mod+Ctrl+s move scratchpad
+bindsym $mod+grave scratchpad show
 
 # change focus
 bindsym $mod+h focus left

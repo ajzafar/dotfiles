@@ -1,0 +1,3 @@
+# Set PATH/path to be unique, then add ~/bin
+typeset -U path
+path+=( ~/bin )

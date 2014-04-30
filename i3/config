@@ -14,14 +14,17 @@ set $mod Mod4
 font pango:Menlo 10
 
 # Window rules {{{1
-for_window [class="Plugin-container" instance="plugin-container"] fullscreen disable
+
 for_window [class="feh"] floating enable
 for_window [class="mplayer2"] floating enable
+for_window [class="Plugin-container" instance="plugin-container"] fullscreen disable
 for_window [class="Skype"] floating enable
+for_window [class="Steam"] floating enable
 for_window [class="Wine"] floating enable
-for_window [class="Xfce4-notifyd"] floating enable; border pixel 0; move position 0 px 1500 px
 # for_window [class="Tilda"] move scratchpad
 # bindsym Print scratchpad show
+for_window [class="Xfce4-notifyd"] floating enable; border pixel 0; focus mode_toggle
+
 
 # Key bindings {{{1
 # Use Mouse+$mod to drag floating windows to their wanted position

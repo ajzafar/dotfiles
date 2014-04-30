@@ -37,3 +37,9 @@
 [submodule "vim/bundle/fanfingtastic"]
 	path = vim/bundle/fanfingtastic
 	url = https://github.com/dahu/vim-fanfingtastic.git
+[submodule "vim/bundle/kweasy"]
+	path = vim/bundle/kweasy
+	url = https://github.com/dahu/vim-KWEasy.git
+[submodule "vim/dep-bundle/nexus"]
+	path = vim/dep-bundle/nexus
+	url = https://github.com/dahu/Nexus.git

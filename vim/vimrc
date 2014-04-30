@@ -421,6 +421,12 @@ let g:CSApprox_hook_post = [
             \ ]
 let g:CSApprox_attr_map = { 'bold' : '', 'italic' : '', 'sp' : 'fg' }
 
+"""" Kweasy
+let g:kweasy_nolist = 1
+
+nmap <leader>f <Plug>KweasyJump
+nmap <leader>/ <Plug>KweasySearch
+
 
 "" taken from godlygeek's vimrc. Pretty nice way to handle folding.
 "" vim:fdm=expr

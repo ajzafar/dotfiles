@@ -4,6 +4,7 @@ syntax: glob
 .*
 !.gitignore
 *~
+Session.vim
 
 ## ctags and etags
 tags

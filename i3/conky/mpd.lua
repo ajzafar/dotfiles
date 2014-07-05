@@ -11,9 +11,9 @@ function conky_cursong()
         file = info['file']
         os.execute(string.format([[notify-send '%s' '%s\n%s: %s']],
                 escape_quote(info['artist']),
-                escape_quote(info['album']),
+                pango_escape(escape_quote(info['album'])),
                 info['track'],
-                escape_quote(info['title'])))
+                pango_escape(escape_quote(info['title']))))
     end
 
     return ''
@@ -23,6 +23,7 @@ function pango_escape(str)
     return str:gsub('&', '&amp;')
 end
 
+-- Replace ' with '\''
 function escape_quote(str)
     return str:gsub("'", "'\\''")
 end

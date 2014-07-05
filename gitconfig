@@ -13,6 +13,8 @@
     st = status
     dc = diff --cached
     di = diff
+    lg = log --graph --format=format:'%C(yellow)%h%C(reset) - %C(bold blue)(%ar) %aD%C(reset) %C(auto)%d%C(reset)%n          %s %N- %an%n'
+    lgs = log --graph --oneline
 [core]
     autocrlf     = input
     excludesfile = ~/.cvsignore

@@ -21,7 +21,7 @@ for_window [class="Plugin-container" instance="plugin-container"] fullscreen dis
 for_window [class="Skype"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Wine"] floating enable
-for_window [class="Xfce4-notifyd"] floating enable; border pixel 0; focus mode_toggle
+for_window [class="Xfce4-notifyd"] floating enable; border none; focus mode_toggle
 
 exec urxvt -name 'azscratch' -e tmux attach -t scratch
 for_window [instance="azscratch"] move scratchpad
@@ -76,6 +76,11 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
+
+# borders
+bindsym $mod+d border none
+bindsym $mod+Ctrl+d border normal
+bindsym $mod+Shift+d border 1pixel
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking

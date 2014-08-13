@@ -10,10 +10,12 @@ URxvt.*.color4: #264ead
 URxvt.*.color12: #4171e2
 URxvt.*.scrollBar: false
 URxvt*iso14755*: false
-URxvt.perl-ext: default,tabbed,url-select
+URxvt.perl-ext: default,tabbed,url-select,notify
 URxvt.url-select.underline: true
 URxvt.keysym.C-M-r: perl:url-select:select_next
 URxvt*launcher: firefox -new-tab
+URxvt.urgentOnBell: true
+URxvt.keysym.C-M-n: perl:notify:toggle
 *.utmpInhibit: true
 *.background: #1a1c20
 *.foreground: #98a0aa

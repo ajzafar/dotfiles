@@ -1,0 +1,30 @@
+#! perl -w
+# Taken from <https://phyks.me/2014/02/notif_weechat_urxvt.html>
+
+my $status = 1;
+
+sub on_user_command {
+  my($term, $command) = @_;
+
+  if ($command eq "notify:toggle") {
+    $status = 1 - $status;
+
+    if ($status eq 1) {
+        system("notify-send", ("Notifications activated"))
+    } else {
+        system("notify-send", ("Notifications deactivated"))
+    }
+  }
+}
+
+sub on_osc_seq_perl {
+  my ($term, $osc, $resp) = @_;
+
+  if ($status eq 0) {
+      return;
+  }
+
+  if ($osc =~ /^notify;(\S+);(.*)$/) {
+    system("notify-send", ($1, $2));
+  }
+}

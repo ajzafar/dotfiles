@@ -8,6 +8,9 @@ ifrun() { # {{{
     which $1 > /dev/null 2>&1 && $exe "$@";
 } # }}}
 
+# Environment {{{1
+export URXVT_PERL_LIB="${XDG_CONFIG_HOME}/urxvt-perl"
+
 # Single run programs {{{
 ifrun xrdb -merge ${XDG_CONFIG_HOME}/Xresources
 ifrun xsetroot -cursor_name Vienna3

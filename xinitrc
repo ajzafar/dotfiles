@@ -11,36 +11,30 @@ ifrun() { # {{{
 # Environment {{{1
 export URXVT_PERL_LIB="${XDG_CONFIG_HOME}/urxvt-perl"
 
-# Single run programs {{{
+# Programs {{{1
 ifrun xrdb -merge ${XDG_CONFIG_HOME}/Xresources
 ifrun xsetroot -cursor_name Vienna3
 ifrun xset mouse 1
 ifrun xmodmap ${XDG_CONFIG_HOME}/Xmodmap
 ifrun feh -z --bg-fill ${XDG_CONFIG_HOME}/backgrounds
-# }}}
 
-# Forking programs {{{
 ifrun urxvtd -q -o -f
 conkyrc=${XDG_CONFIG_HOME}/conkyrc-$(hostname)
 [[ -f $conkyrc ]] && ifrun conky -d -c $conkyrc
 ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
-# }}}
 
-# Backgrounded programs {{{
 ifrun unclutter -idle 1.5 -jitter 5 -noevents &
 ifrun dropbox &
-# }}}
 
-# Synergy {{{
+# Synergy
 synergy_host='mesabert'
 if test "X$(hostname)" == "X${synergy_host}"; then
     ifrun synergys
 else
     ifrun synergyc $synergy_host
 fi
-# }}}
 
-# WM selection {{{
+# WM selection {{{1
 case ${XSESSION:-awesome} in
     flux*)
         ifrun exec startfluxbox

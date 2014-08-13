@@ -1,26 +1,33 @@
-URxvt.*.background: #1a1c20
-URxvt.*.foreground: #98a0aa
-URxvt.*.fading: 25
-URxvt.*.fadeColor: #1a1c20
-URxvt.*.font: xft:Menlo:size=9
-URxvt.*.boldFont: xft:Menlo:size=9
-URxvt.*.italicFont: xft:Menlo:italic:size=9
-URxvt.*.boldItalicFont: xft:Menlo:italic:size=9
-URxvt.*.color4: #264ead
-URxvt.*.color12: #4171e2
-URxvt.*.scrollBar: false
-URxvt*iso14755*: false
+*.utmpInhibit: true
+*.background: #1a1c20
+*.foreground: #98a0aa
+
+gnuplot*background: #ffffff
+gnuplot*foreground: #000000
+
+URxvt.background: #1a1c20
+URxvt.foreground: #98a0aa
+URxvt.fading: 25
+URxvt.fadeColor: #1a1c20
+URxvt.color4: #264ead
+URxvt.color12: #4171e2
+
+URxvt.font: xft:Menlo:size=9
+URxvt.boldFont: xft:Menlo:size=9
+URxvt.italicFont: xft:Menlo:italic:size=9
+URxvt.boldItalicFont: xft:Menlo:italic:size=9
+
+URxvt.scrollBar: false
+URxvt.iso14755*: false
+
 URxvt.perl-ext: default,tabbed,url-select,notify
 URxvt.url-select.underline: true
+URxvt.url-select.button: 3
 URxvt.keysym.C-M-r: perl:url-select:select_next
 URxvt*launcher: firefox -new-tab
 URxvt.urgentOnBell: true
 URxvt.keysym.C-M-n: perl:notify:toggle
-*.utmpInhibit: true
-*.background: #1a1c20
-*.foreground: #98a0aa
-gnuplot*background: #ffffff
-gnuplot*foreground: #000000
+
 Xcursor.theme: Vienna3
 Xcursor.theme_core: true
 Xcursor.size: 16

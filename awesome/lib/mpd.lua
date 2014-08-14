@@ -12,42 +12,50 @@
 -- based on a netcat version from Steve Jothen <sjothen at gmail dot com>
 -- (see http://modeemi.fi/~tuomov/repos/ion-scripts-3/scripts/mpd.lua)
 --
---
--- Copyright (c) 2008-2009, Alexandre Perrin <kaworu@kaworu.ch>
--- All rights reserved.
+-- Copyright (c) 2008-2014
+--    Alexandre Perrin <alex@kaworu.ch>.  All rights reserved.
 --
 -- Redistribution and use in source and binary forms, with or without
 -- modification, are permitted provided that the following conditions
 -- are met:
 --
 -- 1. Redistributions of source code must retain the above copyright
---    notice, this list of conditions and the following disclaimer.
+--    notice, this list of conditions and the following disclaimer
+--    in this position and unchanged.
+--
 -- 2. Redistributions in binary form must reproduce the above copyright
 --    notice, this list of conditions and the following disclaimer in the
 --    documentation and/or other materials provided with the distribution.
--- 4. Neither the name of the author nor the names of its contributors
---    may be used to endorse or promote products derived from this software
---    without specific prior written permission.
 --
--- THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
--- ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
--- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
--- ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
--- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
--- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
--- OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
--- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
--- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
--- OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
--- SUCH DAMAGE.
+-- THIS SOFTWARE IS PROVIDED BY THE AUTHOR(S) ``AS IS'' AND ANY EXPRESS OR
+-- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+-- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+-- EVENT SHALL THE AUTHOR(S) BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+-- SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+-- PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+-- OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+-- WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+-- OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+-- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+--
+-- Modifications by Adnan Zafar:
+-- * Remove socket and retry timeouts
+-- * Close sockets when possible
+-- * Separate connection code from send() function
 
-local socket = require('socket')
+socket = require("socket")
+
+-- Grab env
+local socket = socket
+local string = string
+local tonumber = tonumber
+local setmetatable = setmetatable
+local os = os
 
 -- Music Player Daemon Lua library.
-_M = {}
 
-_M.MPD = { }
-_M.MPD_mt = { __index = _M.MPD }
+MPD = {
+} MPD_mt = { __index = MPD }
 
 -- create and return a new mpd client.
 -- the settings argument is a table with theses keys:
@@ -57,7 +65,7 @@ _M.MPD_mt = { __index = _M.MPD }
 --      password: the server's password (default nil, no password)
 --      timeout:  time in sec to wait for connect() and receive() (default 1)
 --      retry:    time in sec to wait before reconnect if error (default 60)
-function _M.new(settings)
+local function new(settings)
     local client = {}
     if settings == nil then settings = {} end
 
@@ -65,14 +73,41 @@ function _M.new(settings)
     client.port     = settings.port or 6600
     client.desc     = settings.desc or client.hostname
     client.password = settings.password
-    client.timeout  = settings.timeout or 1
-    client.retry    = settings.retry or 60
 
-    setmetatable(client, _M.MPD_mt)
+    setmetatable(client, MPD_mt)
 
     return client
 end
 
+local function connect(mpd)
+    if mpd.socket then
+        mpd.socket:close()
+    end
+    mpd.socket = socket.tcp()
+
+    mpd.connected, err = mpd.socket:connect(mpd.hostname, mpd.port)
+    if not mpd.connected then
+        return { errormsg = err }
+    end
+
+    -- Read the server's hello message
+    local line = mpd.socket:receive("*l")
+    if not line:match("^OK MPD") then -- Invalid hello message?
+        mpd.connected = false
+        return { errormsg = string.format("invalid hello message: %s", line) }
+    else
+        _, _, mpd.version = string.find(line, "^OK MPD ([0-9.]+)")
+    end
+
+    -- send the password if needed
+    if mpd.password then
+        local rsp = mpd:send(string.format("password %s", mpd.password))
+        if rsp.errormsg then
+            return rsp
+        end
+    end
+
+end
 
 -- calls the action and returns the server's response.
 --      Example: if the server's response to "status" action is:
@@ -90,52 +125,29 @@ end
 --      table is:
 --              { errormsg = "could not connect" }
 --
-function _M.MPD:send(action)
+function MPD:send(action)
     local command = string.format("%s\n", action)
     local values = {}
 
-    -- connect to MPD server if not already done.
     if not self.connected then
-        local now = os.time();
-        if not self.last_try or (now - self.last_try) > self.retry then
-            self.socket = socket.tcp()
-            self.socket:settimeout(self.timeout, 't')
-            self.last_try = os.time()
-            self.connected = self.socket:connect(self.hostname, self.port)
-            if not self.connected then
-                return { errormsg = "could not connect" }
-            end
-
-            -- Read the server's hello message
-            local line = self.socket:receive("*l")
-            if not line:match("^OK MPD") then -- Invalid hello message?
-                self.connected = false
-                return { errormsg = string.format("invalid hello message: %s", line) }
-            else
-                _, _, self.version = string.find(line, "^OK MPD ([0-9.]+)")
-            end
-
-            -- send the password if needed
-            if self.password then
-                local rsp = self:send(string.format("password %s", self.password))
-                if rsp.errormsg then
-                    return rsp
-                end
-            end
-        else
-            local retry_sec = self.retry - (now - self.last_try)
-            return { errormsg = string.format("could not connect (retrying in %d sec)", retry_sec) }
+        ret = connect(self)
+        if ret then
+            print("Unable to connect: " .. ret.errormsg)
         end
     end
 
     self.socket:send(command)
 
-    local line = ""
-    while not line:match("^OK$") do
-        line = self.socket:receive("*l")
-        if not line then -- closed,timeout (mpd killed?)
-            self.connected = false
-            return self:send(action)
+    repeat
+        local line, err, extra = self.socket:receive("*l")
+
+        if not line then -- socket error
+            if err == "closed" then
+                self.connected = false
+                return { errormsg = "Socket error (MPD killed?): " .. err }
+            else -- timeout
+                return self:send(action)
+            end
         end
 
         if line:match("^ACK") then
@@ -146,35 +158,35 @@ function _M.MPD:send(action)
         if key then
             values[string.lower(key)] = value
         end
-    end
+    until line:match("^OK")
 
     return values
 end
 
-function _M.MPD:next()
+function MPD:next()
     return self:send("next")
 end
 
-function _M.MPD:previous()
+function MPD:previous()
     return self:send("previous")
 end
 
-function _M.MPD:stop()
+function MPD:stop()
     return self:send("stop")
 end
 
 -- no need to check the new value, mpd will set the volume in [0,100]
-function _M.MPD:volume_up(delta)
+function MPD:volume_up(delta)
     local stats = self:send("status")
     local new_volume = tonumber(stats.volume) + delta
     return self:send(string.format("setvol %d", new_volume))
 end
 
-function _M.MPD:volume_down(delta)
+function MPD:volume_down(delta)
     return self:volume_up(-delta)
 end
 
-function _M.MPD:toggle_random()
+function MPD:toggle_random()
     local stats = self:send("status")
     if tonumber(stats.random) == 0 then
         return self:send("random 1")
@@ -183,7 +195,7 @@ function _M.MPD:toggle_random()
     end
 end
 
-function _M.MPD:toggle_repeat()
+function MPD:toggle_repeat()
     local stats = self:send("status")
     if tonumber(stats["repeat"]) == 0 then
         return self:send("repeat 1")
@@ -192,7 +204,7 @@ function _M.MPD:toggle_repeat()
     end
 end
 
-function _M.MPD:toggle_play()
+function MPD:toggle_play()
     if self:send("status").state == "stop" then
         return self:send("play")
     else
@@ -200,13 +212,13 @@ function _M.MPD:toggle_play()
     end
 end
 
-function _M.MPD:seek(delta)
+function MPD:seek(delta)
     local stats   = self:send("status")
     local current = stats.time:match("^(%d+):")
     return self:send(string.format("seek %d %d", stats.songid, current + delta))
 end
 
-function _M.MPD:protocol_version()
+function MPD:protocol_version()
     if not self.version then
         -- send a "status" command to init the connection
         local s = self:send("status")
@@ -217,6 +229,6 @@ function _M.MPD:protocol_version()
     return self.version
 end
 
-return _M
+return { new = new }
 
 -- vim:filetype=lua:tabstop=8:shiftwidth=4:expandtab:

@@ -21,8 +21,7 @@ mpd_cover_size      = 300
 host                = awful.util.pread('hostname'):match('%S*')
 mpd_pass, mpd_host  = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
 mpd_con             = mpd.new{ hostname = mpd_host,
-                               password = mpd_pass,
-                               retry    = 20 }
+                               password = mpd_pass }
 mpd_notify_id       = 0
 mpd_notify_position = 'bottom_left'
 

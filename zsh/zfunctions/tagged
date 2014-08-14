@@ -35,4 +35,4 @@ for artist in *; do
     fi
 done
 
-rmdir --ignore-fail-on-non-empty *
+$dry rmdir --ignore-fail-on-non-empty *

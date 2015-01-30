@@ -17,13 +17,15 @@ confdir             = awful.util.getdir('config')
 terminal            = "urxvt"
 editor_cmd          = terminal .. " -e " .. os.getenv("EDITOR")
 modkey              = "Mod4"
-mpd_cover_size      = 300
+mpd_cover_size      = 200
 host                = awful.util.pread('hostname'):match('%S*')
 mpd_pass, mpd_host  = string.match(os.getenv('MPD_HOST'), '(.+)@(.+)')
 mpd_con             = mpd.new{ hostname = mpd_host,
                                password = mpd_pass }
 mpd_notify_id       = 0
 mpd_notify_position = 'bottom_left'
+
+naughty.config.defaults.position = 'bottom_left'
 
 function load_theme(name)
     beautiful.init(string.format('%s/themes/%s/theme.lua', confdir, name))

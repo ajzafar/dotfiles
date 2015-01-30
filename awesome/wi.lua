@@ -7,7 +7,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 mytextclock = awful.widget.textclock("%A %x %k:%M:%S", 1)
 mytextclock:buttons(awful.button({ }, 1, function() naughty.notify{ text = awful.util.pread("date +'%s'") } end ))
-botclocks = awful.widget.textclock(' <span color="black">|</span>   %T   <span color="black">|</span> ')
+botclocks = awful.widget.textclock(' <span color="black">|</span>   %k:%M   <span color="black">|</span> ')
 
 -- Create a systray
 mysystray = wibox.widget.systray()

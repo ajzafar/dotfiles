@@ -14,7 +14,7 @@ vicious         = require('vicious')
 mpd             = require('lib.mpd')
 
 confdir             = awful.util.getdir('config')
-terminal            = "urxvtc"
+terminal            = "urxvt"
 editor_cmd          = terminal .. " -e " .. os.getenv("EDITOR")
 modkey              = "Mod4"
 mpd_cover_size      = 300

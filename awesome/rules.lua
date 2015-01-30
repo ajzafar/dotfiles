@@ -5,6 +5,7 @@ vid_properties = { floating = true,
                    tag = tags[screen.count()][1],
                    ontop = true,
                  }
+
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -73,4 +74,8 @@ awful.rules.rules = {
       properties = { floating = true, } },
     { rule = { class = "Huludesktop.bin" },
       properties = vid_properties, },
+    { rule = { instance = "azscratch" },
+      properties = { tag = tags[1][9],
+                     ontop = true,
+                     floating = true, } },
 }

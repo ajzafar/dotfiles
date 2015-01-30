@@ -78,4 +78,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][9],
                      ontop = true,
                      floating = true, } },
+    { rule = { class = "Plugin-container" },
+      properties = { focus = true,
+                     floating = true, },
+      callback = function(c) c.fullscreen = true end },
 }

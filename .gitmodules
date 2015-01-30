@@ -46,3 +46,12 @@
 [submodule "vim/bundle/exchange"]
 	path = vim/bundle/exchange
 	url = https://github.com/tommcdo/vim-exchange.git
+[submodule "vim/bundle/sideways"]
+	path = vim/bundle/sideways
+	url = https://github.com/AndrewRadev/sideways.vim.git
+[submodule "vim/bundle/splitjoin"]
+	path = vim/bundle/splitjoin
+	url = https://github.com/AndrewRadev/splitjoin.vim.git
+[submodule "vim/bundle/vspec"]
+	path = vim/bundle/vspec
+	url = https://github.com/kana/vim-vspec.git

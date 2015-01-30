@@ -430,6 +430,11 @@ nmap <leader>f <Plug>KweasyJump
 nmap <leader>/ <Plug>KweasySearch
 
 """" SnipMate
+let g:snipMate = {
+            \ 'snippet_version' : 1,
+            \ 'override' : 1
+            \ }
+
 " Empty a stop and move to the next
 " FIXME: Use <Plug>snipMateNext
 smap <BS> x<BS><Plug>snipMateNextOrTrigger

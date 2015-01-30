@@ -9,7 +9,7 @@ local -a have
 [[ -n $1 ]] && dry='echo'
 
 for artist in *; do
-    have=( ../^untagged/$artist(N) )
+    have=( ~/music/^untagged/$artist(N) )
 
     if (( ${#have} == 0 )); then
         echo "Don't have $artist. Skipping"
@@ -21,7 +21,6 @@ for artist in *; do
         for album in $artist/*; do
             old_album=$dest/${album:t}
 
-            $dry zcover -i $album
             if [[ -d $old_album ]]; then
                 $dry feh $old_album/cover.jpg $album/cover.jpg(N)
                 $dry read -q "preserve?Preserve art for $album (y/n): "

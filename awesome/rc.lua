@@ -40,7 +40,7 @@ function mpd_notify()
     local t = string.format("%s\n%s\n%s: %s", song.artist,
         string.format(song.date and '%s (%s)' or '%s', song.album, song.date),
         song.track, song.title):gsub('&', '&amp;')
-    local cover = '/mnt/music/' .. song.file:gsub('[^/]+$', 'cover.jpg')
+    local cover = os.getenv('HOME') .. '/music/' .. song.file:gsub('[^/]+$', 'cover.jpg')
     mpd_notify_id = naughty.notify{ text        = t,
                                     icon        = cover,
                                     icon_size   = mpd_cover_size,

@@ -22,6 +22,7 @@ ifrun urxvtd -q -o -f
 conkyrc=${XDG_CONFIG_HOME}/conkyrc-$(hostname)
 [[ -f $conkyrc ]] && ifrun conky -d -c $conkyrc
 ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
+[[ -d ~/music ]] && ifrun mpd
 
 ifrun unclutter -idle 1.5 -jitter 5 -noevents &
 ifrun dropbox &

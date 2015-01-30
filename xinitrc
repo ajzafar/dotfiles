@@ -10,6 +10,7 @@ ifrun() { # {{{
 
 # Environment {{{1
 export URXVT_PERL_LIB="${XDG_CONFIG_HOME}/urxvt-perl"
+export LIBVA_DRIVER_NAME="vdpau"
 
 # Programs {{{1
 ifrun xrdb -merge ${XDG_CONFIG_HOME}/Xresources

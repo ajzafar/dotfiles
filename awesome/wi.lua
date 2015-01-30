@@ -69,8 +69,6 @@ batwid = widgets.battery.new()
 vicious.register(batwid, vicious.widgets.bat, widgets.battery.vicious_format, 5, 'BAT0')
 diskwid = widgets.disk.new{ mounts = { '/', '/home', '/mnt/music' } }
 vicious.register(diskwid, vicious.widgets.fs, widgets.disk.vicious_format, 29)
-todowid = widgets.todo.new{ dir = os.getenv('HOME') .. '/Dropbox/todo/' }
-vicious.register(todowid, widgets.todo.vicious_worker, nil, 13, todowid)
 
 promptwid = awful.widget.prompt()
 -- }}}
@@ -87,7 +85,6 @@ for i,v in ipairs{mpdwid, cpuwid, memwid, volwid, batwid, diskwid} do
     wids:add(m)
 end
 midright:set_left(promptwid)
-midright:set_right(todowid)
 mid:add(wids)
 mid:add(midright)
 layout:set_left(botclocks)

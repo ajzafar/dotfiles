@@ -41,16 +41,17 @@ function disk.new(args)
     widget:add(widget.bar)
     widget:add(widget.label)
 
-    widget:buttons(awful.button({}, 1, function() vicious.force{widget} end))
-    widget:buttons(awful.button({}, 3,
-                        function()
-                            if widget.menu and widget.menu.wibox.visible then
-                                widget.menu:hide()
-                            else
-                                create_menu(widget)
-                                widget.menu:show()
-                            end
-                        end))
+    widget:buttons(awful.util.table.join(
+                   awful.button({}, 1, function() vicious.force{widget} end),
+                   awful.button({}, 3,
+                       function()
+                           if widget.menu then
+                               widget.menu:toggle()
+                           else
+                               create_menu(widget)
+                               widget.menu:show()
+                           end
+                       end)))
 
     return widget
 end

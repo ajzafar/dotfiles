@@ -15,6 +15,14 @@ function client_center_mouse(client)
     mouse.coords({ x = geom.x + geom.width / 2, y = geom.y + geom.height / 2 }, true)
 end
 
+function confirm(text, func)
+    return function()
+        local entries = { { text }, { "Yes", func }, { "No", function() end } }
+        menu = awful.menu({ items = entries })
+        menu:show()
+    end
+end
+
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -73,7 +81,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ modkey, "Shift"   }, "q", confirm("Do you want to quit?", awesome.quit)),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),

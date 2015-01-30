@@ -6,7 +6,10 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
+feh_bg = 'feh -z --bg-fill ' .. confdir .. '/../backgrounds'
+
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "refresh background", feh_bg},
                                     { "open terminal", terminal }
                                   }
                         })

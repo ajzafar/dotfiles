@@ -11,7 +11,7 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Menlo 10
+font pango:Fira Mono 9
 
 # Window rules {{{1
 

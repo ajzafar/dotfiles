@@ -212,6 +212,15 @@ for i = 1, keynumber do
                   end))
 end
 
+globalkeys = awful.util.table.join(globalkeys,
+    awful.key({ modkey }, 'grave',
+              function ()
+                  local screen = mouse.screen
+                  if tags[screen][9] then
+                      awful.tag.viewtoggle(tags[screen][9])
+                  end
+              end))
+
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),

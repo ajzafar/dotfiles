@@ -23,7 +23,7 @@ for_window [class="Skype"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="Display"] floating enable
-for_window [class="Xfce4-notifyd"] floating enable; border none; focus mode_toggle
+for_window [class="Xfce4-notifyd"] floating enable; focus mode_toggle
 
 for_window [instance="azscratch"] move scratchpad
 

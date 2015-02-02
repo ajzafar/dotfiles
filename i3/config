@@ -134,6 +134,9 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 bindsym $mod+Mod1+f exec firefox -ProfileManager -no-remote
 bindsym $mod+Mod1+space exec firefox
+bindsym $mod+Mod1+1 exec setxkbmap -layout us -variant dvorak
+bindsym $mod+Mod1+2 exec setxkbmap -layout us
+
 bindsym $mod+Ctrl+space exec mpc toggle
 bindsym $mod+Ctrl+Up exec mpc volume +5
 bindsym $mod+Ctrl+Down exec mpc volume -5

@@ -11,7 +11,7 @@ awful.rules     = require('awful.rules')
 beautiful       = require('beautiful')
 naughty         = require('naughty')
 vicious         = require('vicious')
-mpd             = require('lib.mpd')
+mpd             = require('mpd')
 
 confdir             = awful.util.getdir('config')
 terminal            = "urxvt"

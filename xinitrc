@@ -27,6 +27,7 @@ ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
 
 ifrun unclutter -idle 1.5 -jitter 5 -noevents &
 ifrun dropbox &
+ifrun mumble &
 ifrun urxvt -name 'azscratch' -e tmux attach -t scratch &
 
 # Synergy

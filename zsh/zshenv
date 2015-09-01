@@ -5,4 +5,6 @@ export HTTP_PROXY="$http_proxy"
 
 export MPD_HOST="$(< ${XDG_CONFIG_HOME:-~/.config}/sekrit/mpd_pass)@mesabert"
 
+export LUA_PATH=";;${XDG_CONFIG_HOME:-~/.config}/lua_lib/?.lua"
+
 ZDOTDIR=${XDG_CONFIG_HOME:-~/.config}/zsh

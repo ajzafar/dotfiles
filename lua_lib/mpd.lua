@@ -43,10 +43,9 @@
 -- * Close sockets when possible
 -- * Separate connection code from send() function
 
-socket = require("socket")
+local socket = require("socket")
 
 -- Grab env
-local socket = socket
 local string = string
 local tonumber = tonumber
 local setmetatable = setmetatable
@@ -54,8 +53,10 @@ local os = os
 
 -- Music Player Daemon Lua library.
 
-MPD = {
-} MPD_mt = { __index = MPD }
+-- the module
+local mpd = {}
+-- the class
+local MPD = {}
 
 -- create and return a new mpd client.
 -- the settings argument is a table with theses keys:
@@ -65,7 +66,7 @@ MPD = {
 --      password: the server's password (default nil, no password)
 --      timeout:  time in sec to wait for connect() and receive() (default 1)
 --      retry:    time in sec to wait before reconnect if error (default 60)
-local function new(settings)
+function mpd.new(settings)
     local client = {}
     if settings == nil then settings = {} end
 
@@ -74,7 +75,7 @@ local function new(settings)
     client.desc     = settings.desc or client.hostname
     client.password = settings.password
 
-    setmetatable(client, MPD_mt)
+    setmetatable(client, { __index = MPD })
 
     return client
 end
@@ -229,6 +230,6 @@ function MPD:protocol_version()
     return self.version
 end
 
-return { new = new }
+return mpd
 
 -- vim:filetype=lua:tabstop=8:shiftwidth=4:expandtab:

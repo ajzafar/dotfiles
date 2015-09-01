@@ -56,8 +56,7 @@ snippet mat
 # Cases
 snippet cas
 	\\begin{cases}
-		${1:equation} &\\text{if } ${2:case} \\\\
-		${0}
+		${1:equation} & ${0:\\text{if \} ${2:case}} \\\\
 	\\end{cases}
 # Split
 snippet spl
@@ -133,7 +132,7 @@ snippet eqr
 snippet page
 	${1:page}~\\pageref{${2}}
 snippet fr
-	\\frac{${1}}{${2}}
+	\\frac{$1}{$2}
 snippet dfr
 	\\dfrac{${1}}{${2}}
 snippet left
@@ -203,3 +202,5 @@ snippet sum Infinite series
 	\\sum_{${1:n}=${2:0}}^\\infty ${0}
 snippet qand
 	\\${1:quad} \\text{and} \\$1
+snippet bin
+	\\binom{$1}{$2}

@@ -1,0 +1,1 @@
+nunmap <leader>bug

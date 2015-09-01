@@ -39,7 +39,8 @@ function mpd_notify()
     then
         return
     end
-    local t = string.format("%s\n%s\n%s: %s", song.artist,
+    local t = string.format("%s\n%s\n%s: %s",
+        song.composer and (song.composer .. ' - ' .. song.artist) or song.artist,
         string.format(song.date and '%s (%s)' or '%s', song.album, song.date),
         song.track, song.title):gsub('&', '&amp;')
     local cover = os.getenv('HOME') .. '/music/' .. song.file:gsub('[^/]+$', 'cover.jpg')

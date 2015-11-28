@@ -22,7 +22,8 @@ ifrun feh -z --bg-fill ${XDG_CONFIG_HOME}/backgrounds
 ifrun urxvtd -q -o -f
 conkyrc=${XDG_CONFIG_HOME}/conkyrc-$(hostname)
 [[ -f $conkyrc ]] && ifrun conky -d -c $conkyrc
-ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
+[[ -f ${XDG_CONFIG_HOME}/sekrit/zipcode ]] && \
+    ifrun xflux -z $(< ${XDG_CONFIG_HOME}/sekrit/zipcode )
 [[ -d ~/music ]] && ifrun mpd
 
 ifrun unclutter -idle 1.5 -jitter 5 -noevents &

@@ -442,6 +442,18 @@ smap <BS> x<BS><Plug>snipMateNextOrTrigger
 " so map it.
 smap <Tab> <Plug>snipMateNextOrTrigger
 
+"""" Sideways
+
+nnoremap <Leader><C-H> :SidewaysLeft<CR>
+nnoremap <Leader><C-L> :SidewaysRight<CR>
+nnoremap <Leader>h :SidewaysJumpLeft<CR>
+nnoremap <Leader>l :SidewaysJumpRight<CR>
+
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
+
 "" taken from godlygeek's vimrc. Pretty nice way to handle folding.
 "" vim:fdm=expr
 "" vim:fde=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'""*')-2)\:'='

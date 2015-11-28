@@ -32,7 +32,6 @@ check_com mplayer || chalias mplayer2 mplayer=mplayer2
 
 chalias hamachi ham='sudo -u hamachi hamachi -c /etc/hamachi'
 chalias -d mplayer mplfs='mplayer -fs'
-chalias mplayer stream='http_proxy= mplayer -volume 100 http://deskbert:9362/stream'
 chalias mpc at mpat="echo 'mpc --no-status pause' | at"
 chalias transmission-remote btr btg='btr -l | grep -i'
 chalias wicd-curses wicd='wicd-curses'

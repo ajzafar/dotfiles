@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# link files
 if test "X$1" == 'X-d'; then
     dry=echo
     shift
@@ -25,3 +26,7 @@ while read file; do
         fi
     done
 done < "$linksfile"
+
+# Create cache directories
+cache=${XDG_CONFIG_CACHE:-~/.cache}
+mkdir -p ${cache}/zsh ${cache}/vim/{undo,swap}files

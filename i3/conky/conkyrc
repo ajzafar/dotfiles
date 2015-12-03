@@ -27,7 +27,7 @@ override_utf8_locale no
 # number of cpu samples to average set to 1 to disable averaging
 cpu_avg_samples 2
 
-mpd_host mesabert
+mpd_host ornata
 # FIXME: Is there a way to load this using $XDG_CONFIG_HOME or something?
 lua_load ~/.config/i3/conky/escape.lua
 lua_load ~/.config/i3/conky/todo.lua

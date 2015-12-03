@@ -32,7 +32,7 @@ ifrun mumble &
 ifrun urxvt -name 'azscratch' -e tmux attach -t scratch &
 
 # Synergy
-synergy_host='mesabert'
+synergy_host='ornata'
 if test "X$(hostname)" == "X${synergy_host}"; then
     ifrun synergys
 else

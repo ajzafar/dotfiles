@@ -1,7 +1,7 @@
 cvsignore
 fonts.conf
 gitconfig
-gtkrc.mine
+gtkrc-2.0
 i3
 irssi
 mplayer
@@ -9,6 +9,7 @@ ncmpc
 screenrc
 ssh
 synergy.conf
+themes
 tilda
 tmux.conf
 vim

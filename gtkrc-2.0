@@ -1,0 +1,10 @@
+#include "/usr/share/themes/Adwaita/gtk-2.0/gtkrc"
+#include "/usr/share/themes/Emacs/gtk-2.0-key/gtkrc"
+
+gtk-theme-name = "darkskyglass"
+gtk-key-theme-name = "Emacs"
+
+gtk-font-name = "Segoe UI 9"
+gtk-error-bell = 0
+
+GTK_IM_MODULE="xim"

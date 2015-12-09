@@ -63,8 +63,6 @@ cpuwid = widgets.cpu.new()
 vicious.register(cpuwid, vicious.widgets.cpu, "$1", 5)
 memwid = widgets.memory.new()
 vicious.register(memwid, vicious.widgets.mem, widgets.memory.vicious_format, 7)
-volwid = widgets.volume.new()
-vicious.register(volwid, vicious.widgets.volume, "$1", 2, 'Master')
 batwid = widgets.battery.new()
 vicious.register(batwid, vicious.widgets.bat, widgets.battery.vicious_format, 5, 'BAT0')
 diskwid = widgets.disk.new{ mounts = { '/', '/home', '/mnt/music' } }
@@ -80,7 +78,7 @@ local mid = wibox.layout.flex.horizontal()
 local wids = wibox.layout.flex.horizontal()
 local midright = wibox.layout.align.horizontal()
 local left = wibox.layout.fixed.horizontal()
-for i,v in ipairs{mpdwid, cpuwid, memwid, volwid, batwid, diskwid} do
+for i,v in ipairs{mpdwid, cpuwid, memwid, batwid, diskwid} do
     local m = wibox.layout.margin(v, 15, 15, 1, 1)
     wids:add(m)
 end

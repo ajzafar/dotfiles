@@ -1,0 +1,68 @@
+#!/usr/bin/pulseaudio -nF
+
+### Automatically restore the volume of streams and devices
+load-module module-device-restore
+load-module module-stream-restore
+load-module module-card-restore
+
+### Automatically restore the default sink/source when changed by the user
+### during runtime
+### NOTE: This should be loaded as early as possible so that subsequent modules
+### that look up the default sink/source get the right value
+load-module module-default-device-restore
+
+### Should be after module-*-restore but before module-*-detect
+load-module module-switch-on-port-available
+
+# ### Automatically load driver modules depending on the hardware available
+# .ifexists module-udev-detect.so
+# load-module module-udev-detect
+# .else
+# ### Use the static hardware detection module (for systems that lack udev support)
+# load-module module-detect
+# .endif
+
+## Create sinks/sources
+load-module module-alsa-sink sink_name=alsaout_analog
+load-module module-alsa-source source_name=alsain_analog
+# Create a null sink for streaming
+load-module module-null-sink sink_name=stream_null
+load-module module-combine-sink sink_name=stream_comb slaves=stream_null,alsaout_analog
+load-module module-loopback source=alsain_analog sink=stream_null
+
+# Allow the local network access to Pulse
+# (Provided they have the Pulse cookie)
+load-module module-native-protocol-tcp
+
+### Automatically move streams to the default sink if the sink they are
+### connected to dies, similar for sources
+load-module module-rescue-streams
+
+### Make sure we always have a sink around, even if it is a null sink.
+load-module module-always-sink
+
+### Automatically suspend sinks/sources that become idle for too long
+load-module module-suspend-on-idle
+
+### Enable positioned event sounds
+load-module module-position-event-sounds
+
+### Modules to allow autoloading of filters (such as echo cancellation)
+### on demand. module-filter-heuristics tries to determine what filters
+### make sense, and module-filter-apply does the heavy-lifting of
+### loading modules and rerouting streams.
+load-module module-filter-heuristics
+load-module module-filter-apply
+
+### Load X11 bell module
+#load-module module-x11-bell sample=x11-bell
+
+### Register ourselves in the X11 session manager
+#load-module module-x11-xsmp
+
+### Publish connection data in the X11 root window
+.ifexists module-x11-publish.so
+.nofail
+load-module module-x11-publish
+.fail
+.endif

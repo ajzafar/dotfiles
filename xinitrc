@@ -18,6 +18,7 @@ ifrun xsetroot -cursor_name Vienna3
 ifrun xset mouse 1
 ifrun xmodmap ${XDG_CONFIG_HOME}/Xmodmap
 ifrun feh -z --bg-fill ${XDG_CONFIG_HOME}/backgrounds
+ifrun pulseaudio --start
 
 ifrun urxvtd -q -o -f
 conkyrc=${XDG_CONFIG_HOME}/conkyrc-$(hostname)

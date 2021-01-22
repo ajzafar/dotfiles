@@ -56,6 +56,10 @@ zle -N prev-dir
 bindkey '^[.' up-dir
 bindkey '^[-' prev-dir
 
+zle -C complete-file complete-word _generic
+zstyle ':completion:complete-file::::' completer _files
+bindkey '^F' complete-file
+
 # rationalise-dot {{{1
 # This was written entirely by Mikael Magnusson
 # Basically type '...' to get '../..' with successive .'s adding /..

@@ -37,6 +37,7 @@ chalias transmission-remote btr btg='btr -l | grep -i'
 chalias wicd-curses wicd='wicd-curses'
 # This allows aliases to be used with sudo. Credit to godlygeek.
 chalias sudo sudo='sudo '
+check_com view || chalias vim view='vim -R'
 # }}}
 
 # extension aliases {{{

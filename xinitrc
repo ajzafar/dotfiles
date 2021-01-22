@@ -41,7 +41,7 @@ else
 fi
 
 # WM selection {{{1
-case ${XSESSION:-awesome} in
+case ${XSESSION:-i3} in
     flux*)
         ifrun exec startfluxbox
         ;;

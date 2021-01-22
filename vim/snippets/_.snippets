@@ -5,3 +5,21 @@ snippet date
 	`strftime("%Y-%m-%d")`
 snippet ddate
 	`strftime("%B %d, %Y")`
+snippet vis
+	foo${VISUAL}bar
+	foo
+	${VISUAL}
+	bar
+snippet sel one
+	_ sel: ${2|select|$1|two|`v:version`|four|m$1d|two} _
+	_ first: ${1:one} _
+	_ third: ${3:foo} _
+	_ third/sub: ${3/foo/bar} _
+	_ sel mir: $2 _
+	_ fourth with sel mir: ${4:$2} _
+snippet sel two
+	_ ${1|foo|bar|foo$2bar} _
+snippet sel three
+	_ ${2:foo} _
+	_ ${1:bar} _
+	_ $2 _

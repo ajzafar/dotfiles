@@ -23,9 +23,10 @@ for artist in *; do
 
             if [[ -d $old_album ]]; then
                 $dry feh $old_album/cover.jpg $album/cover.jpg(N)
-                $dry read -q "preserve?Preserve art for $album (y/n): "
-                [[ -z $dry ]] && echo
-                $dry cp $old_album/cover.jpg $album
+                if read -q "preserve?Preserve art for $album (y/n): "; then
+                    $dry cp $old_album/cover.jpg $album
+                fi
+                print
                 $dry rm -r $old_album
             fi
 

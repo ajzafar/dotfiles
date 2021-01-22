@@ -20,6 +20,49 @@ welcome-screen-list = yes
 wide-cursor = yes
 wrap-around = no
 
-list-format = "[[%composer% - ]%artist% #[%album%[ (%date%)]#] [%track%: ]%title%|%file%] #[%time%#]"
-status-format = "[[%composer% - ]%artist% #[%album%#] %title%]|%file%"
+list-format = "[%artist% #[%album%[ (%date%)]#] [%track%: ]%title%|%file%] #[%time%#]"
+status-format = "[[%albumartist%|%artist%] #[%album%#] %title%]|%file%"
 xterm-title-format = "[%artist% #[%album%#] %title%]|%file%"
+
+## Set the background color.
+color background = black
+color progressbar-background = black
+
+## Set the text color for the title row.
+color title = yellow
+
+## Set the text color for the title row (the bold part).
+color title-bold = yellow,bold
+
+## Set the color of the line on the second row.
+color line = white
+
+## Set the text color used to indicate mpd flags on the second row.
+color line-flags = white,bold
+
+## Set the text color in the main area of ncmpc.
+color list = green
+
+## Set the bold text color in the main area of ncmpc.
+color list-bold = green,bold
+
+## Sets the text color of directories in the browser
+color browser-directory = yellow
+
+## Sets the text color of playlists in the browser
+color browser-playlist = red
+
+## Set the color of the progress indicator.
+color progressbar = white
+
+## Set the text color used to display mpd status in the status window.
+color status-state = yellow,bold
+
+## Set the text color used to display song names in the status window.
+color status-song  = yellow
+
+## Set the text color used to display time the status window.
+color status-time  = red
+
+## Text color used to display alerts in the status window.
+#color alert = red,bold

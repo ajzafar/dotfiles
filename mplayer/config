@@ -5,9 +5,10 @@ ontop=yes
 softvol=yes
 use-filename-title=yes
 vf=screenshot
-vo=xv,x11
-volume=40
+volume=10
 cache=8192
+fs=no
+nojoystick=yes
 
 [hd]
 lavdopts=fast=1:skiploopfilter=all

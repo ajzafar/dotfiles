@@ -1,1 +1,1 @@
-convert -resize 300x300 -quality 90 $1 cover.jpg
+convert -resize 300x300 -quality 100 $1 cover.jpg

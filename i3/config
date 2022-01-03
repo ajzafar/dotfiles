@@ -164,6 +164,7 @@ bindsym $mod+Ctrl+Up exec mpc volume +5
 bindsym $mod+Ctrl+Down exec mpc volume -5
 bindsym $mod+Ctrl+Right exec mpc next
 bindsym $mod+Ctrl+Left exec mpc prev
+bindsym $mod+Ctrl+Mod1+space exec now.sh
 
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev

@@ -177,8 +177,8 @@ bindsym XF86AudioRaiseVolume exec mpc volume +5
 # - indicator color is for the indicator showing where a new window will open
 #
 # class                  border   bg       fg       indicator
-client.focused           #7a3132  #591516  #e8e6f8  #c70407
-client.focused_inactive  #333333  #0c3457  #d3deeb  #484e50
+client.focused           #7a3132  #591516  #e8e6f8  #95473d
+client.focused_inactive  #443c61  #1c1533  #d3deeb  #484e50
 client.unfocused         #333333  #222222  #888888  #292d2e
 client.urgent            #2f343a  #900000  #ffffff  #900000
 

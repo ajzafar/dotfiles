@@ -18,7 +18,8 @@ URxvt.italicFont: xft:Meslo LG S:italic:size=9
 URxvt.boldItalicFont: xft:Meslo LG S:italic:size=9
 
 URxvt.scrollBar: false
-URxvt.iso14755*: false
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 URxvt.perl-ext: default,tabbed,url-select,notify
 URxvt.url-select.underline: true

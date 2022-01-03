@@ -16,8 +16,6 @@ font pango:Fira Mono 9
 # Window rules {{{1
 
 for_window [class="feh"] floating enable
-for_window [class="mplayer2"] floating enable
-for_window [class="MPlayer"] floating enable; fullscreen toggle
 for_window [class="Plugin-container" instance="plugin-container"] fullscreen disable
 for_window [class="Skype"] floating enable
 for_window [class="Steam"] floating enable

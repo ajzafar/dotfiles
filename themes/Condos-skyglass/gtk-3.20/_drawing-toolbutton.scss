@@ -1,0 +1,242 @@
+@mixin progressbar_fill($d:horizontal) {
+  $dir: if($d==vertical,right,bottom);
+  background-image:    linear-gradient(to $dir,
+                                       $progress_stop1_color,
+                                       $progress_stop2_color 40%,
+                                       $progress_stop3_color 70%);
+
+}
+
+@mixin toolbutton($t, $c:$bg_color, $tc:$fg_color, $edge: $borders_edge) {
+//
+// Button drawing function
+//
+// $t:    button type,
+// $c:    base button color for colored* types
+// $tc:   optional text color for colored* types
+// $edge: set to none to not draw the bottom edge or specify a color to not
+//        use the default one
+//
+// possible $t values:
+// normal, hover, active, disabled, disabled-active,
+// osd, osd-hover, osd-active, osd-disabled, , undecorated
+//
+
+  $_hilight_color: _button_hilight_color($c);
+  $_button_edge: if($edge == none, none, _widget_edge($edge));
+  $_blank_edge: if($edge == none, none, _widget_edge(transparentize($edge,1)));
+
+  @if $t==normal {
+  //
+  // normal button
+  //
+    color: $tc;
+    outline-color: transparentize($tc, 0.7);
+    border-color: if($c!=$bg_color, _border_color($c), $borders_color);
+    background-image: linear-gradient(to top,
+                                  #c9c6b8,
+                                  #d9d7c7 2px,
+                                  #ece9d8 3px,
+                                  #fffffe
+                                  );
+    @include _button_text_shadow($tc,$c);
+    box-shadow: inset 0 1px #d8d5c6,
+                inset 1px 0 #d8d5c6,
+                inset -1px 0px #d8d5c6;
+
+  }
+
+  @else if $t==hover {
+  //
+  // hovered button
+  //
+    color: $tc;
+    outline-color: transparentize($tc, 0.7);
+    border-color: if($c!=$bg_color, _border_color($c), $borders_color);
+    background-image: linear-gradient(to bottom,
+                                  #fffefd,
+                                  #ece9d8
+                                  );
+
+    @include _button_text_shadow($tc,lighten($c,4%));
+    box-shadow: inset 0 2px #fdbf50,
+                inset 0 -2px #fdbf50,
+                inset 2px 0 #fdbf50,
+                inset -2px 0px #fdbf50;
+
+
+  }
+
+  @else if $t==active {
+  //
+  // pushed button
+  //
+    color: $tc;
+    outline-color: transparentize($tc, 0.7);
+    border-color: #2c628b;
+    background-image: linear-gradient(to bottom,
+                                  #b5b3a6,
+                                  #c4c2b4 2px,
+                                  #d5d2c3 3px,
+                                  #ececec
+                                  );
+    @include _button_text_shadow($tc,$c);
+    box-shadow: inset 0 -1px #d8d5c6,
+                inset 1px 0 #d8d5c6,
+                inset -1px 0px #d8d5c6;
+  }
+  @else if $t==disabled {
+  //
+  // disabled button
+  //
+    $_bg: if($c!=$bg_color, mix($c,$base_color,85%), $insensitive_bg_color);
+
+    color: $insensitive_fg_color;
+    border-color: $insensitive_borders_color;
+    background-image: none;
+    background-color: #eeeeef;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+    // white with 0 alpha to avoid an ugly transition, since no color means
+    // black with 0 alpha
+    > .label { color: inherit; }
+  }
+  @else if $t==disabled-active {
+  //
+  // disabled pushed button
+  //
+    $_bg: if($c!=$bg_color, darken(mix($c,$base_color,85%),5%),
+                            $insensitive_bg_color);
+    $_bc: if($c!=$bg_color, _border_color($c), $insensitive_borders_color);
+
+    color: if($c!=$bg_color, mix($tc,$_bg,60%), $insensitive_fg_color);
+    border-color: $_bc;
+    background-image: linear-gradient(to bottom, mix($_bc, $_bg, 10%), $_bg);
+    // white with 0 alpha to avoid an ugly transition, since no color means
+    // black with 0 alpha
+    @include _shadows(inset 0 1px transparentize(white,1), $_button_edge);
+    > .label { color: inherit; }
+  }
+
+  @else if $t==osd {
+  //
+  // normal osd button
+  //
+    $_bg: if($c!=$bg_color, transparentize($c, 0.5),
+                            $osd_bg_color);
+
+    color: $osd_fg_color;
+    border-color: $osd_borders_color;
+    background-image: none;
+    background-color: $_bg;
+    background-clip: padding-box;
+    box-shadow: inset 0 1px transparentize(white, 0.9);
+    text-shadow: 0 1px black;
+    -gtk-icon-shadow: 0 1px black;
+    outline-color: transparentize($osd_fg_color, 0.7);
+  }
+  @else if $t==osd-hover {
+  //
+  // active osd button
+  //
+    $_bg: if($c!=$bg_color, transparentize($c, 0.3),
+                            lighten($osd_bg_color, 12%));
+
+    color: white;
+    border-color: $osd_borders_color;
+    background-image: none;
+    background-color: $_bg;
+    background-clip: padding-box;
+    box-shadow: inset 0 1px transparentize(white, 0.9);
+    text-shadow: 0 1px black;
+    -gtk-icon-shadow: 0 1px black;
+    outline-color: transparentize($osd_fg_color, 0.7);
+  }
+  @else if $t==osd-active {
+  //
+  // active osd button
+  //
+    $_bg: if($c!=$bg_color, $c, $osd_borders_color);
+
+    color: white;
+    border-color: $osd_borders_color;
+    background-image: none;
+    background-color: $_bg;
+    background-clip: padding-box;
+    box-shadow: none;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+    outline-color: transparentize($osd_fg_color, 0.7);
+  }
+  @else if $t==osd-disabled {
+  //
+  // disabled osd button
+  //
+    color: $osd_disabled_fg_color;
+    border-color: $osd_borders_color;
+    background-image: linear-gradient(to bottom, $osd_disabled_bg_color);
+    background-clip: padding-box;
+    box-shadow: none;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+  }
+  @else if $t==undecorated {
+  //
+  // reset
+  //
+    border-color: transparent;
+    background-color: transparent;
+    background-image: none;
+
+    @include _shadows(inset 0 1px transparentize(white, 1),
+                      $_blank_edge);
+
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+  }
+}
+
+toolbar {
+  @include headerbar_fill;
+
+   button {
+      $_hc: mix($top_hilight,$selected_bg_color, 50%); // hilight color
+      @include toolbutton(normal, $selected_bg_color, $fg_color, $_hc);
+
+      &.flat { @include toolbutton(undecorated); }
+
+      &:hover { @include toolbutton(hover, $selected_bg_color, $fg_color, $_hc); }
+
+      &:active, &:checked { @include toolbutton(active, $selected_bg_color, $fg_color, $_hc); }
+
+      &.flat:disabled {
+        @include toolbutton(undecorated);
+      }
+
+      &:disabled {
+        @include toolbutton(disabled, $selected_bg_color, $fg_color, $_hc);
+
+        &:active, &:checked { @include toolbutton(disabled-active, $selected_bg_color, $fg_color, $_hc); }
+      }
+
+      &.suggested-action {
+        @include toolbutton(normal);
+        border-color: $selected_borders_color;
+
+        &:hover {
+          @include toolbutton(hover);
+          border-color: $selected_borders_color;
+        }
+
+        &:active {
+          @include toolbutton(active);
+          border-color: $selected_borders_color;
+        }
+
+        &:disabled {
+          @include toolbutton(disabled);
+          border-color: $selected_borders_color;
+        }
+      }
+    }
+}

@@ -22,9 +22,6 @@
 [submodule "vim/bundle/vim-rails"]
         path = vim/bundle/vim-rails
         url = git://github.com/tpope/vim-rails.git
-[submodule "awesome/vicious"]
-        path = awesome/vicious
-        url = https://github.com/vicious-widgets/vicious.git
 [submodule "vim/bundle/snipmate"]
         path = vim/bundle/snipmate
         url = git://github.com/ajzafar/vim-snipmate.git

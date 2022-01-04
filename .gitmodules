@@ -61,6 +61,3 @@
 [submodule "vim/bundle/dispatch"]
 	path = vim/bundle/dispatch
 	url = https://github.com/tpope/vim-dispatch.git
-[submodule "themes/darkskyglass"]
-	path = themes/darkskyglass
-	url = https://github.com/ajzafar/darkskyglass.git

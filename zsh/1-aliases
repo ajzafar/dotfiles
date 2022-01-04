@@ -25,6 +25,7 @@ elif [[ $(uname) == Linux ]]; then
 fi
 alias dir=ls
 alias egrep='grep -E'
+alias dumas='sudo du -max --max-depth=1 . | sort -n'
 # }}}
 
 # apps-based aliases {{{

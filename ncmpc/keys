@@ -68,5 +68,3 @@ key locate = 'l'
 
 ## Backward find previous
 key rfind-next = 'N'
-
-key lyrics-interrupt = 999

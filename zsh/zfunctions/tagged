@@ -9,7 +9,7 @@ local -a have
 [[ -n $1 ]] && dry='echo'
 
 for artist in *; do
-    have=( ~/music/^untagged/$artist(N) )
+    have=( ~/music/^(untagged|<2019-2030>-<1-12>)/$artist(N) )
 
     if (( ${#have} == 0 )); then
         echo "Don't have $artist. Skipping"

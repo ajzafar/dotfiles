@@ -4,6 +4,7 @@ discord
 easytag
 epdfview
 evince
+GIMP
 google-*
 gtk-2.0
 icons
@@ -13,6 +14,7 @@ menus
 pavucontrol.ini
 projectM
 pulse
+QtProject.conf
 sekrit
 Skype
 ssh

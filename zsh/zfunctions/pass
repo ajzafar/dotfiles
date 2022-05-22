@@ -1,3 +1,4 @@
 pwf=$XDG_CONFIG_HOME/sekrit/passfile
-
-pwgen -H ${pwf}\#$1
+key=$1
+shift
+pwgen -H ${pwf}\#$key "$@"

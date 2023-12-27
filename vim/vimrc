@@ -115,7 +115,7 @@ let &stl .= '%{(&ro || &pvw || &mod || !&ma || &bt == "help") ? " " : ""}'
 let &stl .= '%#LineNr# ' " change color
 let &stl .= '%{STLSnipMate()}' " SnipMate stops/count if available
 let &stl .= '%{STLQuickfix()}%a%=' " Qucikfix, argument list, end of left matter
-let &stl .= '%{fugitive#head(7)}    ' " branch name or commit if detached
+let &stl .= '%{FugitiveHead(7)}    ' " branch name or commit if detached
 let &stl .= '%{&filetype}    ' " filetype (no extra characters)
 let &stl .= '%-14.(%l,%c%V %) %P ' " line, col, percent through file
 

@@ -1,0 +1,2 @@
+metaflac --remove --block-type=PICTURE *.flac
+metaflac --remove-tag=COVERART *.flac

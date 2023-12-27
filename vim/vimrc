@@ -7,10 +7,6 @@ scriptencoding utf-8
 " a side effect.
 set nocompatible
 
-""" Pathogen
-runtime pathogen/autoload/pathogen.vim
-execute pathogen#infect('bundle/{}', 'dep-bundle/{}')
-
 """ Vim Settings
 """" Patterns and search behavior
 set incsearch           " do incremental searching

@@ -1,60 +1,48 @@
-[submodule "vim/pathogen"]
-        path = vim/pathogen
-        url = https://github.com/tpope/vim-pathogen.git
-[submodule "vim/bundle/csapprox"]
-        path = vim/bundle/csapprox
-        url = https://github.com/godlygeek/csapprox.git
-[submodule "vim/bundle/fugitive"]
-        path = vim/bundle/fugitive
-        url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/pset"]
-        path = vim/bundle/pset
-        url = https://github.com/ajzafar/vim-pset.git
-[submodule "vim/bundle/repeat"]
-        path = vim/bundle/repeat
-        url = https://github.com/tpope/vim-repeat.git
-[submodule "vim/bundle/surround"]
-        path = vim/bundle/surround
-        url = https://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/tabular"]
-        path = vim/bundle/tabular
-        url = https://github.com/godlygeek/tabular.git
-[submodule "vim/bundle/vim-rails"]
-        path = vim/bundle/vim-rails
-        url = https://github.com/tpope/vim-rails.git
-[submodule "vim/bundle/snipmate"]
-        path = vim/bundle/snipmate
-        url = https://github.com/ajzafar/vim-snipmate.git
-[submodule "vim/bundle/commentary"]
-        path = vim/bundle/commentary
-        url = https://github.com/tpope/vim-commentary.git
-[submodule "vim/bundle/unimpaired"]
-	path = vim/bundle/unimpaired
-	url = https://github.com/tpope/vim-unimpaired.git
-[submodule "vim/bundle/fanfingtastic"]
-	path = vim/bundle/fanfingtastic
-	url = https://github.com/dahu/vim-fanfingtastic.git
-[submodule "vim/bundle/kweasy"]
-	path = vim/bundle/kweasy
-	url = https://github.com/dahu/vim-KWEasy.git
-[submodule "vim/dep-bundle/nexus"]
-	path = vim/dep-bundle/nexus
-	url = https://github.com/dahu/Nexus.git
-[submodule "vim/bundle/exchange"]
-	path = vim/bundle/exchange
-	url = https://github.com/tommcdo/vim-exchange.git
-[submodule "vim/bundle/sideways"]
-	path = vim/bundle/sideways
-	url = https://github.com/AndrewRadev/sideways.vim.git
-[submodule "vim/bundle/splitjoin"]
-	path = vim/bundle/splitjoin
-	url = https://github.com/AndrewRadev/splitjoin.vim.git
-[submodule "vim/bundle/vspec"]
-	path = vim/bundle/vspec
-	url = https://github.com/kana/vim-vspec.git
-[submodule "vim/bundle/push"]
-	path = vim/bundle/push
-	url = https://github.com/glts/vim-push.git
-[submodule "vim/bundle/dispatch"]
-	path = vim/bundle/dispatch
+[submodule "csapprox"]
+	path = vim/pack/musthave/start/csapprox
+	url = https://github.com/vim-scripts/CSApprox.git
+[submodule "commentary"]
+	path = vim/pack/musthave/start/commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "fugitive"]
+	path = vim/pack/musthave/start/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "repeat"]
+	path = vim/pack/musthave/start/repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule "surround"]
+	path = vim/pack/musthave/start/surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "dispatch"]
+	path = vim/pack/bundle/start/dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "exchange"]
+	path = vim/pack/bundle/start/exchange
+	url = https://github.com/tommcdo/vim-exchange.git
+[submodule "pset"]
+	path = vim/pack/bundle/start/pset
+	url = https://github.com/ajzafar/vim-pset.git
+[submodule "snipmate"]
+	path = vim/pack/bundle/start/snipmate
+	url = https://github.com/garbas/vim-snipmate.git
+[submodule "tabular"]
+	path = vim/pack/bundle/start/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "unimpaired"]
+	path = vim/pack/bundle/start/unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "vspec"]
+	path = vim/pack/bundle/opt/vim-vspec
+	url = https://github.com/kana/vim-vspec.git
+[submodule "mw-utils"]
+	path = vim/pack/dep/start/mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "splitjoin"]
+	path = vim/pack/bundle/start/splitjoin
+	url = https://github.com/AndrewRadev/splitjoin.vim.git
+[submodule "tlib"]
+	path = vim/pack/dep/opt/tlib
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "sideways"]
+	path = vim/pack/bundle/start/sideways
+	url = https://github.com/AndrewRadev/sideways.vim.git

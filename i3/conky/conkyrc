@@ -1,4 +1,4 @@
-# vim:ft=lua:sw=2:
+-- vim:ft=lua:sw=2:
 
 conky.config = {
   out_to_x = false,
@@ -36,10 +36,11 @@ conky.config = {
 
 -- Following will be formatted on screen
 conky.text = [[
-,[
+[
   { "full_text" : "${lua conky_json_escape $mpd_artist} [${lua conky_json_escape $mpd_album}] $mpd_track: ${lua conky_json_escape $mpd_title} [${mpd_elapsed}/${mpd_length}]" },
   { "full_text" : "/ ${fs_free /}" },
   { "full_text" : "~ ${fs_free /home}" },
+  { "full_text" : "mus ${fs_free /mnt/music}" },
   { "full_text" : "CPU: ${cpu 0}%",
     "min_width" : "CPU: 000%" },
   { "full_text" : "RAM ${memperc}%",
@@ -49,5 +50,5 @@ conky.text = [[
     ${endif}
     "min_width" : "RAM 000%" },
   { "full_text" : "${time %a %x %T}" }
-]
+],
 ]]

@@ -238,6 +238,10 @@ if has("autocmd")
     " Normally I map <CR> to <C-]>. This interferes with the cmdline-window
     au CmdwinEnter * nnoremap <buffer> <CR> <CR>
 
+    " Originally taken from godlygeek's vimrc
+    au FileType vim setl fdm=expr fde=getline(v\:lnum)=~'^\"\"'?'>'.(matchend(getline(v\:lnum),'\"\"*')-2):'='
+    au FileType markdown setl fdm=expr fde=getline(v\:lnum)=~'^\#'?'>'.(matchend(getline(v\:lnum),'\#*')-0):'='
+
     augroup END
 endif
 
@@ -457,7 +461,3 @@ let g:splitjoin_join_mapping = ''
 
 nmap <Leader>j :SplitjoinJoin<cr>
 nmap <Leader>s :SplitjoinSplit<cr>
-
-"" taken from godlygeek's vimrc. Pretty nice way to handle folding.
-"" vim:fdm=expr
-"" vim:fde=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'""*')-2)\:'='
